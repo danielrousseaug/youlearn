@@ -1,0 +1,17 @@
+{
+  "name": "summary-gen-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && uvicorn app:app --reload --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install": "npm run install:frontend && npm run install:backend",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && pip install -r requirements.txt -U",
+    "postinstall": "echo 'All dependencies installed! Run npm run dev to start both services.'"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
