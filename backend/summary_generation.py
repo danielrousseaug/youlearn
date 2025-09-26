@@ -20,36 +20,48 @@ def create_prompt_with_chunks(extracts: List[PDFExtract]) -> str:
         text_preview = extract.text[:300] + "..." if len(extract.text) > 300 else extract.text
         chunks_text += f"[{i}] Page {int(extract.page_number)}: {text_preview}\n\n"
 
-    prompt = f"""You are an expert document summarizer. Create a comprehensive, detailed summary with precise inline citations.
+    prompt = f"""You are an expert document summarizer. Create a comprehensive, bullet-point focused summary with precise inline citations.
 
 CONTENT REQUIREMENTS:
 - Write a thorough, detailed summary (aim for 800-1200 words)
+- USE BULLET POINTS AS THE PRIMARY FORMAT - avoid long paragraphs
+- Each bullet point should be a complete, informative statement
 - Cover all major sections, concepts, and findings from the document
 - Include specific details, methodologies, results, and conclusions
-- Explain complex concepts clearly and comprehensively
-- Provide context and background for technical terms
+- Group related bullet points under clear section headers
 
 CITATION RULES - CRITICAL:
 - ALWAYS use square brackets with numbers: [1], [2], [3] - NEVER use any other format
 - NEVER use formats like CITATION_0, **CITATION_1**, or similar patterns
+- NEVER use range notation like [30-32] or [75-79] - use individual citations [30], [31], [32]
 - Every factual claim must include a citation immediately after the statement
 - Use only numbers 1-{len(extracts)} (the total chunks available)
 - Multiple citations: [1,2,3] when combining information from multiple chunks
+- PREFER individual citations over ranges for better navigation: [30], [31], [32] instead of [30-32]
 - Do NOT create a separate "Citations" or "References" section at the end
 - Citations should ONLY appear inline within the text
-- Example: "The Transformer model uses attention mechanisms [1] and achieves state-of-the-art results [2,3]."
+- Example: "• The Transformer model uses attention mechanisms [1] and achieves state-of-the-art results [2,3]"
 
 FORMATTING REQUIREMENTS:
-- Use proper markdown headers (##, ###, ####)
-- Use bullet points and numbered lists where appropriate
-- Keep citations inline with the text, never separate them
-- Include detailed explanations of key concepts and methodologies
+- Use proper markdown headers (##, ###) for major sections
+- PRIMARILY USE BULLET POINTS (•) for content
+- Keep each bullet point concise but informative (1-2 sentences)
+- Use sub-bullets for related details
+- Keep citations inline with the bullet points
 - Structure with clear sections covering all major aspects
+- Avoid long paragraphs - break information into digestible bullet points
+- Example format:
+  ## Section Name
+  • Key finding or concept with explanation [1]
+  • Another important point with specific details [2,3]
+    - Supporting detail or example [4]
+    - Additional context [5]
+  • Next major point [6]
 
 Available chunks ({len(extracts)} total):
 {chunks_text}
 
-Create a comprehensive, detailed markdown summary with inline citations only:"""
+Create a comprehensive, bullet-point focused markdown summary with inline citations only:"""
 
     return prompt
 
@@ -57,14 +69,34 @@ def parse_chunk_for_citations(chunk_text: str, extracts: List[PDFExtract]) -> Di
     """Parse a chunk of text and extract citation mapping."""
     citations = {}
 
-    # Find all citation patterns like [1], [2], [1,2,3], etc.
+    # Find all citation patterns like [1], [2], [1,2,3], [30-32], etc.
     import re
-    citation_pattern = r'\[(\d+(?:,\s*\d+)*)\]'
+    citation_pattern = r'\[(\d+(?:[-,]\s*\d+)*)\]'
     matches = re.finditer(citation_pattern, chunk_text)
 
     for match in matches:
-        citation_text = match.group(0)  # e.g., "[1]" or "[1,2,3]"
-        citation_nums = [int(n.strip()) for n in match.group(1).split(',')]
+        citation_text = match.group(0)  # e.g., "[1]" or "[1,2,3]" or "[30-32]"
+        citation_content = match.group(1)
+
+        # Parse citation numbers - handle both comma lists and ranges
+        citation_nums = []
+        if '-' in citation_content:
+            # Handle ranges like [30-32] or [75-79]
+            parts = citation_content.split('-')
+            if len(parts) == 2:
+                try:
+                    start = int(parts[0].strip())
+                    end = int(parts[1].strip())
+                    citation_nums = list(range(start, end + 1))
+                except ValueError:
+                    # Fallback to treating as comma-separated
+                    citation_nums = [int(n.strip()) for n in citation_content.replace('-', ',').split(',')]
+            else:
+                # Multiple dashes or complex format - treat as comma-separated
+                citation_nums = [int(n.strip()) for n in citation_content.replace('-', ',').split(',')]
+        else:
+            # Handle comma-separated lists like [1,2,3]
+            citation_nums = [int(n.strip()) for n in citation_content.split(',')]
 
         for num in citation_nums:
             if 1 <= num <= len(extracts):
@@ -102,7 +134,7 @@ async def generate_summary_stream(doc_id: str) -> AsyncGenerator[str, None]:
 
         # Call OpenRouter API with streaming
         response = await client.chat.completions.create(
-            model="openai/gpt-4o-mini",  # Using a fast, efficient model
+            model="openai/gpt-4o",  # Using GPT-4o (GPT-5 not available yet)
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that creates detailed summaries with accurate citations."},
                 {"role": "user", "content": prompt}

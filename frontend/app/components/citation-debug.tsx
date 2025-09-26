@@ -134,23 +134,32 @@ export default function CitationDebug({ citations, isStreaming, summary }: Citat
 
       {/* Recent Logs */}
       <div className="mb-3">
-        <div className="text-yellow-400 mb-1">RECENT LOGS:</div>
+        <div className="text-yellow-400 mb-1">RECENT EVENTS:</div>
         <div className="max-h-32 overflow-y-auto">
-          {recentLogs.map((log, idx) => (
+          {recentLogs.filter(log =>
+            // Only show important events: clicks, failures, and fallbacks
+            (log.type === 'citation_click' && (log.data.success !== undefined || log.data.type === 'REACT_FAILED_DOM_FALLBACK')) ||
+            (log.type === 'pdf_operation' && log.data.success === false) ||
+            (log.type === 'render' && log.data.action === 'RENDER_BLOCKED_DURING_STREAMING')
+          ).map((log, idx) => (
             <div key={idx} className="text-xs">
               <span className="text-gray-400">
                 {new Date(log.timestamp).toLocaleTimeString()}
               </span>
               <span className={
-                log.type === 'citation_click' ? 'text-cyan-400' :
-                log.type === 'citation_data' ? 'text-green-400' :
-                log.type === 'pdf_operation' ? 'text-yellow-400' :
+                log.data.success === false ? 'text-red-400' :
+                log.data.type === 'REACT_FAILED_DOM_FALLBACK' ? 'text-yellow-400' :
+                log.data.success === true ? 'text-green-400' :
                 'text-white'
               }>
-                {' ' + log.type.toUpperCase()}
+                {' '}
+                {log.data.type === 'REACT_FAILED_DOM_FALLBACK' ? 'FALLBACK' :
+                 log.data.success === false ? 'FAIL' :
+                 log.data.success === true ? 'SUCCESS' :
+                 log.data.action || log.type.toUpperCase()}
               </span>
               <div className="text-gray-300 pl-2">
-                {JSON.stringify(log.data, null, 0).slice(0, 100)}
+                [{log.data.citationId || 'N/A'}] {log.data.reason || log.data.error || ''}
               </div>
             </div>
           ))}

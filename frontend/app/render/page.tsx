@@ -6,6 +6,8 @@ import EnhancedPdfViewer, { PdfViewerHandle } from "../components/enhanced-pdf-v
 import CitationRenderer from "../components/citation-renderer";
 import { useSummaryStream, Citation } from "../../hooks/useSummaryStream";
 import CitationDebug, { addDebugLog } from "../components/citation-debug";
+import ChunksViewer from "../components/chunks-viewer";
+import ResizableLayout from "../components/resizable-layout";
 
 export default function PdfPage() {
     const searchParams = useSearchParams();
@@ -85,44 +87,29 @@ export default function PdfPage() {
                 if (pdfViewerRef.current) {
                     try {
                         pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
-                        addDebugLog('pdf_operation', {
-                            action: 'IMMEDIATE_HIGHLIGHT_SUCCESS',
-                            citationId,
-                            page: citation.page
-                        });
                     } catch (error) {
                         addDebugLog('pdf_operation', {
-                            action: 'IMMEDIATE_HIGHLIGHT_FAILED',
+                            action: 'HIGHLIGHT_FAILED',
                             citationId,
                             error: error.message,
                             success: false
                         });
                     }
                 }
-            }, 20); // Very short delay for immediate response
+            }, 20);
 
             // Wait for navigation to complete
             const navigationSuccess = await navigationPromise;
-            addDebugLog('pdf_operation', {
-                action: 'NAVIGATION_COMPLETED',
-                citationId,
-                success: navigationSuccess
-            });
 
-            // Apply additional highlight if navigation was successful and we need to ensure visibility
+            // Apply additional highlight if navigation was successful
             if (navigationSuccess) {
                 setTimeout(() => {
                     if (pdfViewerRef.current) {
                         try {
                             pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
-                            addDebugLog('pdf_operation', {
-                                action: 'SECONDARY_HIGHLIGHT_SUCCESS',
-                                citationId,
-                                page: citation.page
-                            });
                         } catch (error) {
                             addDebugLog('pdf_operation', {
-                                action: 'SECONDARY_HIGHLIGHT_FAILED',
+                                action: 'NAVIGATION_HIGHLIGHT_FAILED',
                                 citationId,
                                 error: error.message,
                                 success: false
@@ -163,7 +150,7 @@ export default function PdfPage() {
 
     return (
         <main className="w-full h-screen flex flex-col">
-            <header className="w-full p-4 border-b dark:border-neutral-700 flex items-center justify-between">
+            <header className="sticky top-0 z-40 w-full p-4 border-b dark:border-neutral-700 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm flex items-center justify-between">
                 <div className="flex items-center gap-4">
                     <Link
                         href="/"
@@ -184,82 +171,81 @@ export default function PdfPage() {
                 )}
             </header>
 
-            <div className="flex flex-1 overflow-hidden">
-                {/* Left Panel - PDF Viewer */}
-                <div className="w-1/2 h-full overflow-auto border-r dark:border-neutral-700 bg-white dark:bg-neutral-900">
-                    {pdfUrl ? (
-                        <EnhancedPdfViewer
-                            ref={pdfViewerRef}
-                            fileUrl={pdfUrl}
-                            className="h-full"
-                            highlights={highlights}
-                        />
-                    ) : (
-                        <div className="flex items-center justify-center h-full text-neutral-500">
-                            Loading PDF...
-                        </div>
-                    )}
-                </div>
-
-                {/* Right Panel - Streaming Summary */}
-                <aside className="w-1/2 h-full overflow-y-auto p-6 bg-neutral-50 dark:bg-neutral-800/40">
-                    <div className="max-w-3xl mx-auto space-y-6">
-                        <section>
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold">AI Summary</h2>
-                                {!isStreaming && summary && (
-                                    <button
-                                        onClick={startStream}
-                                        className="text-sm px-3 py-1 rounded-lg bg-primary text-white hover:opacity-90 transition-opacity"
-                                    >
-                                        Regenerate
-                                    </button>
-                                )}
+            <ResizableLayout
+                className="flex-1"
+                leftPanel={
+                    <div className="h-full overflow-auto bg-white dark:bg-neutral-900 minimal-scrollbar">
+                        {pdfUrl ? (
+                            <EnhancedPdfViewer
+                                ref={pdfViewerRef}
+                                fileUrl={pdfUrl}
+                                className="h-full"
+                                highlights={highlights}
+                            />
+                        ) : (
+                            <div className="flex items-center justify-center h-full text-neutral-500">
+                                Loading PDF...
                             </div>
-
-                            {error && (
-                                <div className="p-4 mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                                    <p className="text-sm text-red-600 dark:text-red-400">
-                                        Error: {error}
-                                    </p>
-                                </div>
-                            )}
-
-                            {!summary && !isStreaming && !error && (
-                                <div className="text-center py-8">
-                                    <button
-                                        onClick={startStream}
-                                        className="px-6 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition-opacity"
-                                    >
-                                        Generate Summary
-                                    </button>
-                                </div>
-                            )}
-
-                            {(summary || isStreaming) && (
-                                <div className="prose prose-sm max-w-none">
-                                    <CitationRenderer
-                                        text={summary}
-                                        citations={citations}
-                                        onCitationClick={handleCitationClick}
-                                    />
-                                    {isStreaming && (
-                                        <span className="inline-block w-2 h-4 bg-neutral-400 animate-pulse ml-1"></span>
-                                    )}
-                                </div>
-                            )}
-                        </section>
-
+                        )}
                     </div>
-                </aside>
-            </div>
+                }
+                rightPanel={
+                    <aside className="h-full overflow-y-auto p-6 bg-neutral-50 dark:bg-neutral-800/40 custom-scrollbar">
+                        <div className="max-w-3xl mx-auto space-y-6">
+                            <section>
 
-            {/* Debug Component */}
-            <CitationDebug
-                citations={citations}
-                isStreaming={isStreaming}
-                summary={summary}
+                                {error && (
+                                    <div className="p-4 mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                        <p className="text-sm text-red-600 dark:text-red-400">
+                                            Error: {error}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {!summary && !isStreaming && !error && (
+                                    <div className="text-center py-8">
+                                        <button
+                                            onClick={startStream}
+                                            className="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+                                        >
+                                            Generate Summary
+                                        </button>
+                                    </div>
+                                )}
+
+                                {(summary || isStreaming) && (
+                                    <div className="prose prose-sm max-w-none">
+                                        <CitationRenderer
+                                            text={summary}
+                                            citations={citations}
+                                            onCitationClick={handleCitationClick}
+                                        />
+                                        {isStreaming && (
+                                            <span className="inline-block w-2 h-4 bg-neutral-400 animate-pulse ml-1"></span>
+                                        )}
+                                    </div>
+                                )}
+                            </section>
+                        </div>
+                    </aside>
+                }
             />
+
+            {/* Debug Components - Hidden but preserved */}
+            {false && (
+                <>
+                    <CitationDebug
+                        citations={citations}
+                        isStreaming={isStreaming}
+                        summary={summary}
+                    />
+                    <ChunksViewer
+                        citations={citations}
+                        summary={summary}
+                        docId={docId}
+                    />
+                </>
+            )}
         </main>
     );
 } 

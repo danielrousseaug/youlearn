@@ -19,15 +19,7 @@ function CitationRenderer({
   onCitationClick
 }: CitationRendererProps) {
 
-  // Track component renders - add dependency array to prevent constant firing
-  useEffect(() => {
-    addDebugLog('render', {
-      action: 'CITATION_RENDERER_RENDER',
-      textLength: text.length,
-      citationCount: Object.keys(citations).length,
-      timestamp: Date.now()
-    });
-  }, [text.length, Object.keys(citations).length]); // Only log when actually changing
+  // Remove noisy render logging - we only care about button creation now
 
   // Simple ref to prevent rapid double-clicks - use Map for per-button tracking
   const buttonClickTracking = useRef<Map<string, number>>(new Map());
@@ -36,14 +28,9 @@ function CitationRenderer({
   const citationsRef = useRef(citations);
   const onCitationClickRef = useRef(onCitationClick);
 
-  // Update refs when values change
+  // Update refs when values change - remove noisy logging
   useEffect(() => {
     citationsRef.current = citations;
-    addDebugLog('citation_data', {
-      citationCount: Object.keys(citations).length,
-      citationKeys: Object.keys(citations),
-      action: 'CITATIONS_UPDATED'
-    });
   }, [citations]);
 
   useEffect(() => {
@@ -52,12 +39,7 @@ function CitationRenderer({
 
   // Create citation button component with stable reference
   const createCitationButton = useCallback((numbers: string[], key: string) => {
-    addDebugLog('render', {
-      action: 'CITATION_BUTTON_CREATED',
-      citationId: numbers[0],
-      key,
-      timestamp: Date.now()
-    });
+    // Remove noisy button creation logging
     const handleClick = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
@@ -114,47 +96,23 @@ function CitationRenderer({
     return (
       <button
         key={key}
-        className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium rounded-full cursor-pointer align-baseline text-neutral-600 bg-neutral-100 hover:bg-neutral-200 dark:text-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+        className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium rounded-full cursor-pointer align-baseline text-white bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-500"
         style={{
           position: 'relative',
-          zIndex: 1000,
-          pointerEvents: 'auto',
-          border: '1px solid red' // Temporary visual debug aid
+          zIndex: 10,
+          pointerEvents: 'auto'
         }}
         onClick={handleClick}
-        onMouseDown={(e) => {
-          addDebugLog('citation_click', {
-            type: 'RAW_MOUSE_DOWN',
-            citationId: numbers[0],
-            timestamp: Date.now(),
-            hasReactHandler: !!handleClick
-          });
-        }}
-        onPointerDown={(e) => {
-          addDebugLog('citation_click', {
-            type: 'RAW_POINTER_DOWN',
-            citationId: numbers[0],
-            timestamp: Date.now()
-          });
-        }}
         ref={(buttonElement) => {
           if (buttonElement) {
-            // Add raw DOM listener to catch ALL clicks, even if React misses them
+            // Simplified fallback - only trigger when React completely fails
             const rawClickHandler = (e) => {
-              addDebugLog('citation_click', {
-                type: 'RAW_DOM_CLICK',
-                citationId: numbers[0],
-                timestamp: Date.now(),
-                reactHandlerCalled: false
-              });
-
-              // If React's synthetic event system fails, trigger click directly
               const citation = citationsRef.current[numbers[0]];
               if (citation && onCitationClickRef.current) {
-                // Small delay to let React handler fire first
+                // Delay to let React handler fire first
                 setTimeout(() => {
                   // Check if React handler was called by looking at recent logs
-                  const recentLogs = getDebugLogs().slice(-5);
+                  const recentLogs = getDebugLogs().slice(-3);
                   const reactHandlerCalled = recentLogs.some(log =>
                     log.type === 'citation_click' &&
                     log.data.action === 'HANDLER_CALLED' &&
@@ -163,9 +121,10 @@ function CitationRenderer({
 
                   if (!reactHandlerCalled) {
                     addDebugLog('citation_click', {
-                      type: 'DOM_FALLBACK_TRIGGERED',
+                      type: 'REACT_FAILED_DOM_FALLBACK',
                       citationId: numbers[0],
-                      timestamp: Date.now()
+                      action: 'HANDLER_CALLED',
+                      success: true
                     });
                     onCitationClickRef.current(numbers[0], citation);
                   }
@@ -174,11 +133,7 @@ function CitationRenderer({
             };
 
             buttonElement.addEventListener('click', rawClickHandler, { capture: true });
-
-            // Cleanup function
-            return () => {
-              buttonElement.removeEventListener('click', rawClickHandler, { capture: true });
-            };
+            return () => buttonElement.removeEventListener('click', rawClickHandler, { capture: true });
           }
         }}
         title={numbers.map(num => {
@@ -186,7 +141,10 @@ function CitationRenderer({
           return citation ? `Page ${citation.page}: ${citation.text.substring(0, 100)}...` : '';
         }).filter(Boolean).join('\n')}
       >
-        C
+        {(() => {
+          const citation = citationsRef.current[numbers[0]];
+          return citation ? citation.page : numbers[0];
+        })()}
       </button>
     );
   }, []); // Stable callback using refs - no dependencies on changing values
@@ -218,7 +176,8 @@ function CitationRenderer({
       let lastIndex = 0;
 
       // Create a combined pattern for both citations and inline math
-      const combinedPattern = /(\[(\d+(?:,\s*\d+)*)\])|(\$(.+?)\$)/g;
+      // Updated to handle ranges like [30-32] and comma lists like [1,2,3]
+      const combinedPattern = /(\[(\d+(?:[-,]\s*\d+)*)\])|(\$(.+?)\$)/g;
       let match;
 
       while ((match = combinedPattern.exec(children)) !== null) {
@@ -228,21 +187,50 @@ function CitationRenderer({
         }
 
         if (match[1]) {
-          // It's a citation [1,2,3]
-          const citationNumbers = match[2].split(',').map((n: string) => n.trim());
-          const citationKey = `citation-${match.index}-${citationNumbers.join('-')}`;
+          // It's a citation - handle both [1,2,3] and [30-32] formats
+          const citationText = match[2];
+          let citationNumbers: string[] = [];
 
-          // Only render citation button if citation data is available
-          const firstCitationId = citationNumbers[0];
-          const hasCitationData = citationsRef.current[firstCitationId];
-
-          if (hasCitationData) {
-            parts.push(createCitationButton(citationNumbers, citationKey));
+          // Check if it's a range like [30-32] or a list like [1,2,3]
+          if (citationText.includes('-')) {
+            // Handle ranges like [30-32] or [75-79]
+            const parts = citationText.split(/[-,]/).map(n => n.trim());
+            if (parts.length >= 2) {
+              const start = parseInt(parts[0]);
+              const end = parseInt(parts[parts.length - 1]);
+              if (!isNaN(start) && !isNaN(end)) {
+                // Generate range: [30-32] becomes [30, 31, 32]
+                for (let i = start; i <= end; i++) {
+                  citationNumbers.push(i.toString());
+                }
+              }
+            }
           } else {
-            // Render as plain text until citation data arrives
-            parts.push(match[1]);
-            console.log('[CitationRenderer] Citation data not yet available for:', firstCitationId);
+            // Handle comma-separated lists like [1,2,3]
+            citationNumbers = citationText.split(',').map((n: string) => n.trim());
           }
+
+          // Create individual clickable buttons for each citation with minimal spacing
+          citationNumbers.forEach((citationId, index) => {
+            const hasCitationData = citationsRef.current[citationId];
+            const citationKey = `citation-${match.index}-${citationId}`;
+
+            if (hasCitationData) {
+              parts.push(createCitationButton([citationId], citationKey));
+            } else {
+              // Render as plain text if no data - show chunk number as fallback
+              parts.push(
+                <span key={`fallback-${citationKey}`} className="text-xs text-gray-400">
+                  [{citationId}]
+                </span>
+              );
+            }
+
+            // Add small space between multiple citations
+            if (index < citationNumbers.length - 1) {
+              parts.push(' ');
+            }
+          });
         } else if (match[3]) {
           // It's inline LaTeX $...$
           try {
@@ -414,16 +402,14 @@ const MemoizedCitationRenderer = React.memo(CitationRenderer, (prevProps, nextPr
   // Only re-render for significant changes, not every character during streaming
   const shouldUpdate = significantTextChange || citationCountChanged;
 
-  addDebugLog('render', {
-    action: 'MEMOIZATION_CHECK',
-    textChanged,
-    textLengthDiff,
-    significantTextChange,
-    citationCountChanged,
-    shouldUpdate,
-    prevTextLength: prevProps.text.length,
-    nextTextLength: nextProps.text.length
-  });
+  // Only log when we're blocking a re-render during streaming
+  if (!shouldUpdate && textChanged) {
+    addDebugLog('render', {
+      action: 'RENDER_BLOCKED_DURING_STREAMING',
+      textLengthDiff,
+      reason: textLengthDiff <= 50 ? 'SMALL_TEXT_CHANGE' : 'OTHER'
+    });
+  }
 
   // Return true to SKIP re-render, false to allow re-render
   return !shouldUpdate;

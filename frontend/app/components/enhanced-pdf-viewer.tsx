@@ -149,12 +149,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
 
                 const highlightId = `highlight-${page}-${now}`;
 
-                addDebugLog('pdf_operation', {
-                    action: 'HIGHLIGHT_AREA_CALLED',
-                    page,
-                    bbox,
-                    highlightId
-                });
+                // Remove noisy PDF highlight logging
 
                 // Clear existing highlights immediately
                 setActiveHighlights([]);
