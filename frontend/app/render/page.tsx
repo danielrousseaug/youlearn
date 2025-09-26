@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import EnhancedPdfViewer, { PdfViewerHandle } from "../components/enhanced-pdf-viewer";
 import CitationRenderer from "../components/citation-renderer";
 import { useSummaryStream, Citation } from "../../hooks/useSummaryStream";
+import CitationDebug, { addDebugLog } from "../components/citation-debug";
 
 export default function PdfPage() {
     const searchParams = useSearchParams();
@@ -50,44 +51,115 @@ export default function PdfPage() {
         }
     }, [pdfUrl]);
 
-    const handleCitationClick = async (citationId: string, citation: Citation) => {
-        // Navigate to the page using async method to handle virtualized pages
-        if (pdfViewerRef.current) {
-            // Clear existing highlights immediately
-            pdfViewerRef.current.clearHighlights();
-            setActiveHighlight(null);
+    // Create stable citation click handler to prevent re-renders
+    const handleCitationClick = useCallback(async (citationId: string, citation: Citation) => {
+        addDebugLog('pdf_operation', {
+            action: 'CITATION_CLICK_RECEIVED',
+            citationId,
+            citationPage: citation.page,
+            hasPdfRef: !!pdfViewerRef.current
+        });
 
-            try {
-                // Wait for navigation to complete (handles virtualized pages)
-                const navigationSuccess = await pdfViewerRef.current.goToPage(citation.page);
-
-                // Apply highlight with minimal delay regardless of navigation success
-                setTimeout(() => {
-                    if (pdfViewerRef.current) {
-                        try {
-                            // Only call highlightArea - setActiveHighlight will be handled by the prop
-                            pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
-                            setActiveHighlight({ page: citation.page, bbox: citation.bbox });
-                        } catch (error) {
-                            // Highlighting failed, continue silently
-                        }
-                    }
-                }, navigationSuccess ? 100 : 500); // Shorter delay if navigation was successful
-            } catch (error) {
-                // Navigation failed, try fallback highlighting
-                setTimeout(() => {
-                    if (pdfViewerRef.current) {
-                        try {
-                            pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
-                            setActiveHighlight({ page: citation.page, bbox: citation.bbox });
-                        } catch (error) {
-                            // Fallback highlighting also failed, continue silently
-                        }
-                    }
-                }, 200);
-            }
+        if (!pdfViewerRef.current) {
+            addDebugLog('pdf_operation', {
+                action: 'PDF_REF_UNAVAILABLE',
+                citationId,
+                success: false
+            });
+            return;
         }
-    };
+
+        // Clear existing highlights immediately
+        pdfViewerRef.current.clearHighlights();
+        setActiveHighlight(null);
+
+        // Set new highlight state immediately for prop-based highlighting
+        setActiveHighlight({ page: citation.page, bbox: citation.bbox });
+
+        try {
+            // Start navigation and highlighting in parallel for better responsiveness
+            const navigationPromise = pdfViewerRef.current.goToPage(citation.page);
+
+            // Apply highlight immediately without waiting for navigation
+            setTimeout(() => {
+                if (pdfViewerRef.current) {
+                    try {
+                        pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
+                        addDebugLog('pdf_operation', {
+                            action: 'IMMEDIATE_HIGHLIGHT_SUCCESS',
+                            citationId,
+                            page: citation.page
+                        });
+                    } catch (error) {
+                        addDebugLog('pdf_operation', {
+                            action: 'IMMEDIATE_HIGHLIGHT_FAILED',
+                            citationId,
+                            error: error.message,
+                            success: false
+                        });
+                    }
+                }
+            }, 20); // Very short delay for immediate response
+
+            // Wait for navigation to complete
+            const navigationSuccess = await navigationPromise;
+            addDebugLog('pdf_operation', {
+                action: 'NAVIGATION_COMPLETED',
+                citationId,
+                success: navigationSuccess
+            });
+
+            // Apply additional highlight if navigation was successful and we need to ensure visibility
+            if (navigationSuccess) {
+                setTimeout(() => {
+                    if (pdfViewerRef.current) {
+                        try {
+                            pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
+                            addDebugLog('pdf_operation', {
+                                action: 'SECONDARY_HIGHLIGHT_SUCCESS',
+                                citationId,
+                                page: citation.page
+                            });
+                        } catch (error) {
+                            addDebugLog('pdf_operation', {
+                                action: 'SECONDARY_HIGHLIGHT_FAILED',
+                                citationId,
+                                error: error.message,
+                                success: false
+                            });
+                        }
+                    }
+                }, 100);
+            }
+        } catch (error) {
+            addDebugLog('pdf_operation', {
+                action: 'NAVIGATION_FAILED',
+                citationId,
+                error: error.message,
+                success: false
+            });
+            // Navigation failed, ensure highlighting still works
+            setTimeout(() => {
+                if (pdfViewerRef.current) {
+                    try {
+                        pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
+                        addDebugLog('pdf_operation', {
+                            action: 'FALLBACK_HIGHLIGHT_SUCCESS',
+                            citationId,
+                            page: citation.page
+                        });
+                    } catch (error) {
+                        addDebugLog('pdf_operation', {
+                            action: 'FALLBACK_HIGHLIGHT_FAILED',
+                            citationId,
+                            error: error.message,
+                            success: false
+                        });
+                    }
+                }
+            }, 50);
+        }
+    }, []); // Empty dependencies for stable reference
 
     return (
         <main className="w-full h-screen flex flex-col">
@@ -181,6 +253,13 @@ export default function PdfPage() {
                     </div>
                 </aside>
             </div>
+
+            {/* Debug Component */}
+            <CitationDebug
+                citations={citations}
+                isStreaming={isStreaming}
+                summary={summary}
+            />
         </main>
     );
 } 

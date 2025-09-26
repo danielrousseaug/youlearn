@@ -10,6 +10,7 @@ import {
 } from "@anaralabs/lector";
 import "pdfjs-dist/web/pdf_viewer.css";
 import React, { useEffect, useRef, forwardRef, useImperativeHandle, useState } from "react";
+import { addDebugLog } from './citation-debug';
 
 GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/legacy/build/pdf.worker.mjs",
@@ -44,6 +45,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
             color: string;
         }>>([]);
         const [isHighlighting, setIsHighlighting] = useState(false);
+        const lastHighlightOperationRef = useRef<number>(0);
 
         useImperativeHandle(ref, () => ({
             goToPage: (page: number) => {
@@ -136,13 +138,25 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
                 });
             },
             highlightArea: (page: number, bbox: number[]) => {
-                // Prevent overlapping highlight operations
-                if (isHighlighting) return;
+                const now = Date.now();
 
-                setIsHighlighting(true);
-                const highlightId = `highlight-${page}-${Date.now()}`;
+                // Rate limit highlight operations instead of blocking
+                if (now - lastHighlightOperationRef.current < 100) {
+                    console.log('[PDF Viewer] Rate limiting highlight operation');
+                    return;
+                }
+                lastHighlightOperationRef.current = now;
 
-                // Clear existing highlights
+                const highlightId = `highlight-${page}-${now}`;
+
+                addDebugLog('pdf_operation', {
+                    action: 'HIGHLIGHT_AREA_CALLED',
+                    page,
+                    bbox,
+                    highlightId
+                });
+
+                // Clear existing highlights immediately
                 setActiveHighlights([]);
 
                 // Add new highlight
@@ -155,12 +169,10 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
 
                 setActiveHighlights([newHighlight]);
 
-                // Apply highlight to DOM immediately to prevent fade-in effect
+                // Apply highlight to DOM with reduced delay
                 setTimeout(() => {
                     applyHighlightToDOM(newHighlight);
-                    // Reset highlighting flag after operation completes
-                    setTimeout(() => setIsHighlighting(false), 50);
-                }, 50);
+                }, 10); // Reduced from 50ms to 10ms
             },
             clearHighlights: () => {
                 setActiveHighlights([]);
@@ -300,7 +312,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
             }
         }, [activeHighlights, fileUrl]);
 
-        // Handle prop-based highlights with throttling to prevent streaming stutters
+        // Handle prop-based highlights with reduced throttling
         const highlightUpdateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
         useEffect(() => {
             // Clear any pending highlight updates first
@@ -309,7 +321,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
             }
 
             if (highlights.length > 0) {
-                // Throttle highlight updates - only apply after 200ms of no new changes
+                // Reduced throttle time for more responsive highlighting during streaming
                 highlightUpdateTimeoutRef.current = setTimeout(() => {
                     const propHighlights = highlights.map((h, idx) => ({
                         id: `prop-highlight-${idx}`,
@@ -318,7 +330,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
                         color: h.color || '#22c55e' // Use green color consistently
                     }));
                     setActiveHighlights(propHighlights);
-                }, 200);
+                }, 50); // Reduced from 200ms to 50ms
             } else if (activeHighlights.length > 0) {
                 // Only clear if there are existing highlights to prevent infinite loop
                 setActiveHighlights([]);

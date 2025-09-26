@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Citation } from '../../hooks/useSummaryStream';
+import { addDebugLog, getDebugLogs } from './citation-debug';
 
 interface CitationRendererProps {
   text: string;
@@ -18,8 +19,18 @@ function CitationRenderer({
   onCitationClick
 }: CitationRendererProps) {
 
-  // Simple ref to prevent rapid double-clicks
-  const lastClickRef = useRef<number>(0);
+  // Track component renders - add dependency array to prevent constant firing
+  useEffect(() => {
+    addDebugLog('render', {
+      action: 'CITATION_RENDERER_RENDER',
+      textLength: text.length,
+      citationCount: Object.keys(citations).length,
+      timestamp: Date.now()
+    });
+  }, [text.length, Object.keys(citations).length]); // Only log when actually changing
+
+  // Simple ref to prevent rapid double-clicks - use Map for per-button tracking
+  const buttonClickTracking = useRef<Map<string, number>>(new Map());
 
   // Use refs to access latest values without causing re-renders
   const citationsRef = useRef(citations);
@@ -28,6 +39,11 @@ function CitationRenderer({
   // Update refs when values change
   useEffect(() => {
     citationsRef.current = citations;
+    addDebugLog('citation_data', {
+      citationCount: Object.keys(citations).length,
+      citationKeys: Object.keys(citations),
+      action: 'CITATIONS_UPDATED'
+    });
   }, [citations]);
 
   useEffect(() => {
@@ -36,22 +52,62 @@ function CitationRenderer({
 
   // Create citation button component with stable reference
   const createCitationButton = useCallback((numbers: string[], key: string) => {
+    addDebugLog('render', {
+      action: 'CITATION_BUTTON_CREATED',
+      citationId: numbers[0],
+      key,
+      timestamp: Date.now()
+    });
     const handleClick = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
 
-      // Simple debounce using timestamp
       const now = Date.now();
-      if (now - lastClickRef.current < 100) {
+      const firstCitationId = numbers[0];
+      const buttonKey = `${firstCitationId}-${key}`;
+
+      // Per-button debouncing to prevent event storms
+      const lastClick = buttonClickTracking.current.get(buttonKey) || 0;
+      if (now - lastClick < 200) { // 200ms per-button debounce
+        addDebugLog('citation_click', {
+          type: 'CLICK_DEBOUNCED',
+          citationId: firstCitationId,
+          timeSinceLastClick: now - lastClick
+        });
         return;
       }
-      lastClickRef.current = now;
+      buttonClickTracking.current.set(buttonKey, now);
 
-      const firstCitationId = numbers[0];
       const citation = citationsRef.current[firstCitationId];
 
+      addDebugLog('citation_click', {
+        citationId: firstCitationId,
+        citation: citation ? 'HAS_DATA' : 'NO_DATA',
+        hasHandler: !!onCitationClickRef.current,
+        citationPage: citation?.page,
+        citationBbox: citation?.bbox,
+        success: !!(citation && onCitationClickRef.current)
+      });
+
       if (citation && onCitationClickRef.current) {
-        onCitationClickRef.current(firstCitationId, citation);
+        // Use setTimeout to ensure handler executes outside of React's event handling
+        setTimeout(() => {
+          if (onCitationClickRef.current && citation) {
+            addDebugLog('citation_click', {
+              citationId: firstCitationId,
+              action: 'HANDLER_CALLED',
+              success: true
+            });
+            onCitationClickRef.current(firstCitationId, citation);
+          }
+        }, 0);
+      } else {
+        addDebugLog('citation_click', {
+          citationId: firstCitationId,
+          action: 'HANDLER_FAILED',
+          reason: !citation ? 'NO_CITATION_DATA' : 'NO_HANDLER',
+          success: false
+        });
       }
     };
 
@@ -59,7 +115,72 @@ function CitationRenderer({
       <button
         key={key}
         className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium rounded-full cursor-pointer align-baseline text-neutral-600 bg-neutral-100 hover:bg-neutral-200 dark:text-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+        style={{
+          position: 'relative',
+          zIndex: 1000,
+          pointerEvents: 'auto',
+          border: '1px solid red' // Temporary visual debug aid
+        }}
         onClick={handleClick}
+        onMouseDown={(e) => {
+          addDebugLog('citation_click', {
+            type: 'RAW_MOUSE_DOWN',
+            citationId: numbers[0],
+            timestamp: Date.now(),
+            hasReactHandler: !!handleClick
+          });
+        }}
+        onPointerDown={(e) => {
+          addDebugLog('citation_click', {
+            type: 'RAW_POINTER_DOWN',
+            citationId: numbers[0],
+            timestamp: Date.now()
+          });
+        }}
+        ref={(buttonElement) => {
+          if (buttonElement) {
+            // Add raw DOM listener to catch ALL clicks, even if React misses them
+            const rawClickHandler = (e) => {
+              addDebugLog('citation_click', {
+                type: 'RAW_DOM_CLICK',
+                citationId: numbers[0],
+                timestamp: Date.now(),
+                reactHandlerCalled: false
+              });
+
+              // If React's synthetic event system fails, trigger click directly
+              const citation = citationsRef.current[numbers[0]];
+              if (citation && onCitationClickRef.current) {
+                // Small delay to let React handler fire first
+                setTimeout(() => {
+                  // Check if React handler was called by looking at recent logs
+                  const recentLogs = getDebugLogs().slice(-5);
+                  const reactHandlerCalled = recentLogs.some(log =>
+                    log.type === 'citation_click' &&
+                    log.data.action === 'HANDLER_CALLED' &&
+                    Date.now() - log.timestamp < 100
+                  );
+
+                  if (!reactHandlerCalled) {
+                    addDebugLog('citation_click', {
+                      type: 'DOM_FALLBACK_TRIGGERED',
+                      citationId: numbers[0],
+                      timestamp: Date.now()
+                    });
+                    onCitationClickRef.current(numbers[0], citation);
+                  }
+                }, 10);
+              }
+            };
+
+            buttonElement.addEventListener('click', rawClickHandler, { capture: true });
+
+            // Cleanup function
+            return () => {
+              buttonElement.removeEventListener('click', rawClickHandler, { capture: true });
+            };
+          }
+        }}
         title={numbers.map(num => {
           const citation = citationsRef.current[num];
           return citation ? `Page ${citation.page}: ${citation.text.substring(0, 100)}...` : '';
@@ -110,7 +231,18 @@ function CitationRenderer({
           // It's a citation [1,2,3]
           const citationNumbers = match[2].split(',').map((n: string) => n.trim());
           const citationKey = `citation-${match.index}-${citationNumbers.join('-')}`;
-          parts.push(createCitationButton(citationNumbers, citationKey));
+
+          // Only render citation button if citation data is available
+          const firstCitationId = citationNumbers[0];
+          const hasCitationData = citationsRef.current[firstCitationId];
+
+          if (hasCitationData) {
+            parts.push(createCitationButton(citationNumbers, citationKey));
+          } else {
+            // Render as plain text until citation data arrives
+            parts.push(match[1]);
+            console.log('[CitationRenderer] Citation data not yet available for:', firstCitationId);
+          }
         } else if (match[3]) {
           // It's inline LaTeX $...$
           try {
@@ -268,15 +400,30 @@ function CitationRenderer({
 
 // Memoize the component to prevent unnecessary re-renders during streaming
 const MemoizedCitationRenderer = React.memo(CitationRenderer, (prevProps, nextProps) => {
-  // Only re-render if text actually changes in a meaningful way
-  // This prevents re-renders when citations object changes but text is the same
+  // Only re-render if text changes significantly (not just minor additions)
   const textChanged = prevProps.text !== nextProps.text;
+  const textLengthDiff = Math.abs(prevProps.text.length - nextProps.text.length);
+  const significantTextChange = textChanged && textLengthDiff > 50; // Only major text changes
+
+  // Check if citation count changed (new citations appeared)
   const citationCountChanged = Object.keys(prevProps.citations).length !== Object.keys(nextProps.citations).length;
 
   // IGNORE handler changes during streaming to prevent citation button recreation
   // The component uses refs internally to access the latest handler, so this is safe
-  const shouldUpdate = textChanged || citationCountChanged;
 
+  // Only re-render for significant changes, not every character during streaming
+  const shouldUpdate = significantTextChange || citationCountChanged;
+
+  addDebugLog('render', {
+    action: 'MEMOIZATION_CHECK',
+    textChanged,
+    textLengthDiff,
+    significantTextChange,
+    citationCountChanged,
+    shouldUpdate,
+    prevTextLength: prevProps.text.length,
+    nextTextLength: nextProps.text.length
+  });
 
   // Return true to SKIP re-render, false to allow re-render
   return !shouldUpdate;

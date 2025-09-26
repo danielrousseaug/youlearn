@@ -35,6 +35,9 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
   const [pendingSummary, setPendingSummary] = useState('');
   const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Stable citation reference to prevent recreation during streaming
+  const citationsRef = useRef<Record<string, Citation>>({});
+
   // Function to throttle summary updates
   const throttledSetSummary = useCallback((newSummary: string) => {
     // Clear existing timeout
@@ -70,6 +73,7 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
     setError(null);
     setSummary('');
     setCitations({});
+    citationsRef.current = {};
 
     try {
       const response = await fetch('http://localhost:8000/summary', {
@@ -115,7 +119,31 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
                   setPendingSummary(prev => prev + data.text);
                 }
                 if (data.citations) {
-                  setCitations(prev => ({ ...prev, ...data.citations }));
+                  // Update citations without creating new object reference unless necessary
+                  setCitations(prev => {
+                    let hasChanges = false;
+                    const newCitations = { ...prev };
+
+                    for (const [key, citation] of Object.entries(data.citations)) {
+                      if (!prev[key] || JSON.stringify(prev[key]) !== JSON.stringify(citation)) {
+                        newCitations[key] = citation;
+                        hasChanges = true;
+                        console.log('[useSummaryStream] New citation added:', { key, citation });
+                      }
+                    }
+
+                    if (hasChanges) {
+                      citationsRef.current = newCitations;
+                      console.log('[useSummaryStream] Citations updated:', {
+                        totalCitations: Object.keys(newCitations).length,
+                        newCitationKeys: Object.keys(data.citations),
+                        allKeys: Object.keys(newCitations)
+                      });
+                      return newCitations;
+                    }
+
+                    return prev; // Return same reference if no changes
+                  });
                 }
               } else if (data.type === 'complete') {
                 // Ensure final summary is set when streaming completes
