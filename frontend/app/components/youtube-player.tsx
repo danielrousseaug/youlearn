@@ -42,7 +42,7 @@ const YouTubePlayer = forwardRef<YouTubePlayerHandle, YouTubePlayerProps>(
   ({ videoId, className, onTimeUpdate }, ref) => {
     const playerRef = useRef<InstanceType<typeof window.YT.Player> | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const intervalRef = useRef<NodeJS.Timeout>();
+    const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
     useImperativeHandle(ref, () => ({
       seekToTime: (timeInSeconds: number) => {
