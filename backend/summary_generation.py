@@ -1,9 +1,9 @@
 import json
-from typing import AsyncGenerator, List, Dict, Any
+from typing import AsyncGenerator, List, Dict, Any, Union
 from openai import AsyncOpenAI
 import os
 import asyncio
-from db import get_pdf_extracts, PDFExtract
+from db import get_extracts, get_content_information, is_youtube_content, PDFExtract, YouTubeExtract
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
@@ -12,21 +12,34 @@ client = AsyncOpenAI(
     api_key=OPENROUTER_API_KEY,
 )
 
-def create_prompt_with_chunks(extracts: List[PDFExtract]) -> str:
+def create_prompt_with_chunks(extracts: List[Union[PDFExtract, YouTubeExtract]], content_type: str = "document") -> str:
     """Create a prompt with numbered chunks for citation."""
     chunks_text = ""
+    is_youtube = content_type == "youtube"
+
     for i, extract in enumerate(extracts, 1):
         # Truncate very long chunks but keep them meaningful
         text_preview = extract.text[:300] + "..." if len(extract.text) > 300 else extract.text
-        chunks_text += f"[{i}] Page {int(extract.page_number)}: {text_preview}\n\n"
 
-    prompt = f"""You are an expert document summarizer. Create a comprehensive, bullet-point focused summary with precise inline citations.
+        if is_youtube:
+            # Format for YouTube timestamps
+            start_min = int(extract.start_time // 60)
+            start_sec = int(extract.start_time % 60)
+            chunks_text += f"[{i}] {start_min:02d}:{start_sec:02d}: {text_preview}\n\n"
+        else:
+            # Format for PDF pages
+            chunks_text += f"[{i}] Page {int(extract.page_number)}: {text_preview}\n\n"
+
+    content_description = "video transcript" if is_youtube else "document"
+    source_reference = "timestamps" if is_youtube else "pages"
+
+    prompt = f"""You are an expert {content_description} summarizer. Create a comprehensive, bullet-point focused summary with precise inline citations.
 
 CONTENT REQUIREMENTS:
 - Write a thorough, detailed summary (aim for 800-1200 words)
 - USE BULLET POINTS AS THE PRIMARY FORMAT - avoid long paragraphs
 - Each bullet point should be a complete, informative statement
-- Cover all major sections, concepts, and findings from the document
+- Cover all major sections, concepts, and findings from the {content_description}
 - Include specific details, methodologies, results, and conclusions
 - Group related bullet points under clear section headers
 
@@ -58,16 +71,17 @@ FORMATTING REQUIREMENTS:
     - Additional context [5]
   • Next major point [6]
 
-Available chunks ({len(extracts)} total):
+Available chunks ({len(extracts)} total from {source_reference}):
 {chunks_text}
 
 Create a comprehensive, bullet-point focused markdown summary with inline citations only:"""
 
     return prompt
 
-def parse_chunk_for_citations(chunk_text: str, extracts: List[PDFExtract]) -> Dict[str, Any]:
+def parse_chunk_for_citations(chunk_text: str, extracts: List[Union[PDFExtract, YouTubeExtract]], content_type: str = "document") -> Dict[str, Any]:
     """Parse a chunk of text and extract citation mapping."""
     citations = {}
+    is_youtube = content_type == "youtube"
 
     # Find all citation patterns like [1], [2], [1,2,3], [30-32], etc.
     import re
@@ -111,32 +125,49 @@ def parse_chunk_for_citations(chunk_text: str, extracts: List[PDFExtract]) -> Di
                     else:
                         text_preview = text_preview[:150] + "..."
 
-                citations[str(num)] = {
-                    "page": int(extract.page_number),
-                    "bbox": extract.bbox,
-                    "text": text_preview,
-                    "chunk_id": f"page{int(extract.page_number)}_chunk{num}",
-                    "full_text": extract.text[:500]  # More context for debugging
-                }
+                if is_youtube:
+                    # YouTube citation format
+                    youtube_extract = extract
+                    citations[str(num)] = {
+                        "start_time": youtube_extract.start_time,
+                        "duration": youtube_extract.duration,
+                        "end_time": youtube_extract.end_time,
+                        "text": text_preview,
+                        "chunk_id": f"time{int(youtube_extract.start_time)}_chunk{num}",
+                        "full_text": extract.text[:500],  # More context for debugging
+                        "timestamp_display": f"{int(youtube_extract.start_time // 60):02d}:{int(youtube_extract.start_time % 60):02d}"
+                    }
+                else:
+                    # PDF citation format
+                    pdf_extract = extract
+                    citations[str(num)] = {
+                        "page": int(pdf_extract.page_number),
+                        "bbox": pdf_extract.bbox,
+                        "text": text_preview,
+                        "chunk_id": f"page{int(pdf_extract.page_number)}_chunk{num}",
+                        "full_text": extract.text[:500]  # More context for debugging
+                    }
 
     return citations
 
 async def generate_summary_stream(doc_id: str) -> AsyncGenerator[str, None]:
     """
-    Generate a streaming summary of the document with citations.
+    Generate a streaming summary of the document or video with citations.
     """
     try:
-        # Get PDF extracts from database
-        extracts = get_pdf_extracts(doc_id)
+        # Determine content type and get appropriate extracts
+        is_youtube = is_youtube_content(doc_id)
+        extracts = get_extracts(doc_id)
+        content_type = "youtube" if is_youtube else "document"
 
         # Create prompt with numbered chunks
-        prompt = create_prompt_with_chunks(extracts)
+        prompt = create_prompt_with_chunks(extracts, content_type)
 
         # Call OpenRouter API with streaming
         response = await client.chat.completions.create(
             model="openai/gpt-4o",  # Using GPT-4o (GPT-5 not available yet)
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that creates detailed summaries with accurate citations."},
+                {"role": "system", "content": f"You are a helpful assistant that creates detailed summaries of {content_type}s with accurate citations."},
                 {"role": "user", "content": prompt}
             ],
             stream=True,
@@ -152,14 +183,15 @@ async def generate_summary_stream(doc_id: str) -> AsyncGenerator[str, None]:
                 accumulated_text += text_chunk
 
                 # Extract citations from the accumulated text
-                citations = parse_chunk_for_citations(accumulated_text, extracts)
+                citations = parse_chunk_for_citations(accumulated_text, extracts, content_type)
 
                 # Send the chunk with citation metadata
                 data = {
                     "type": "content",
                     "text": text_chunk,
                     "citations": citations,
-                    "accumulated": accumulated_text
+                    "accumulated": accumulated_text,
+                    "content_type": content_type
                 }
                 yield json.dumps(data) + "\n"
 

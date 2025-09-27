@@ -27,11 +27,13 @@ const presetPDFs: PresetPDF[] = [
 ];
 
 export default function Home() {
-  const [selectedOption, setSelectedOption] = useState<'preset' | 'upload'>('preset');
+  const [selectedOption, setSelectedOption] = useState<'preset' | 'upload' | 'youtube'>('preset');
   const [selectedPDF, setSelectedPDF] = useState(presetPDFs[0].id);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [youtubeUrl, setYoutubeUrl] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -40,6 +42,7 @@ export default function Home() {
       router.push(`/render?src=${encodeURIComponent(selectedPDF)}`);
     } else if (selectedOption === 'upload' && uploadedFile) {
       try {
+        setIsProcessing(true);
         // Upload the file to the backend
         const formData = new FormData();
         formData.append('file', uploadedFile);
@@ -57,6 +60,31 @@ export default function Home() {
         }
       } catch (error) {
         console.error('Upload error:', error);
+      } finally {
+        setIsProcessing(false);
+      }
+    } else if (selectedOption === 'youtube' && youtubeUrl.trim()) {
+      try {
+        setIsProcessing(true);
+        // Process the YouTube URL
+        const response = await fetch('http://localhost:8000/upload-youtube', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url: youtubeUrl.trim() }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          router.push(`/render?src=${encodeURIComponent(data.video_id)}`);
+        } else {
+          console.error('YouTube processing failed');
+        }
+      } catch (error) {
+        console.error('YouTube processing error:', error);
+      } finally {
+        setIsProcessing(false);
       }
     }
   };
@@ -149,6 +177,16 @@ export default function Home() {
               >
                 Upload PDF
               </button>
+              <button
+                onClick={() => setSelectedOption('youtube')}
+                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
+                  selectedOption === 'youtube'
+                    ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-md'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                }`}
+              >
+                YouTube Video
+              </button>
             </div>
 
             {/* Content Area */}
@@ -209,7 +247,7 @@ export default function Home() {
                     )}
                   </div>
                 </div>
-              ) : (
+              ) : selectedOption === 'upload' ? (
                 <div className="space-y-4">
                   <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                     Upload your PDF document
@@ -233,6 +271,7 @@ export default function Home() {
                       ref={fileInputRef}
                       type="file"
                       accept=".pdf"
+                      value=""
                       onChange={handleFileSelect}
                       className="hidden"
                     />
@@ -279,20 +318,68 @@ export default function Home() {
                     )}
                   </div>
                 </div>
+              ) : (
+                <div className="space-y-4">
+                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    Enter YouTube video URL
+                  </label>
+
+                  {/* YouTube URL Input */}
+                  <div className="relative">
+                    <input
+                      type="url"
+                      value={youtubeUrl}
+                      onChange={(e) => setYoutubeUrl(e.target.value)}
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:border-neutral-500 dark:focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200 dark:focus:ring-neutral-700 transition-colors"
+                    />
+                    <div className="absolute inset-y-0 right-3 flex items-center">
+                      <svg className="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M17 21l-5-5-5 5V5a2 2 0 012-2h10a2 2 0 012 2v16z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {youtubeUrl && (
+                    <div className="p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                          <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="font-medium text-neutral-900 dark:text-white">
+                            YouTube Video Ready
+                          </div>
+                          <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                            Click "Generate Summary" to process this video
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
             {/* Action Button */}
             <button
               onClick={handleSubmit}
-              disabled={selectedOption === 'upload' && !uploadedFile}
+              disabled={
+                isProcessing ||
+                (selectedOption === 'upload' && !uploadedFile) ||
+                (selectedOption === 'youtube' && !youtubeUrl.trim())
+              }
               className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
-                (selectedOption === 'upload' && !uploadedFile)
+                isProcessing ||
+                (selectedOption === 'upload' && !uploadedFile) ||
+                (selectedOption === 'youtube' && !youtubeUrl.trim())
                   ? 'bg-neutral-200 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed'
-                  : 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+                  : 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer'
               }`}
             >
-              Generate Summary
+              {isProcessing ? 'Processing...' : 'Generate Summary'}
             </button>
           </div>
 

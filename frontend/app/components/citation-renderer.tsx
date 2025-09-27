@@ -1,7 +1,6 @@
 "use client";
 import React, { useMemo, useCallback, useRef, useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-// import remarkGfm from 'remark-gfm';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Citation } from '../../hooks/useSummaryStream';
@@ -11,16 +10,15 @@ interface CitationRendererProps {
   text: string;
   citations: Record<string, Citation>;
   onCitationClick?: (citationId: string, citation: Citation) => void;
+  isStreaming?: boolean;
 }
 
 function CitationRenderer({
   text,
   citations,
-  onCitationClick
+  onCitationClick,
+  isStreaming
 }: CitationRendererProps) {
-
-  // Remove noisy render logging - we only care about button creation now
-
   // Simple ref to prevent rapid double-clicks - use Map for per-button tracking
   const buttonClickTracking = useRef<Map<string, number>>(new Map());
 
@@ -93,10 +91,17 @@ function CitationRenderer({
       }
     };
 
+    const citation = citationsRef.current[numbers[0]];
+    const isYouTube = citation?.start_time !== undefined;
+
     return (
       <button
         key={key}
-        className="inline-flex items-center justify-center w-4 h-4 text-xs font-medium rounded-full cursor-pointer align-baseline text-white bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-500"
+        className={
+          isYouTube
+            ? "inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-normal rounded-md cursor-pointer align-baseline text-white bg-slate-600 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 shadow-sm border border-slate-500/20"
+            : "inline text-xs font-medium cursor-pointer align-super text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200 hover:underline transition-colors"
+        }
         style={{
           position: 'relative',
           zIndex: 10,
@@ -138,12 +143,31 @@ function CitationRenderer({
         }}
         title={numbers.map(num => {
           const citation = citationsRef.current[num];
-          return citation ? `Page ${citation.page}: ${citation.text.substring(0, 100)}...` : '';
+          if (!citation) return '';
+
+          // Different tooltip for YouTube vs PDF
+          if (citation.start_time !== undefined) {
+            const minutes = Math.floor(citation.start_time / 60);
+            const seconds = Math.floor(citation.start_time % 60);
+            return `${minutes}:${seconds.toString().padStart(2, '0')} - ${citation.text.substring(0, 100)}...`;
+          } else {
+            return `Page ${citation.page}: ${citation.text.substring(0, 100)}...`;
+          }
         }).filter(Boolean).join('\n')}
       >
-        {(() => {
+{(() => {
           const citation = citationsRef.current[numbers[0]];
-          return citation ? citation.page : numbers[0];
+          if (!citation) return `[${numbers[0]}]`;
+
+          // Show timestamp for YouTube videos, bracketed page number for PDFs
+          if (citation.start_time !== undefined) {
+            // Format timestamp as MM:SS
+            const minutes = Math.floor(citation.start_time / 60);
+            const seconds = Math.floor(citation.start_time % 60);
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+          } else {
+            return `[${citation.page}]`;
+          }
         })()}
       </button>
     );
@@ -151,7 +175,7 @@ function CitationRenderer({
 
   // Process LaTeX in text before it goes to React Markdown
   const processedText = useMemo(() => {
-    if (!text) return '';
+    if (!text) return isStreaming ? ' ' : ''; // Add space when streaming but no text yet
 
     let processedText = text;
 
@@ -165,8 +189,13 @@ function CitationRenderer({
       return match; // Keep as citation if not LaTeX
     });
 
+    // Add cursor when streaming
+    if (isStreaming) {
+      processedText += ' ';
+    }
+
     return processedText;
-  }, [text]);
+  }, [text, isStreaming]);
 
   // Function to process inline content with citations and inline LaTeX
   const processInlineContent = useCallback((children: React.ReactNode): React.ReactNode => {
@@ -245,8 +274,10 @@ function CitationRenderer({
 
       // Add remaining text
       if (lastIndex < children.length) {
-        parts.push(children.slice(lastIndex));
+        const remainingText = children.slice(lastIndex);
+        parts.push(remainingText);
       }
+
 
       return parts.length > 1 ? parts : children;
     }
@@ -381,6 +412,9 @@ function CitationRenderer({
         >
           {processedText}
         </ReactMarkdown>
+        {isStreaming && (
+          <span className="inline-block w-0.5 h-4 bg-neutral-400 animate-pulse ml-1 align-text-bottom"></span>
+        )}
       </div>
     </div>
   );

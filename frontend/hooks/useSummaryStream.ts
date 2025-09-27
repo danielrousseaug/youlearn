@@ -1,8 +1,17 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 export interface Citation {
-  page: number;
-  bbox: number[];
+  // PDF properties
+  page?: number;
+  bbox?: number[];
+
+  // YouTube properties
+  start_time?: number;
+  duration?: number;
+  end_time?: number;
+  timestamp_display?: string;
+
+  // Common properties
   text: string;
   chunk_id: string;
 }

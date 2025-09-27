@@ -3,17 +3,19 @@ import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import EnhancedPdfViewer, { PdfViewerHandle } from "../components/enhanced-pdf-viewer";
+import YouTubePlayer, { YouTubePlayerHandle } from "../components/youtube-player";
+import TranscriptDisplay from "../components/transcript-display";
 import CitationRenderer from "../components/citation-renderer";
-import { useSummaryStream, Citation } from "../../hooks/useSummaryStream";
-import CitationDebug, { addDebugLog } from "../components/citation-debug";
-import ChunksViewer from "../components/chunks-viewer";
 import ResizableLayout from "../components/resizable-layout";
+import { useSummaryStream, Citation } from "../../hooks/useSummaryStream";
+import { addDebugLog } from "../components/citation-debug";
 
-export default function PdfPage() {
+export default function ContentViewerPage() {
     const searchParams = useSearchParams();
     const docId = searchParams.get('src') || 'pdf_1';
-    const [pdfUrl, setPdfUrl] = useState<string>("");
-    const [pdfTitle, setPdfTitle] = useState<string>("Loading...");
+    const [contentUrl, setContentUrl] = useState<string>("");
+    const [contentTitle, setContentTitle] = useState<string>("Loading...");
+    const [contentType, setContentType] = useState<'pdf' | 'youtube'>('pdf');
     const [activeHighlight, setActiveHighlight] = useState<{ page: number; bbox: number[] } | null>(null);
 
     // Memoize highlights array to prevent unnecessary re-renders of PDF viewer
@@ -21,132 +23,157 @@ export default function PdfPage() {
         return activeHighlight ? [activeHighlight] : [];
     }, [activeHighlight]);
 
-    // CitationRenderer is now memoized to prevent unnecessary re-renders
-
     const pdfViewerRef = useRef<PdfViewerHandle>(null);
+    const youtubePlayerRef = useRef<YouTubePlayerHandle>(null);
+    const [currentVideoTime, setCurrentVideoTime] = useState(0);
     const { summary, citations, isStreaming, error, startStream } = useSummaryStream(docId);
 
-    // Prevent PDF re-renders by not passing streaming state
-
-    // Fetch PDF information
+    // Fetch content information
     useEffect(() => {
-        const fetchPdfInfo = async () => {
+        const fetchContentInfo = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/pdf/${docId}`);
+                const response = await fetch(`http://localhost:8000/content/${docId}`);
                 if (response.ok) {
                     const data = await response.json();
-                    setPdfUrl(data.url);
-                    setPdfTitle(data.title || "PDF Document");
+                    setContentUrl(data.url || data.embed_url);
+                    setContentTitle(data.title || "Content");
+                    setContentType(data.type || 'pdf');
                 }
             } catch (err) {
-                // Failed to fetch PDF info
+                // Fallback to PDF endpoint for backward compatibility
+                try {
+                    const response = await fetch(`http://localhost:8000/pdf/${docId}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setContentUrl(data.url);
+                        setContentTitle(data.title || "PDF Document");
+                        setContentType('pdf');
+                    }
+                } catch (err2) {
+                    // Failed to fetch content info
+                }
             }
         };
 
-        fetchPdfInfo();
+        fetchContentInfo();
     }, [docId]);
 
     // Auto-start streaming when component mounts
     useEffect(() => {
-        if (pdfUrl) {
+        if (contentUrl) {
             startStream();
         }
-    }, [pdfUrl]);
+    }, [contentUrl]);
 
     // Create stable citation click handler to prevent re-renders
     const handleCitationClick = useCallback(async (citationId: string, citation: Citation) => {
-        addDebugLog('pdf_operation', {
-            action: 'CITATION_CLICK_RECEIVED',
-            citationId,
-            citationPage: citation.page,
-            hasPdfRef: !!pdfViewerRef.current
-        });
-
-        if (!pdfViewerRef.current) {
-            addDebugLog('pdf_operation', {
-                action: 'PDF_REF_UNAVAILABLE',
+        if (contentType === 'youtube') {
+            // Handle YouTube timestamp navigation
+            addDebugLog('youtube_operation', {
+                action: 'CITATION_CLICK_RECEIVED',
                 citationId,
-                success: false
+                startTime: citation.start_time,
+                hasYouTubeRef: !!youtubePlayerRef.current
             });
-            return;
-        }
 
-        // Clear existing highlights immediately
-        pdfViewerRef.current.clearHighlights();
-        setActiveHighlight(null);
+            if (youtubePlayerRef.current && citation.start_time !== undefined) {
+                youtubePlayerRef.current.seekToTime(citation.start_time);
+            }
+        } else {
+            // Handle PDF page/bbox navigation
+            addDebugLog('pdf_operation', {
+                action: 'CITATION_CLICK_RECEIVED',
+                citationId,
+                citationPage: citation.page,
+                hasPdfRef: !!pdfViewerRef.current
+            });
 
-        // Set new highlight state immediately for prop-based highlighting
-        setActiveHighlight({ page: citation.page, bbox: citation.bbox });
+            if (!pdfViewerRef.current) {
+                addDebugLog('pdf_operation', {
+                    action: 'PDF_REF_UNAVAILABLE',
+                    citationId,
+                    success: false
+                });
+                return;
+            }
 
-        try {
-            // Start navigation and highlighting in parallel for better responsiveness
-            const navigationPromise = pdfViewerRef.current.goToPage(citation.page);
+            // Clear existing highlights immediately
+            pdfViewerRef.current.clearHighlights();
+            setActiveHighlight(null);
 
-            // Apply highlight immediately without waiting for navigation
-            setTimeout(() => {
-                if (pdfViewerRef.current) {
-                    try {
-                        pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
-                    } catch (error) {
-                        addDebugLog('pdf_operation', {
-                            action: 'HIGHLIGHT_FAILED',
-                            citationId,
-                            error: error.message,
-                            success: false
-                        });
-                    }
-                }
-            }, 20);
+            // Set new highlight state immediately for prop-based highlighting
+            setActiveHighlight({ page: citation.page, bbox: citation.bbox });
 
-            // Wait for navigation to complete
-            const navigationSuccess = await navigationPromise;
+            try {
+                // Start navigation and highlighting in parallel for better responsiveness
+                const navigationPromise = pdfViewerRef.current.goToPage(citation.page);
 
-            // Apply additional highlight if navigation was successful
-            if (navigationSuccess) {
+                // Apply highlight immediately without waiting for navigation
                 setTimeout(() => {
                     if (pdfViewerRef.current) {
                         try {
                             pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
                         } catch (error) {
                             addDebugLog('pdf_operation', {
-                                action: 'NAVIGATION_HIGHLIGHT_FAILED',
+                                action: 'HIGHLIGHT_FAILED',
                                 citationId,
                                 error: error.message,
                                 success: false
                             });
                         }
                     }
-                }, 100);
-            }
-        } catch (error) {
-            addDebugLog('pdf_operation', {
-                action: 'NAVIGATION_FAILED',
-                citationId,
-                error: error.message,
-                success: false
-            });
-            // Navigation failed, ensure highlighting still works
-            setTimeout(() => {
-                if (pdfViewerRef.current) {
-                    try {
-                        pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
-                        addDebugLog('pdf_operation', {
-                            action: 'FALLBACK_HIGHLIGHT_SUCCESS',
-                            citationId,
-                            page: citation.page
-                        });
-                    } catch (error) {
-                        addDebugLog('pdf_operation', {
-                            action: 'FALLBACK_HIGHLIGHT_FAILED',
-                            citationId,
-                            error: error.message,
-                            success: false
-                        });
-                    }
+                }, 20);
+
+                // Wait for navigation to complete
+                const navigationSuccess = await navigationPromise;
+
+                // Apply additional highlight if navigation was successful
+                if (navigationSuccess) {
+                    setTimeout(() => {
+                        if (pdfViewerRef.current) {
+                            try {
+                                pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
+                            } catch (error) {
+                                addDebugLog('pdf_operation', {
+                                    action: 'NAVIGATION_HIGHLIGHT_FAILED',
+                                    citationId,
+                                    error: error.message,
+                                    success: false
+                                });
+                            }
+                        }
+                    }, 100);
                 }
-            }, 50);
+            } catch (error) {
+                addDebugLog('pdf_operation', {
+                    action: 'NAVIGATION_FAILED',
+                    citationId,
+                    error: error.message,
+                    success: false
+                });
+                // Navigation failed, ensure highlighting still works
+                setTimeout(() => {
+                    if (pdfViewerRef.current) {
+                        try {
+                            pdfViewerRef.current.highlightArea(citation.page, citation.bbox);
+                            addDebugLog('pdf_operation', {
+                                action: 'FALLBACK_HIGHLIGHT_SUCCESS',
+                                citationId,
+                                page: citation.page
+                            });
+                        } catch (error) {
+                            addDebugLog('pdf_operation', {
+                                action: 'FALLBACK_HIGHLIGHT_FAILED',
+                                citationId,
+                                error: error.message,
+                                success: false
+                            });
+                        }
+                    }
+                }, 50);
+            }
         }
-    }, []); // Empty dependencies for stable reference
+    }, [contentType]); // Include contentType in dependencies
 
     return (
         <main className="w-full h-screen flex flex-col">
@@ -160,7 +187,7 @@ export default function PdfPage() {
                         <span>Back</span>
                     </Link>
                     <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                        {pdfTitle}
+                        {contentTitle}
                     </div>
                 </div>
                 {isStreaming && (
@@ -174,17 +201,48 @@ export default function PdfPage() {
             <ResizableLayout
                 className="flex-1"
                 leftPanel={
-                    <div className="h-full overflow-auto bg-white dark:bg-neutral-900 minimal-scrollbar">
-                        {pdfUrl ? (
-                            <EnhancedPdfViewer
-                                ref={pdfViewerRef}
-                                fileUrl={pdfUrl}
-                                className="h-full"
-                                highlights={highlights}
-                            />
+                    <div className="h-full bg-white dark:bg-neutral-900">
+                        {contentType === 'youtube' ? (
+                            contentUrl ? (
+                                <div className="h-full flex flex-col">
+                                    <div className="flex-none relative" style={{ height: '60%', minHeight: '300px' }}>
+                                        <div className="absolute inset-4 top-6">
+                                            <YouTubePlayer
+                                                ref={youtubePlayerRef}
+                                                videoId={docId}
+                                                className="w-full h-full"
+                                                onTimeUpdate={setCurrentVideoTime}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 p-4 overflow-y-auto">
+                                        <TranscriptDisplay
+                                            videoId={docId}
+                                            currentTime={currentVideoTime}
+                                            onSeekToTime={(time) => youtubePlayerRef.current?.seekToTime(time)}
+                                            className=""
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="flex items-center justify-center h-full text-neutral-500">
+                                    Loading YouTube video...
+                                </div>
+                            )
                         ) : (
-                            <div className="flex items-center justify-center h-full text-neutral-500">
-                                Loading PDF...
+                            <div className="h-full overflow-auto minimal-scrollbar">
+                                {contentUrl ? (
+                                    <EnhancedPdfViewer
+                                        ref={pdfViewerRef}
+                                        fileUrl={contentUrl}
+                                        className="h-full"
+                                        highlights={highlights}
+                                    />
+                                ) : (
+                                    <div className="flex items-center justify-center h-full text-neutral-500">
+                                        Loading PDF...
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
@@ -206,7 +264,7 @@ export default function PdfPage() {
                                     <div className="text-center py-8">
                                         <button
                                             onClick={startStream}
-                                            className="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+                                            className="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-200 cursor-pointer active:scale-95"
                                         >
                                             Generate Summary
                                         </button>
@@ -219,10 +277,8 @@ export default function PdfPage() {
                                             text={summary}
                                             citations={citations}
                                             onCitationClick={handleCitationClick}
+                                            isStreaming={isStreaming}
                                         />
-                                        {isStreaming && (
-                                            <span className="inline-block w-2 h-4 bg-neutral-400 animate-pulse ml-1"></span>
-                                        )}
                                     </div>
                                 )}
                             </section>
