@@ -422,10 +422,9 @@ EnhancedPdfViewer.displayName = 'EnhancedPdfViewer';
 
 // Memoize the component to prevent unnecessary re-renders during streaming
 const MemoizedEnhancedPdfViewer = React.memo(EnhancedPdfViewer, (prevProps, nextProps) => {
-    // Only re-render if fileUrl, highlights, or currentPage change
+    // Only re-render if fileUrl, highlights, or className change
     return (
         prevProps.fileUrl === nextProps.fileUrl &&
-        prevProps.currentPage === nextProps.currentPage &&
         prevProps.className === nextProps.className &&
         JSON.stringify(prevProps.highlights) === JSON.stringify(nextProps.highlights)
     );
