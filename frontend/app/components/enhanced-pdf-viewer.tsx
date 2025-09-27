@@ -98,7 +98,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
                     if (pageElement) {
                         // Found the page - navigate to it
                         const currentScrollTop = container.scrollTop;
-                        const elementTop = pageElement.offsetTop;
+                        const elementTop = (pageElement as HTMLElement).offsetTop;
                         const scrollDistance = Math.abs(elementTop - currentScrollTop);
                         const useInstantScroll = scrollDistance > 1500;
 

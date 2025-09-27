@@ -207,12 +207,12 @@ function CitationRenderer({
       // Create a combined pattern for both citations and inline math
       // Updated to handle ranges like [30-32] and comma lists like [1,2,3]
       const combinedPattern = /(\[(\d+(?:[-,]\s*\d+)*)\])|(\$(.+?)\$)/g;
-      let match;
+      let match: RegExpExecArray | null;
 
       while ((match = combinedPattern.exec(children)) !== null) {
         // Add text before match
-        if (match.index > lastIndex) {
-          parts.push(children.slice(lastIndex, match.index));
+        if (match!.index > lastIndex) {
+          parts.push(children.slice(lastIndex, match!.index));
         }
 
         if (match[1]) {
@@ -242,7 +242,7 @@ function CitationRenderer({
           // Create individual clickable buttons for each citation with minimal spacing
           citationNumbers.forEach((citationId, index) => {
             const hasCitationData = citationsRef.current[citationId];
-            const citationKey = `citation-${match.index}-${citationId}`;
+            const citationKey = `citation-${match!.index}-${citationId}`;
 
             if (hasCitationData) {
               parts.push(createCitationButton([citationId], citationKey));
@@ -263,13 +263,13 @@ function CitationRenderer({
         } else if (match[3]) {
           // It's inline LaTeX $...$
           try {
-            parts.push(<InlineMath key={`math-${match.index}`} math={match[4]} />);
+            parts.push(<InlineMath key={`math-${match!.index}`} math={match[4]} />);
           } catch (error) {
             parts.push(match[3]); // Fallback to original text
           }
         }
 
-        lastIndex = match.index + match[0].length;
+        lastIndex = match!.index + match[0].length;
       }
 
       // Add remaining text
@@ -306,12 +306,12 @@ function CitationRenderer({
     const parts = [];
     let lastIndex = 0;
     const markerPattern = /__LATEX_(INLINE|BLOCK)_(\d+)__/g;
-    let match;
+    let match: RegExpExecArray | null;
 
     while ((match = markerPattern.exec(text)) !== null) {
       // Add text before LaTeX
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
+      if (match!.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match!.index));
       }
 
       // Add LaTeX component
@@ -330,7 +330,7 @@ function CitationRenderer({
         }
       }
 
-      lastIndex = match.index + match[0].length;
+      lastIndex = match!.index + match[0].length;
     }
 
     // Add remaining text
