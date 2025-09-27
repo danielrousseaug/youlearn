@@ -232,8 +232,8 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
                     const canvasWidth = canvas.width || canvas.getAttribute('width');
                     const canvasHeight = canvas.height || canvas.getAttribute('height');
                     if (canvasWidth && canvasHeight) {
-                        pdfPageWidth = parseFloat(canvasWidth);
-                        pdfPageHeight = parseFloat(canvasHeight);
+                        pdfPageWidth = parseFloat(String(canvasWidth));
+                        pdfPageHeight = parseFloat(String(canvasHeight));
                     }
                 }
 
@@ -280,7 +280,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
                 `;
 
                 // Position relative to page
-                pageElement.style.position = 'relative';
+                (pageElement as HTMLElement).style.position = 'relative';
 
                 // Force immediate display using requestAnimationFrame to ensure synchronous rendering
                 requestAnimationFrame(() => {
