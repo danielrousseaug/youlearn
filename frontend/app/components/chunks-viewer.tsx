@@ -118,7 +118,7 @@ export default function ChunksViewer({ citations, summary, docId = 'pdf_1' }: Ch
                   <div>
                     <span className="text-cyan-400">Bbox:</span>
                     <div className="text-xs text-gray-400">
-                      [{citations[selectedCitation].bbox.map(n => n.toFixed(1)).join(', ')}]
+                      [{citations[selectedCitation]?.bbox?.map(n => n.toFixed(1)).join(', ') || 'N/A'}]
                     </div>
                   </div>
                   <div>

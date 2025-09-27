@@ -15,14 +15,32 @@ interface YouTubePlayerProps {
 // YouTube Player API types
 declare global {
   interface Window {
-    YT: any;
+    YT: {
+      Player: new (element: string, config: {
+        height: string;
+        width: string;
+        videoId: string;
+        events: {
+          onReady: (event: { target: unknown }) => void;
+          onStateChange: (event: { target: unknown; data: number }) => void;
+        };
+      }) => {
+        seekTo: (seconds: number) => void;
+        getCurrentTime: () => number;
+        destroy: () => void;
+      };
+      PlayerState: {
+        PLAYING: number;
+        PAUSED: number;
+      };
+    };
     onYouTubeIframeAPIReady: () => void;
   }
 }
 
 const YouTubePlayer = forwardRef<YouTubePlayerHandle, YouTubePlayerProps>(
   ({ videoId, className, onTimeUpdate }, ref) => {
-    const playerRef = useRef<any>(null);
+    const playerRef = useRef<InstanceType<typeof window.YT.Player> | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const intervalRef = useRef<NodeJS.Timeout>();
 

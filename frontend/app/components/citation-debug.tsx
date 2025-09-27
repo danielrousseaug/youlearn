@@ -11,7 +11,7 @@ interface CitationDebugProps {
 interface DebugLog {
   timestamp: number;
   type: 'citation_click' | 'citation_data' | 'pdf_operation' | 'render';
-  data: any;
+  data: unknown;
 }
 
 let debugLogs: DebugLog[] = [];
@@ -20,7 +20,7 @@ let debugLogs: DebugLog[] = [];
 export const getDebugLogs = () => debugLogs;
 
 // Global debug logger
-export const addDebugLog = (type: DebugLog['type'], data: any) => {
+export const addDebugLog = (type: DebugLog['type'], data: unknown) => {
   const log = {
     timestamp: Date.now(),
     type,

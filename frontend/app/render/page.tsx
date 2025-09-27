@@ -9,6 +9,9 @@ import CitationRenderer from "../components/citation-renderer";
 import ResizableLayout from "../components/resizable-layout";
 import { useSummaryStream, Citation } from "../../hooks/useSummaryStream";
 import { addDebugLog } from "../components/citation-debug";
+import { apiUrls } from "../../lib/api";
+import CitationDebug from "../components/citation-debug";
+import ChunksViewer from "../components/chunks-viewer";
 
 export default function ContentViewerPage() {
     const searchParams = useSearchParams();
@@ -32,7 +35,7 @@ export default function ContentViewerPage() {
     useEffect(() => {
         const fetchContentInfo = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/content/${docId}`);
+                const response = await fetch(apiUrls.content(docId));
                 if (response.ok) {
                     const data = await response.json();
                     setContentUrl(data.url || data.embed_url);
@@ -42,7 +45,7 @@ export default function ContentViewerPage() {
             } catch (err) {
                 // Fallback to PDF endpoint for backward compatibility
                 try {
-                    const response = await fetch(`http://localhost:8000/pdf/${docId}`);
+                    const response = await fetch(apiUrls.content(docId));
                     if (response.ok) {
                         const data = await response.json();
                         setContentUrl(data.url);

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { apiUrls } from "../lib/api";
 
 interface PresetPDF {
   id: string;
@@ -47,7 +48,7 @@ export default function Home() {
         const formData = new FormData();
         formData.append('file', uploadedFile);
 
-        const response = await fetch('http://localhost:8000/upload', {
+        const response = await fetch(apiUrls.upload, {
           method: 'POST',
           body: formData,
         });
@@ -67,7 +68,7 @@ export default function Home() {
       try {
         setIsProcessing(true);
         // Process the YouTube URL
-        const response = await fetch('http://localhost:8000/upload-youtube', {
+        const response = await fetch(apiUrls.uploadYoutube, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -353,7 +354,7 @@ export default function Home() {
                             YouTube Video Ready
                           </div>
                           <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                            Click "Generate Summary" to process this video
+                            Click &quot;Generate Summary&quot; to process this video
                           </div>
                         </div>
                       </div>
