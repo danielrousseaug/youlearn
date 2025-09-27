@@ -111,7 +111,7 @@ function CitationRenderer({
         ref={(buttonElement) => {
           if (buttonElement) {
             // Simplified fallback - only trigger when React completely fails
-            const rawClickHandler = (e) => {
+            const rawClickHandler = (e: Event) => {
               const citation = citationsRef.current[numbers[0]];
               if (citation && onCitationClickRef.current) {
                 // Delay to let React handler fire first
@@ -131,7 +131,7 @@ function CitationRenderer({
                       action: 'HANDLER_CALLED',
                       success: true
                     });
-                    onCitationClickRef.current(numbers[0], citation);
+                    onCitationClickRef.current?.(numbers[0], citation);
                   }
                 }, 10);
               }
