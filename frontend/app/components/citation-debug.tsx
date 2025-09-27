@@ -11,7 +11,15 @@ interface CitationDebugProps {
 interface DebugLog {
   timestamp: number;
   type: 'citation_click' | 'citation_data' | 'pdf_operation' | 'render';
-  data: unknown;
+  data: {
+    success?: boolean;
+    type?: string;
+    action?: string;
+    citationId?: string;
+    reason?: string;
+    error?: string;
+    [key: string]: unknown;
+  };
 }
 
 let debugLogs: DebugLog[] = [];
@@ -20,7 +28,7 @@ let debugLogs: DebugLog[] = [];
 export const getDebugLogs = () => debugLogs;
 
 // Global debug logger
-export const addDebugLog = (type: DebugLog['type'], data: unknown) => {
+export const addDebugLog = (type: DebugLog['type'], data: DebugLog['data']) => {
   const log = {
     timestamp: Date.now(),
     type,
@@ -59,7 +67,7 @@ export default function CitationDebug({ citations, isStreaming, summary }: Citat
     // Only count actual citation click attempts, not raw DOM events
     const clickLogs = debugLogs.filter(log =>
       log.type === 'citation_click' &&
-      log.data.hasOwnProperty('success') && // Only events that have success/failure
+      log.data.hasOwnProperty?.('success') && // Only events that have success/failure
       !log.data.type // Exclude raw DOM/mouse events
     );
     const successLogs = clickLogs.filter(log => log.data.success === true);
@@ -141,7 +149,8 @@ export default function CitationDebug({ citations, isStreaming, summary }: Citat
             (log.type === 'citation_click' && (log.data.success !== undefined || log.data.type === 'REACT_FAILED_DOM_FALLBACK')) ||
             (log.type === 'pdf_operation' && log.data.success === false) ||
             (log.type === 'render' && log.data.action === 'RENDER_BLOCKED_DURING_STREAMING')
-          ).map((log, idx) => (
+          ).map((log, idx) => {
+            return (
             <div key={idx} className="text-xs">
               <span className="text-gray-400">
                 {new Date(log.timestamp).toLocaleTimeString()}
@@ -162,7 +171,8 @@ export default function CitationDebug({ citations, isStreaming, summary }: Citat
                 [{log.data.citationId || 'N/A'}] {log.data.reason || log.data.error || ''}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
