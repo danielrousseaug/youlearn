@@ -1,7 +1,7 @@
 "use client"
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { apiUrls } from "../lib/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 interface PresetPDF {
   id: string;
@@ -48,7 +48,7 @@ export default function Home() {
         const formData = new FormData();
         formData.append('file', uploadedFile);
 
-        const response = await fetch(apiUrls.upload, {
+        const response = await fetch(`${API_BASE_URL}/upload`, {
           method: 'POST',
           body: formData,
         });
@@ -68,7 +68,7 @@ export default function Home() {
       try {
         setIsProcessing(true);
         // Process the YouTube URL
-        const response = await fetch(apiUrls.uploadYoutube, {
+        const response = await fetch(`${API_BASE_URL}/upload-youtube`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

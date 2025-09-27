@@ -98,7 +98,7 @@ const YouTubePlayer = forwardRef<YouTubePlayerHandle, YouTubePlayerProps>(
             autohide: 1
           },
           events: {
-            onReady: (event: any) => {
+            onReady: (event: { target: unknown }) => {
               // Start time tracking
               if (onTimeUpdate) {
                 intervalRef.current = setInterval(() => {
@@ -109,7 +109,7 @@ const YouTubePlayer = forwardRef<YouTubePlayerHandle, YouTubePlayerProps>(
                 }, 1000);
               }
             },
-            onStateChange: (event: any) => {
+            onStateChange: (event: { target: unknown; data: number }) => {
               // Handle state changes if needed
             }
           }

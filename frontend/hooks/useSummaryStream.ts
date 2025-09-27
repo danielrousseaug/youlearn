@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { apiUrls } from '../lib/api';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export interface Citation {
   // PDF properties
@@ -90,7 +91,7 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
     citationsRef.current = {};
 
     try {
-      const response = await fetch(apiUrls.summary, {
+      const response = await fetch(`${API_BASE_URL}/summary`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
