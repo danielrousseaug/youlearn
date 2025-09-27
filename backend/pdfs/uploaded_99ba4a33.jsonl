@@ -1,0 +1,768 @@
+{"text": "Project Plan: AI-Powered Personalized Learning", "page_number": 1.0, "bbox": [78.0, 114.938720703125, 503.0699768066406, 139.45472717285156]}
+{"text": "Platform", "page_number": 1.0, "bbox": [78.0, 141.938720703125, 157.43399047851562, 166.45472717285156]}
+{"text": "Introduction & Vision", "page_number": 1.0, "bbox": [78.0, 180.68812561035156, 221.84249877929688, 199.07513427734375]}
+{"text": "Many self-learners struggle to stay on track without the structure of a formal class. This project aims to", "page_number": 1.0, "bbox": [78.0, 211.83291625976562, 533.9359130859375, 224.09091186523438]}
+{"text": "build a web application (with future mobile support) that", "page_number": 1.0, "bbox": [78.0, 225.33291625976562, 330.6150207519531, 237.59091186523438]}
+{"text": "creates customized courses for self-learning", "page_number": 1.0, "bbox": [330.64678955078125, 225.33291625976562, 533.9775390625, 237.59091186523438]}
+{"text": "using AI. The platform will turn user-provided study materials (e.g. a textbook PDF, and later possibly", "page_number": 1.0, "bbox": [78.0, 238.83291625976562, 533.9669189453125, 251.09091186523438]}
+{"text": "videos) into a structured course with a syllabus, assignments, and tests. The core vision is an AI tutor that", "page_number": 1.0, "bbox": [78.0, 252.33291625976562, 533.9983520507812, 264.5909118652344]}
+{"text": "doesn’t just answer questions, but", "page_number": 1.0, "bbox": [78.0, 265.8329162597656, 229.09725952148438, 278.0909118652344]}
+{"text": "guides the learner through a complete course with accountability", "page_number": 1.0, "bbox": [229.08718872070312, 265.8329162597656, 531.573974609375, 278.0909118652344]}
+{"text": ".", "page_number": 1.0, "bbox": [531.588134765625, 265.8329162597656, 534.0001220703125, 278.0909118652344]}
+{"text": "By leveraging AI for syllabus creation, quiz generation, and adaptive feedback, we can provide a personal", "page_number": 1.0, "bbox": [78.0, 279.3329162597656, 533.9422607421875, 291.5909118652344]}
+{"text": "learning experience comparable to a structured class, but tailored to the individual. This addresses a gap", "page_number": 1.0, "bbox": [78.0, 292.8329162597656, 533.9625854492188, 305.0909118652344]}
+{"text": "for independent learners who have resources but need a plan and motivation to follow through. Existing", "page_number": 1.0, "bbox": [78.0, 306.3329162597656, 533.8816528320312, 318.5909118652344]}
+{"text": "tools already hint at this possibility – for example, AI platforms can instantly generate course outlines,", "page_number": 1.0, "bbox": [78.0, 319.8329162597656, 533.9961547851562, 332.0909118652344]}
+{"text": "quizzes, and even feedback based on provided content", "page_number": 1.0, "bbox": [78.0, 333.3329162597656, 309.1823425292969, 345.5909118652344]}
+{"text": ". Our product will integrate these capabilities into", "page_number": 1.0, "bbox": [325.70654296875, 333.3329162597656, 533.974853515625, 345.5909118652344]}
+{"text": "a cohesive learning management system for individuals.", "page_number": 1.0, "bbox": [78.0, 346.8329162597656, 315.94195556640625, 359.0909118652344]}
+{"text": "Target Audience and Use Case", "page_number": 1.0, "bbox": [78.0, 375.64312744140625, 279.83856201171875, 394.0301208496094]}
+{"text": "The target users are", "page_number": 1.0, "bbox": [78.0, 406.7878723144531, 172.13848876953125, 419.0458679199219]}
+{"text": "high school, college, or adult learners", "page_number": 1.0, "bbox": [172.11746215820312, 406.7878723144531, 349.199951171875, 419.0458679199219]}
+{"text": "who are studying a subject on their own", "page_number": 1.0, "bbox": [349.23089599609375, 406.7878723144531, 533.9486083984375, 419.0458679199219]}
+{"text": "(outside a formal school course) and want structure and accountability. For instance:", "page_number": 1.0, "bbox": [78.0, 420.2878723144531, 436.3619689941406, 432.5458679199219]}
+{"text": "A college student using an", "page_number": 1.0, "bbox": [108.0, 448.7878723144531, 221.99400329589844, 461.0458679199219]}
+{"text": "Abstract Algebra", "page_number": 1.0, "bbox": [221.99267578125, 448.7878723144531, 287.8816833496094, 461.0458679199219]}
+{"text": "textbook to learn about rings and fields over summer.", "page_number": 1.0, "bbox": [287.865234375, 448.7878723144531, 519.2732543945312, 461.0458679199219]}
+{"text": "A working professional brushing up on", "page_number": 1.0, "bbox": [108.0, 462.2878723144531, 274.4730529785156, 474.5458679199219]}
+{"text": "Python programming", "page_number": 1.0, "bbox": [274.471435546875, 462.2878723144531, 360.511474609375, 474.5458679199219]}
+{"text": "from an online PDF or tutorial.", "page_number": 1.0, "bbox": [360.494384765625, 462.2878723144531, 493.4424743652344, 474.5458679199219]}
+{"text": "Any motivated learner who has a book or video series and wants an interactive “course” experience", "page_number": 1.0, "bbox": [108.0, 475.7878723144531, 525.58203125, 488.0458679199219]}
+{"text": "around it.", "page_number": 1.0, "bbox": [108.0, 489.2878723144531, 151.3529815673828, 501.5458679199219]}
+{"text": "These users may have tried self-paced MOOCs or reading on their own, but find it hard to stay motivated.", "page_number": 1.0, "bbox": [78.0, 511.7878723144531, 533.876953125, 524.0458984375]}
+{"text": "Our platform gives them a", "page_number": 1.0, "bbox": [78.0, 525.2879028320312, 193.7947235107422, 537.5458984375]}
+{"text": "personalized syllabus and schedule", "page_number": 1.0, "bbox": [193.8106689453125, 525.2879028320312, 352.94415283203125, 537.5458984375]}
+{"text": ", regular homework/quizzes, and feedback", "page_number": 1.0, "bbox": [352.961181640625, 525.2879028320312, 533.978271484375, 537.5458984375]}
+{"text": "– essentially acting as a", "page_number": 1.0, "bbox": [78.0, 538.7879028320312, 183.97122192382812, 551.0458984375]}
+{"text": "virtual teacher and coach", "page_number": 1.0, "bbox": [183.9769287109375, 538.7879028320312, 301.83416748046875, 551.0458984375]}
+{"text": ". The platform will initially focus on solo learners, but", "page_number": 1.0, "bbox": [301.8560485839844, 538.7879028320312, 533.9367065429688, 551.0458984375]}
+{"text": "later allow group/cohort learning for those who want to learn together.", "page_number": 1.0, "bbox": [78.0, 552.2879028320312, 377.916015625, 564.5458984375]}
+{"text": "Core Features (MVP Phase)", "page_number": 1.0, "bbox": [78.0, 581.0980834960938, 257.4690246582031, 599.485107421875]}
+{"text": "The  Minimum  Viable  Product  will  include  the  essential  features  to  deliver  a  structured  self-learning", "page_number": 1.0, "bbox": [78.0, 612.242919921875, 533.9204711914062, 624.5009155273438]}
+{"text": "experience. Key functionalities in the MVP:", "page_number": 1.0, "bbox": [78.0, 625.742919921875, 258.8099365234375, 638.0009155273438]}
+{"text": "Course Material Ingestion", "page_number": 1.0, "bbox": [108.0, 654.242919921875, 228.07948303222656, 666.5009155273438]}
+{"text": "– Users can upload a textbook PDF (or enter a link). The system will", "page_number": 1.0, "bbox": [228.08816528320312, 654.242919921875, 533.9402465820312, 666.5009155273438]}
+{"text": "parse the material to understand its structure (chapters, sections).", "page_number": 1.0, "bbox": [108.0, 667.742919921875, 395.6249084472656, 680.0009155273438]}
+{"text": "(", "page_number": 1.0, "bbox": [395.6180419921875, 667.742919921875, 398.22802734375, 680.0009155273438]}
+{"text": "Starting with PDF/text; YouTube", "page_number": 1.0, "bbox": [398.2283935546875, 667.742919921875, 534.015869140625, 680.0009155273438]}
+{"text": "video support can be added later.", "page_number": 1.0, "bbox": [108.0, 681.242919921875, 252.08250427246094, 693.5009155273438]}
+{"text": ")", "page_number": 1.0, "bbox": [252.0731964111328, 681.242919921875, 254.68319702148438, 693.5009155273438]}
+{"text": "This forms the knowledge base for the course content.", "page_number": 1.0, "bbox": [254.6835479736328, 681.242919921875, 496.6604919433594, 693.5009155273438]}
+{"text": "(For MVP,", "page_number": 1.0, "bbox": [496.6507568359375, 681.242919921875, 534.0082397460938, 693.5009155273438]}
+{"text": "we assume text-based PDFs for easier parsing.)", "page_number": 1.0, "bbox": [108.0, 694.742919921875, 295.1820068359375, 707.0009155273438]}
+{"text": "1", "page_number": 1.0, "bbox": [316.490478515625, 334.5809020996094, 319.9224853515625, 342.7528991699219]}
+{"text": "•", "page_number": 1.0, "bbox": [102.276123046875, 448.7878723144531, 108.0001220703125, 461.0458679199219]}
+{"text": "•", "page_number": 1.0, "bbox": [102.276123046875, 462.2878723144531, 108.0001220703125, 474.5458679199219]}
+{"text": "•", "page_number": 1.0, "bbox": [102.276123046875, 475.7878723144531, 108.0001220703125, 488.0458679199219]}
+{"text": "•", "page_number": 1.0, "bbox": [102.276123046875, 654.242919921875, 108.0001220703125, 666.5009155273438]}
+{"text": "Topic & Scope Customization", "page_number": 2.0, "bbox": [108.0, 72.62118530273438, 239.3729705810547, 84.87918853759766]}
+{"text": "– Through an interactive chat or form, the user specifies what they", "page_number": 2.0, "bbox": [239.38096618652344, 72.62118530273438, 533.929931640625, 84.87918853759766]}
+{"text": "want to learn from the material. For example, they might select certain chapters or topics (e.g. “rings", "page_number": 2.0, "bbox": [108.0, 86.12118530273438, 533.9429321289062, 98.37918853759766]}
+{"text": "and fields” from an algebra text) instead of the entire book. The user also answers a few questions", "page_number": 2.0, "bbox": [108.0, 99.62118530273438, 533.9114379882812, 111.87918853759766]}
+{"text": "about their", "page_number": 2.0, "bbox": [108.0, 113.12118530273438, 158.87997436523438, 125.37918853759766]}
+{"text": "current knowledge level", "page_number": 2.0, "bbox": [158.86856079101562, 113.12118530273438, 269.07208251953125, 125.37918853759766]}
+{"text": "and", "page_number": 2.0, "bbox": [269.07354736328125, 113.12118530273438, 291.3387756347656, 125.37918853759766]}
+{"text": "learning goals", "page_number": 2.0, "bbox": [291.32269287109375, 113.12118530273438, 356.1444396972656, 125.37918853759766]}
+{"text": ". This helps tailor the course to skip what", "page_number": 2.0, "bbox": [356.1495666503906, 113.12118530273438, 533.9564819335938, 125.37918853759766]}
+{"text": "they already know and focus on desired topics.", "page_number": 2.0, "bbox": [108.0, 126.62118530273438, 307.7550048828125, 138.87918090820312]}
+{"text": "Learner Profile & Scheduling Inputs", "page_number": 2.0, "bbox": [108.0, 155.12118530273438, 272.66400146484375, 167.37918090820312]}
+{"text": "– The user inputs practical constraints: how much time per", "page_number": 2.0, "bbox": [272.6661376953125, 155.12118530273438, 533.9675903320312, 167.37918090820312]}
+{"text": "day or week they can study, preferred course duration (e.g. 4 weeks, 8 weeks), and depth of learning", "page_number": 2.0, "bbox": [108.0, 168.62118530273438, 533.9014892578125, 180.87918090820312]}
+{"text": "(overview vs. in-depth). The system may also ask a few", "page_number": 2.0, "bbox": [108.0, 182.12118530273438, 345.311279296875, 194.37918090820312]}
+{"text": "diagnostic questions", "page_number": 2.0, "bbox": [345.33416748046875, 182.12118530273438, 439.1425476074219, 194.37918090820312]}
+{"text": "or a short pre-quiz to", "page_number": 2.0, "bbox": [439.1457824707031, 182.12118530273438, 533.9757080078125, 194.37918090820312]}
+{"text": "gauge the starting level. (For MVP, a simple self-assessment quiz can suffice to categorize beginner/", "page_number": 2.0, "bbox": [108.0, 195.62118530273438, 533.9776611328125, 207.87918090820312]}
+{"text": "intermediate.) Based on these inputs, the platform will set realistic bounds (e.g. it will warn if the", "page_number": 2.0, "bbox": [108.0, 209.12118530273438, 533.8650512695312, 221.37918090820312]}
+{"text": "user’s goal is too ambitious for the timeframe and suggest adjustments).", "page_number": 2.0, "bbox": [108.0, 222.62118530273438, 417.5729064941406, 234.87918090820312]}
+{"text": "Personalized Syllabus Generation", "page_number": 2.0, "bbox": [108.0, 251.12118530273438, 258.967529296875, 263.3791809082031]}
+{"text": "– Using the content and user inputs, the AI generates a", "page_number": 2.0, "bbox": [258.96649169921875, 251.12118530273438, 503.9832458496094, 263.3791809082031]}
+{"text": "course", "page_number": 2.0, "bbox": [504.012451171875, 251.12118530273438, 534.0003662109375, 263.3791809082031]}
+{"text": "syllabus and schedule", "page_number": 2.0, "bbox": [108.0, 264.6211853027344, 208.08001708984375, 276.8791809082031]}
+{"text": ". This includes breaking the selected material into a sequence of lessons or", "page_number": 2.0, "bbox": [208.0916290283203, 264.6211853027344, 533.9276733398438, 276.8791809082031]}
+{"text": "modules, assigning readings to each week or day. For example, “Week 1: Chapters 1-2 (Basics of Ring", "page_number": 2.0, "bbox": [108.0, 278.1211853027344, 533.9339599609375, 290.3791809082031]}
+{"text": "Theory)”, “Week 2: Chapter 3 (Field Axioms)”, etc. The syllabus will outline learning objectives for each", "page_number": 2.0, "bbox": [108.0, 291.6211853027344, 533.9296264648438, 303.8791809082031]}
+{"text": "segment. This is essentially an AI-generated curriculum tailored to the user’s chosen content and", "page_number": 2.0, "bbox": [108.0, 305.1211853027344, 533.901123046875, 317.3791809082031]}
+{"text": "timeline", "page_number": 2.0, "bbox": [108.0, 318.6211853027344, 142.343994140625, 330.8791809082031]}
+{"text": ". The user can review and tweak this syllabus if needed.", "page_number": 2.0, "bbox": [158.842529296875, 318.6211853027344, 394.0665588378906, 330.8791809082031]}
+{"text": "Reading & Lecture Assignments", "page_number": 2.0, "bbox": [108.0, 347.1211853027344, 255.3817596435547, 359.3791809082031]}
+{"text": "– For each segment of the syllabus, the platform provides the", "page_number": 2.0, "bbox": [255.38253784179688, 347.1211853027344, 533.9580078125, 359.3791809082031]}
+{"text": "study  material  (page  ranges  or  video  links  to  watch)  and  may  generate  a  short", "page_number": 2.0, "bbox": [108.0, 360.6211853027344, 498.25653076171875, 372.8791809082031]}
+{"text": "“lecture", "page_number": 2.0, "bbox": [498.261474609375, 360.6211853027344, 534.0093994140625, 372.8791809082031]}
+{"text": "assignment”", "page_number": 2.0, "bbox": [108.0, 374.1211853027344, 164.89801025390625, 386.3791809082031]}
+{"text": "to accompany the reading. These could be a few conceptual questions or a mini-quiz", "page_number": 2.0, "bbox": [164.8974609375, 374.1211853027344, 533.8786010742188, 386.3791809082031]}
+{"text": "to ensure the user has grasped key points from the reading. For MVP, this could be a simple quiz at", "page_number": 2.0, "bbox": [108.0, 387.6211853027344, 533.9400634765625, 399.8791809082031]}
+{"text": "the end of each chapter or a checklist of concepts to recall. These minor assignments are", "page_number": 2.0, "bbox": [108.0, 401.1211853027344, 489.4619445800781, 413.3791809082031]}
+{"text": "formative", "page_number": 2.0, "bbox": [489.4951171875, 401.1211853027344, 534.0, 413.3791809082031]}
+{"text": "(low stakes, mostly to encourage engagement). They might be graded on completion or self-checked", "page_number": 2.0, "bbox": [108.0, 414.6211853027344, 533.9490356445312, 426.8791809082031]}
+{"text": "with provided answers, rather than strict scoring.", "page_number": 2.0, "bbox": [108.0, 428.1211853027344, 317.8799743652344, 440.3791809082031]}
+{"text": "Homework Assignments", "page_number": 2.0, "bbox": [108.0, 456.6211853027344, 220.18275451660156, 468.8791809082031]}
+{"text": "– On a weekly basis (or after major sections), the system generates", "page_number": 2.0, "bbox": [220.1829833984375, 456.6211853027344, 533.9881591796875, 468.8791809082031]}
+{"text": "homework problems or exercises. These are more in-depth questions or problems related to what", "page_number": 2.0, "bbox": [108.0, 470.1211853027344, 533.9940185546875, 482.3791809082031]}
+{"text": "was learned (for example, problem sets from the textbook or AI-generated questions). The user is", "page_number": 2.0, "bbox": [108.0, 483.6211853027344, 533.9849243164062, 495.8791809082031]}
+{"text": "expected to complete these on their own time. The format can vary by subject – it could be solving", "page_number": 2.0, "bbox": [108.0, 497.1211853027344, 533.9835815429688, 509.3791809082031]}
+{"text": "math problems, writing a short essay, or completing a coding exercise. The platform will allow the", "page_number": 2.0, "bbox": [108.0, 510.6211853027344, 533.9857788085938, 522.8792114257812]}
+{"text": "user to submit their work for feedback. For MVP, we can start with relatively structured formats (e.g.", "page_number": 2.0, "bbox": [108.0, 524.1212158203125, 533.9699096679688, 536.3792114257812]}
+{"text": "multiple-choice, fill-in-the-blank, or numeric answers) for easier auto-grading. The option to submit", "page_number": 2.0, "bbox": [108.0, 537.6212158203125, 533.976806640625, 549.8792114257812]}
+{"text": "free-form  written  work  (like  a  photo/PDF  of  handwritten  solutions  or  a  typed  essay)  can  be", "page_number": 2.0, "bbox": [108.0, 551.1212158203125, 533.966796875, 563.3792114257812]}
+{"text": "introduced in a later iteration when our grading AI is ready.", "page_number": 2.0, "bbox": [108.0, 564.6212158203125, 360.3870544433594, 576.8792114257812]}
+{"text": "Quizzes/Tests", "page_number": 2.0, "bbox": [108.0, 593.1212158203125, 168.8760223388672, 605.3792114257812]}
+{"text": "– Periodic", "page_number": 2.0, "bbox": [168.8671875, 593.1212158203125, 216.58822631835938, 605.3792114257812]}
+{"text": "tests", "page_number": 2.0, "bbox": [216.58038330078125, 593.1212158203125, 238.6573944091797, 605.3792114257812]}
+{"text": "will check the learner’s understanding. These could be at the end of", "page_number": 2.0, "bbox": [238.65704345703125, 593.1212158203125, 533.9552612304688, 605.3792114257812]}
+{"text": "each week or major topic (and a final assessment at course end). Quizzes can be auto-generated by", "page_number": 2.0, "bbox": [108.0, 606.6212158203125, 533.9518432617188, 618.8792114257812]}
+{"text": "the AI from the material – for example, a set of multiple-choice or short-answer questions focusing", "page_number": 2.0, "bbox": [108.0, 620.1212158203125, 533.954345703125, 632.3792114257812]}
+{"text": "on the key concepts just covered.", "page_number": 2.0, "bbox": [108.0, 633.6212158203125, 264.314208984375, 645.8792114257812]}
+{"text": "Existing AI tools already demonstrate this capability; e.g., some", "page_number": 2.0, "bbox": [264.28094482421875, 633.6212158203125, 533.9750366210938, 645.8792114257812]}
+{"text": "platforms auto-generate flashcards and quiz questions from uploaded study text", "page_number": 2.0, "bbox": [108.0, 647.1212158203125, 435.7574768066406, 659.3792114257812]}
+{"text": ".", "page_number": 2.0, "bbox": [452.27435302734375, 647.1212158203125, 454.5783386230469, 659.3792114257812]}
+{"text": "These quizzes will", "page_number": 2.0, "bbox": [454.57855224609375, 647.1212158203125, 533.988525390625, 659.3792114257812]}
+{"text": "be graded immediately to give the learner feedback. They serve as checkpoints so both the learner", "page_number": 2.0, "bbox": [108.0, 660.6212158203125, 533.9453125, 672.8792114257812]}
+{"text": "and the system know how well the material is being understood.", "page_number": 2.0, "bbox": [108.0, 674.1212158203125, 382.7250671386719, 686.3792114257812]}
+{"text": "•", "page_number": 2.0, "bbox": [102.276123046875, 72.62118530273438, 108.0001220703125, 84.87918853759766]}
+{"text": "•", "page_number": 2.0, "bbox": [102.276123046875, 155.12118530273438, 108.0001220703125, 167.37918090820312]}
+{"text": "•", "page_number": 2.0, "bbox": [102.276123046875, 251.12118530273438, 108.0001220703125, 263.3791809082031]}
+{"text": "1", "page_number": 2.0, "bbox": [149.62646484375, 319.86920166015625, 153.0584716796875, 328.04119873046875]}
+{"text": "•", "page_number": 2.0, "bbox": [102.276123046875, 347.1211853027344, 108.0001220703125, 359.3791809082031]}
+{"text": "•", "page_number": 2.0, "bbox": [102.276123046875, 456.6211853027344, 108.0001220703125, 468.8791809082031]}
+{"text": "•", "page_number": 2.0, "bbox": [102.276123046875, 593.1212158203125, 108.0001220703125, 605.3792114257812]}
+{"text": "2", "page_number": 2.0, "bbox": [443.12127685546875, 648.3692016601562, 446.4272766113281, 656.5411987304688]}
+{"text": "AI Grading and Feedback", "page_number": 3.0, "bbox": [108.0, 72.62118530273438, 224.53199768066406, 84.87918853759766]}
+{"text": "– A core value proposition is that the AI will", "page_number": 3.0, "bbox": [224.54017639160156, 72.62118530273438, 426.1828308105469, 84.87918853759766]}
+{"text": "grade assignments and", "page_number": 3.0, "bbox": [426.2086486816406, 72.62118530273438, 533.9984741210938, 84.87918853759766]}
+{"text": "tests", "page_number": 3.0, "bbox": [108.0, 86.12118530273438, 130.07701110839844, 98.37918853759766]}
+{"text": "and give detailed feedback, almost like a tutor would. For objective questions (multiple-choice,", "page_number": 3.0, "bbox": [130.07666015625, 86.12118530273438, 533.9877319335938, 98.37918853759766]}
+{"text": "etc.), grading is instant. For open-ended answers (if included), we’ll use AI models to evaluate the", "page_number": 3.0, "bbox": [108.0, 99.62118530273438, 533.9365234375, 111.87918853759766]}
+{"text": "response against the expected answer key or rubric. The system can provide hints or explanations", "page_number": 3.0, "bbox": [108.0, 113.12118530273438, 533.9249877929688, 125.37918853759766]}
+{"text": "for any questions the user got wrong. For example, if a question was “Prove X in abstract algebra”", "page_number": 3.0, "bbox": [108.0, 126.62118530273438, 533.8980102539062, 138.87918090820312]}
+{"text": "and the user’s proof had gaps, the AI could highlight missing reasoning or suggest reviewing a", "page_number": 3.0, "bbox": [108.0, 140.12118530273438, 533.954345703125, 152.37918090820312]}
+{"text": "specific theorem. In MVP, we might constrain to auto-gradable formats first, but we will design the", "page_number": 3.0, "bbox": [108.0, 153.62118530273438, 533.9789428710938, 165.87918090820312]}
+{"text": "grading module to handle free text using an LLM. Notably, AI can even generate", "page_number": 3.0, "bbox": [108.0, 167.12118530273438, 483.1162414550781, 179.37918090820312]}
+{"text": "personalized", "page_number": 3.0, "bbox": [483.08642578125, 167.12118530273438, 533.9993896484375, 179.37918090820312]}
+{"text": "feedback on student submissions", "page_number": 3.0, "bbox": [108.0, 180.62118530273438, 245.24099731445312, 192.87918090820312]}
+{"text": "– we’ll leverage that to give the user constructive comments", "page_number": 3.0, "bbox": [261.7613830566406, 180.62118530273438, 533.9393920898438, 192.87918090820312]}
+{"text": "rather than just a score.", "page_number": 3.0, "bbox": [108.0, 194.12118530273438, 210.90597534179688, 206.37918090820312]}
+{"text": "Progress Tracking Dashboard", "page_number": 3.0, "bbox": [108.0, 222.62118530273438, 239.43896484375, 234.87918090820312]}
+{"text": "– The user will have a dashboard showing their progress through the", "page_number": 3.0, "bbox": [239.400146484375, 222.62118530273438, 533.9642333984375, 234.87918090820312]}
+{"text": "course: completed readings, scores on quizzes/homeworks, upcoming tasks, and overall completion", "page_number": 3.0, "bbox": [108.0, 236.12118530273438, 533.9732666015625, 248.37918090820312]}
+{"text": "percentage of the syllabus. This keeps the learner aware of where they stand. The dashboard can", "page_number": 3.0, "bbox": [108.0, 249.62118530273438, 533.9429931640625, 261.8791809082031]}
+{"text": "also highlight areas of strength or weakness (e.g. “Score average 90% on algebra basics, 60% on field", "page_number": 3.0, "bbox": [108.0, 263.1211853027344, 533.8739624023438, 275.3791809082031]}
+{"text": "theory – perhaps revisit Chapter 3”). For MVP, a simple progress bar and list of completed vs pending", "page_number": 3.0, "bbox": [108.0, 276.6211853027344, 533.8786010742188, 288.8791809082031]}
+{"text": "items per week is sufficient.", "page_number": 3.0, "bbox": [108.0, 290.1211853027344, 227.39404296875, 302.3791809082031]}
+{"text": "Adaptive Course Adjustment", "page_number": 3.0, "bbox": [108.0, 318.6211853027344, 237.35546875, 330.8791809082031]}
+{"text": "– One powerful feature we plan (at least in a basic form) is adaptivity.", "page_number": 3.0, "bbox": [237.366943359375, 318.6211853027344, 533.9207153320312, 330.8791809082031]}
+{"text": "Based on the user’s performance and feedback, the system can adjust the pace or focus of the", "page_number": 3.0, "bbox": [108.0, 332.1211853027344, 533.93701171875, 344.3791809082031]}
+{"text": "course.  For  example,  if  the  user  performs  poorly  on  a  Week  2  quiz,  the  Week  3  plan  might", "page_number": 3.0, "bbox": [108.0, 345.6211853027344, 533.9960327148438, 357.8791809082031]}
+{"text": "automatically include a review session or additional practice on weak topics before moving on.", "page_number": 3.0, "bbox": [108.0, 359.1211853027344, 533.9031982421875, 371.3791809082031]}
+{"text": "Conversely, if the user breezes through with high scores, the system might introduce optional", "page_number": 3.0, "bbox": [108.0, 372.6211853027344, 533.990966796875, 384.8791809082031]}
+{"text": "advanced  challenges  or  expedite  the  schedule.  AI-driven  personalization  allows  courses  to  be", "page_number": 3.0, "bbox": [108.0, 386.1211853027344, 533.9882202148438, 398.3791809082031]}
+{"text": "adapted on the fly according to learner performance", "page_number": 3.0, "bbox": [108.0, 399.6211853027344, 330.33447265625, 411.8791809082031]}
+{"text": ". In the MVP, adaptation rules can be simple:", "page_number": 3.0, "bbox": [346.88623046875, 399.6211853027344, 533.9482421875, 411.8791809082031]}
+{"text": "e.g. if quiz score < 50%, spend extra time on that topic (perhaps unlock an extra remedial exercise)", "page_number": 3.0, "bbox": [108.0, 413.1211853027344, 533.9259033203125, 425.3791809082031]}
+{"text": "before proceeding. Future versions can refine this with more granular adjustments.", "page_number": 3.0, "bbox": [108.0, 426.6211853027344, 461.9429626464844, 438.8791809082031]}
+{"text": "Accountability & Reminders", "page_number": 3.0, "bbox": [108.0, 455.1211853027344, 238.16552734375, 467.3791809082031]}
+{"text": "– To help learners stay on track, the platform will include basic", "page_number": 3.0, "bbox": [238.1752166748047, 455.1211853027344, 533.9475708007812, 467.3791809082031]}
+{"text": "accountability tools. This includes", "page_number": 3.0, "bbox": [108.0, 468.6211853027344, 255.61117553710938, 480.8791809082031]}
+{"text": "reminder notifications", "page_number": 3.0, "bbox": [255.60311889648438, 468.6211853027344, 357.7913818359375, 480.8791809082031]}
+{"text": "(emails or app push notifications) about", "page_number": 3.0, "bbox": [357.7872314453125, 468.6211853027344, 533.96435546875, 480.8791809082031]}
+{"text": "upcoming  deadlines  or  tasks  –  “Don’t  forget  to  complete  Quiz  2  by  Friday”.  It  also  includes", "page_number": 3.0, "bbox": [108.0, 482.1211853027344, 533.9117431640625, 494.3791809082031]}
+{"text": "encouraging messages or check-ins if the user hasn’t logged in for a while (“It looks like you missed", "page_number": 3.0, "bbox": [108.0, 495.6211853027344, 533.8764038085938, 507.8791809082031]}
+{"text": "your study session. Need to reschedule?”). The idea is to mimic the external accountability one gets", "page_number": 3.0, "bbox": [108.0, 509.1211853027344, 533.9857177734375, 521.3792114257812]}
+{"text": "from a class or teacher. In MVP, this can be as simple as automated emails based on schedule. A", "page_number": 3.0, "bbox": [108.0, 522.6212158203125, 533.94287109375, 534.8792114257812]}
+{"text": "more advanced system could let users opt into daily or weekly progress nudges.", "page_number": 3.0, "bbox": [108.0, 536.1212158203125, 448.3619689941406, 548.3792114257812]}
+{"text": "User Accounts and Data", "page_number": 3.0, "bbox": [108.0, 564.6212158203125, 218.85525512695312, 576.8792114257812]}
+{"text": "– Each learner will have a secure account to save their course plan and", "page_number": 3.0, "bbox": [218.85675048828125, 564.6212158203125, 533.9925537109375, 576.8792114257812]}
+{"text": "progress. Basic profile info and preferences will be stored. This allows resuming where they left off,", "page_number": 3.0, "bbox": [108.0, 578.1212158203125, 533.95654296875, 590.3792114257812]}
+{"text": "and in the future, enables joining group courses. User data (materials, progress, scores) will be", "page_number": 3.0, "bbox": [108.0, 591.6212158203125, 533.8890991210938, 603.8792114257812]}
+{"text": "stored privately – ensuring that even if the course uses copyrighted material, it’s only accessible to", "page_number": 3.0, "bbox": [108.0, 605.1212158203125, 533.9406127929688, 617.3792114257812]}
+{"text": "that user (important for legal reasons).", "page_number": 3.0, "bbox": [108.0, 618.6212158203125, 274.0229797363281, 630.8792114257812]}
+{"text": "•", "page_number": 3.0, "bbox": [102.276123046875, 72.62118530273438, 108.0001220703125, 84.87918853759766]}
+{"text": "3", "page_number": 3.0, "bbox": [252.54531860351562, 181.8691864013672, 255.97732543945312, 190.0411834716797]}
+{"text": "•", "page_number": 3.0, "bbox": [102.276123046875, 222.62118530273438, 108.0001220703125, 234.87918090820312]}
+{"text": "•", "page_number": 3.0, "bbox": [102.276123046875, 318.6211853027344, 108.0001220703125, 330.8791809082031]}
+{"text": "4", "page_number": 3.0, "bbox": [337.670166015625, 400.86920166015625, 341.1021728515625, 409.04119873046875]}
+{"text": "•", "page_number": 3.0, "bbox": [102.276123046875, 455.1211853027344, 108.0001220703125, 467.3791809082031]}
+{"text": "•", "page_number": 3.0, "bbox": [102.276123046875, 564.6212158203125, 108.0001220703125, 576.8792114257812]}
+{"text": "Additional Features (Future Phases)", "page_number": 4.0, "bbox": [78.0, 72.93141174316406, 318.2460021972656, 91.31841278076172]}
+{"text": "Beyond the MVP, we envision a number of features to enhance the platform. These can be added in phases", "page_number": 4.0, "bbox": [78.0, 104.07618713378906, 533.9579467773438, 116.33419036865234]}
+{"text": "to keep the development lean while gradually improving functionality:", "page_number": 4.0, "bbox": [78.0, 117.57618713378906, 373.4700622558594, 129.8341827392578]}
+{"text": "Group Learning & Cohort Mode", "page_number": 4.0, "bbox": [108.0, 146.07618713378906, 256.7970275878906, 158.3341827392578]}
+{"text": "– Enable multiple users to enroll in the", "page_number": 4.0, "bbox": [256.81683349609375, 146.07618713378906, 443.8083190917969, 158.3341827392578]}
+{"text": "same course instance", "page_number": 4.0, "bbox": [443.8089599609375, 146.07618713378906, 533.984375, 158.3341827392578]}
+{"text": "together. In this mode, a small group (friends or an online cohort) would follow the same syllabus", "page_number": 4.0, "bbox": [108.0, 159.57618713378906, 533.8649291992188, 171.8341827392578]}
+{"text": "and schedule. They can see each other’s progress and scores (perhaps via leaderboards or a shared", "page_number": 4.0, "bbox": [108.0, 173.07618713378906, 533.9340209960938, 185.3341827392578]}
+{"text": "dashboard) to foster friendly competition. Learning alongside others provides an", "page_number": 4.0, "bbox": [108.0, 186.57618713378906, 477.77783203125, 198.8341827392578]}
+{"text": "accountability", "page_number": 4.0, "bbox": [477.777099609375, 186.57618713378906, 534.0000610351562, 198.8341827392578]}
+{"text": "boost", "page_number": 4.0, "bbox": [108.0, 200.07618713378906, 130.22100830078125, 212.3341827392578]}
+{"text": ": cohort-based courses tend to have higher completion rates due to the motivation of learning", "page_number": 4.0, "bbox": [130.220947265625, 200.07618713378906, 533.9292602539062, 212.3341827392578]}
+{"text": "with peers", "page_number": 4.0, "bbox": [108.0, 213.57618713378906, 152.7307586669922, 225.8341827392578]}
+{"text": ". We can also incorporate features like a group chat or forum for discussion and peer", "page_number": 4.0, "bbox": [169.2371063232422, 213.57618713378906, 533.8923950195312, 225.8341827392578]}
+{"text": "support. This social element can significantly improve engagement and course completion.", "page_number": 4.0, "bbox": [108.0, 227.07618713378906, 515.4668579101562, 239.3341827392578]}
+{"text": "(This", "page_number": 4.0, "bbox": [515.460205078125, 227.07618713378906, 534.0001831054688, 239.3341827392578]}
+{"text": "feature would be a major addition, likely Phase 3 in the timeline, once the core solo experience is solid.)", "page_number": 4.0, "bbox": [108.0, 240.57618713378906, 518.3549194335938, 252.8341827392578]}
+{"text": "Gamification & Motivation", "page_number": 4.0, "bbox": [108.0, 269.0762023925781, 226.94549560546875, 281.3341979980469]}
+{"text": "– To further improve engagement, add gamified elements. For example,", "page_number": 4.0, "bbox": [226.9549560546875, 269.0762023925781, 533.97412109375, 281.3341979980469]}
+{"text": "earning points or badges for completing each week’s study, streaks for consecutive days of study,", "page_number": 4.0, "bbox": [108.0, 282.5762023925781, 533.9549560546875, 294.8341979980469]}
+{"text": "and a leaderboard (especially for group courses). We could have achievements like “Completed 100%", "page_number": 4.0, "bbox": [108.0, 296.0762023925781, 533.96484375, 308.3341979980469]}
+{"text": "of assignments on time” or “Scored above 80% on all tests” to celebrate user successes. Gamification", "page_number": 4.0, "bbox": [108.0, 309.5762023925781, 533.8643798828125, 321.8341979980469]}
+{"text": "taps into learners’ competitive and fun side, making the process more enjoyable and sticky. This is a", "page_number": 4.0, "bbox": [108.0, 323.0762023925781, 533.9160766601562, 335.3341979980469]}
+{"text": "natural complement to the cohort feature (e.g., points could feed into the friendly competition).", "page_number": 4.0, "bbox": [108.0, 336.5762023925781, 513.14404296875, 348.8341979980469]}
+{"text": "Expanded Content Support", "page_number": 4.0, "bbox": [108.0, 365.0762023925781, 228.81448364257812, 377.3341979980469]}
+{"text": "– While the MVP focuses on textbooks (PDFs), later versions will support", "page_number": 4.0, "bbox": [228.8187255859375, 365.0762023925781, 533.960205078125, 377.3341979980469]}
+{"text": "additional content formats", "page_number": 4.0, "bbox": [108.0, 378.5762023925781, 229.5179901123047, 390.8341979980469]}
+{"text": ":", "page_number": 4.0, "bbox": [229.516845703125, 378.5762023925781, 231.92884826660156, 390.8341979980469]}
+{"text": "YouTube Video Integration", "page_number": 4.0, "bbox": [108.0, 407.0762023925781, 213.06600952148438, 419.3341979980469]}
+{"text": ": Users could provide a playlist or series of educational videos. The platform", "page_number": 4.0, "bbox": [213.041748046875, 407.0762023925781, 531.4526977539062, 419.3341979980469]}
+{"text": "would use AI to ingest video transcripts (or use YouTube’s captions) and treat them similar to text", "page_number": 4.0, "bbox": [108.0, 420.5762023925781, 517.1309204101562, 432.8341979980469]}
+{"text": "chapters. Assignments could then be based on video content (e.g., watch video X, then answer", "page_number": 4.0, "bbox": [108.0, 434.0762023925781, 506.2410888671875, 446.3341979980469]}
+{"text": "questions). This opens up use of popular lecture series or tutorials available online.", "page_number": 4.0, "bbox": [108.0, 447.5762023925781, 457.78509521484375, 459.8341979980469]}
+{"text": "Web Articles or Open Courseware", "page_number": 4.0, "bbox": [108.0, 461.0762023925781, 240.2460174560547, 473.3341979980469]}
+{"text": ": The user might input a collection of web links or open educational", "page_number": 4.0, "bbox": [240.22119140625, 461.0762023925781, 523.5863647460938, 473.3341979980469]}
+{"text": "resources. The system could compile these into a course structure as well.", "page_number": 4.0, "bbox": [108.0, 474.5762023925781, 420.02099609375, 486.8341979980469]}
+{"text": "Mixing Content", "page_number": 4.0, "bbox": [108.0, 488.0762023925781, 168.5609893798828, 500.3341979980469]}
+{"text": ": Potentially allow a course that uses multiple sources (some textbook chapters plus", "page_number": 4.0, "bbox": [168.561767578125, 488.0762023925781, 520.812744140625, 500.3341979980469]}
+{"text": "some videos or articles) for a richer experience.", "page_number": 4.0, "bbox": [108.0, 501.5762023925781, 307.88995361328125, 513.834228515625]}
+{"text": "Interactive content", "page_number": 4.0, "bbox": [108.0, 524.0762329101562, 183.91500854492188, 536.334228515625]}
+{"text": ": In the future, we could integrate simulations or coding notebooks for subjects", "page_number": 4.0, "bbox": [183.91253662109375, 524.0762329101562, 533.9406127929688, 536.334228515625]}
+{"text": "that benefit from hands-on work (e.g., an embedded code editor for programming courses with", "page_number": 4.0, "bbox": [108.0, 537.5762329101562, 533.9768676757812, 549.834228515625]}
+{"text": "auto-checking of code exercises).", "page_number": 4.0, "bbox": [108.0, 551.0762329101562, 249.52499389648438, 563.334228515625]}
+{"text": "Advanced AI Tutoring (Optional)", "page_number": 4.0, "bbox": [108.0, 579.5762329101562, 257.6835021972656, 591.834228515625]}
+{"text": "– Although the focus is on structured learning over free-form", "page_number": 4.0, "bbox": [257.6944274902344, 579.5762329101562, 533.9359130859375, 591.834228515625]}
+{"text": "chat, we can include a", "page_number": 4.0, "bbox": [108.0, 593.0762329101562, 207.51370239257812, 605.334228515625]}
+{"text": "“Tutor Q&A”", "page_number": 4.0, "bbox": [207.5216064453125, 593.0762329101562, 262.673583984375, 605.334228515625]}
+{"text": "feature for when students are stuck. This would be an AI chat", "page_number": 4.0, "bbox": [262.663330078125, 593.0762329101562, 533.9144287109375, 605.334228515625]}
+{"text": "interface (powered by an LLM) that has context of the course material. The user could ask, “I didn’t", "page_number": 4.0, "bbox": [108.0, 606.5762329101562, 533.9165649414062, 618.834228515625]}
+{"text": "understand theorem 3.1” or “Can you give another example of X?” and the AI could respond with an", "page_number": 4.0, "bbox": [108.0, 620.0762329101562, 533.8971557617188, 632.334228515625]}
+{"text": "explanation. Essentially, this is like a built-in ChatGPT specialized on their course content", "page_number": 4.0, "bbox": [108.0, 633.5762329101562, 485.6490478515625, 645.834228515625]}
+{"text": ". This is", "page_number": 4.0, "bbox": [502.1807556152344, 633.5762329101562, 533.9942626953125, 645.834228515625]}
+{"text": "an optional support tool – the core idea is the student should try to learn via the assignments, but", "page_number": 4.0, "bbox": [108.0, 647.0762329101562, 533.9520874023438, 659.334228515625]}
+{"text": "having a helper on standby can be valuable. Since many generic chatbots exist, this feature is lower", "page_number": 4.0, "bbox": [108.0, 660.5762329101562, 533.9220581054688, 672.834228515625]}
+{"text": "priority, but it could differentiate our platform by integrating it with the user’s specific materials (the", "page_number": 4.0, "bbox": [108.0, 674.0762329101562, 533.8709106445312, 686.334228515625]}
+{"text": "AI can be instructed with the textbook’s content to give more targeted answers).", "page_number": 4.0, "bbox": [108.0, 687.5762329101562, 448.5059509277344, 699.834228515625]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 146.07618713378906, 108.0001220703125, 158.3341827392578]}
+{"text": "5", "page_number": 4.0, "bbox": [160.0210418701172, 214.82418823242188, 163.4530487060547, 222.99618530273438]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 269.0762023925781, 108.0001220703125, 281.3341979980469]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 365.0762023925781, 108.0001220703125, 377.3341979980469]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 407.0762023925781, 108.0001220703125, 419.3341979980469]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 461.0762023925781, 108.0001220703125, 473.3341979980469]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 488.0762023925781, 108.0001220703125, 500.3341979980469]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 524.0762329101562, 108.0001220703125, 536.334228515625]}
+{"text": "•", "page_number": 4.0, "bbox": [102.276123046875, 579.5762329101562, 108.0001220703125, 591.834228515625]}
+{"text": "6", "page_number": 4.0, "bbox": [492.9646911621094, 634.8241577148438, 496.3966979980469, 642.9961547851562]}
+{"text": "Mobile App & Notifications", "page_number": 5.0, "bbox": [108.0, 72.62118530273438, 230.17050170898438, 84.87918853759766]}
+{"text": "– Once the web app is stable, develop native mobile applications (iOS/", "page_number": 5.0, "bbox": [230.19403076171875, 72.62118530273438, 533.91259765625, 84.87918853759766]}
+{"text": "Android) or a Progressive Web App. This will improve accessibility (users can do quizzes or read", "page_number": 5.0, "bbox": [108.0, 86.12118530273438, 533.9295043945312, 98.37918853759766]}
+{"text": "material on the go) and enable real-time push notifications for reminders. Mobile support will also", "page_number": 5.0, "bbox": [108.0, 99.62118530273438, 533.968505859375, 111.87918853759766]}
+{"text": "make features like scanning handwritten homework easier – e.g., the app could let you snap a photo", "page_number": 5.0, "bbox": [108.0, 113.12118530273438, 533.97021484375, 125.37918853759766]}
+{"text": "of your work to submit. The mobile app should sync with the web, using the same backend. (For", "page_number": 5.0, "bbox": [108.0, 126.62118530273438, 533.9653930664062, 138.87918090820312]}
+{"text": "efficiency, we might implement this in Phase 3 or 4, possibly using a cross-platform framework or", "page_number": 5.0, "bbox": [108.0, 140.12118530273438, 533.9183959960938, 152.37918090820312]}
+{"text": "simply enhancing the web app to be mobile-friendly first.)", "page_number": 5.0, "bbox": [108.0, 153.62118530273438, 354.1410217285156, 165.87918090820312]}
+{"text": "Analytics for Learners", "page_number": 5.0, "bbox": [108.0, 182.12118530273438, 211.2945098876953, 194.37918090820312]}
+{"text": "– Provide more detailed analytics to the user about their learning. For", "page_number": 5.0, "bbox": [211.304443359375, 182.12118530273438, 533.94921875, 194.37918090820312]}
+{"text": "example, insights like “You tend to do better on conceptual questions than on problem-solving", "page_number": 5.0, "bbox": [108.0, 195.62118530273438, 533.9859008789062, 207.87918090820312]}
+{"text": "questions” or “Your average study pace is 3 pages/day”. We can use the data collected to give", "page_number": 5.0, "bbox": [108.0, 209.12118530273438, 533.9671020507812, 221.37918090820312]}
+{"text": "personalized study tips. In a group setting, analytics might compare a user’s progress to the cohort", "page_number": 5.0, "bbox": [108.0, 222.62118530273438, 533.9453735351562, 234.87918090820312]}
+{"text": "average (privately) to let them know if they might need to put in extra effort. Such analytics can help", "page_number": 5.0, "bbox": [108.0, 236.12118530273438, 533.9926147460938, 248.37918090820312]}
+{"text": "learners self-reflect and adjust their habits.", "page_number": 5.0, "bbox": [108.0, 249.62118530273438, 291.7890319824219, 261.8791809082031]}
+{"text": "Content Recommendation & Repository", "page_number": 5.0, "bbox": [108.0, 278.1211853027344, 288.1529846191406, 290.3791809082031]}
+{"text": "– Over time, as the platform grows, we could maintain a", "page_number": 5.0, "bbox": [288.1646728515625, 278.1211853027344, 533.9485473632812, 290.3791809082031]}
+{"text": "repository of course templates or publicly shared syllabi. For instance, if someone uploads a popular", "page_number": 5.0, "bbox": [108.0, 291.6211853027344, 533.9174194335938, 303.8791809082031]}
+{"text": "textbook,  the  system  might  eventually  learn  a  recommended  course  outline  for  it  (based  on", "page_number": 5.0, "bbox": [108.0, 305.1211853027344, 533.95654296875, 317.3791809082031]}
+{"text": "aggregate usage). This could enable suggesting pre-made syllabi or additional resources (“People", "page_number": 5.0, "bbox": [108.0, 318.6211853027344, 533.9813232421875, 330.8791809082031]}
+{"text": "who learned with", "page_number": 5.0, "bbox": [108.0, 332.1211853027344, 184.88775634765625, 344.3791809082031]}
+{"text": "Algebra Chapter 5", "page_number": 5.0, "bbox": [184.88714599609375, 332.1211853027344, 258.0392150878906, 344.3791809082031]}
+{"text": "also liked this supplementary video on Galois theory”). However,", "page_number": 5.0, "bbox": [258.0426940917969, 332.1211853027344, 533.9646606445312, 344.3791809082031]}
+{"text": "this is a later-stage idea and also depends on content rights.", "page_number": 5.0, "bbox": [108.0, 345.6211853027344, 364.8600158691406, 357.8791809082031]}
+{"text": "Integration with External Tools", "page_number": 5.0, "bbox": [108.0, 374.1211853027344, 253.42425537109375, 386.3791809082031]}
+{"text": "– To enhance the experience, we can integrate with calendars", "page_number": 5.0, "bbox": [253.42648315429688, 374.1211853027344, 533.9453125, 386.3791809082031]}
+{"text": "(export  your  study  schedule  to  Google  Calendar),  note-taking  apps,  or  even  LMS  platforms  if", "page_number": 5.0, "bbox": [108.0, 387.6211853027344, 533.9364624023438, 399.8791809082031]}
+{"text": "targeting schools later. Another idea is connecting with certification programs – for example, if", "page_number": 5.0, "bbox": [108.0, 401.1211853027344, 533.9961547851562, 413.3791809082031]}
+{"text": "someone completes a course, they could get a certificate or be prepared to take an external", "page_number": 5.0, "bbox": [108.0, 414.6211853027344, 533.873291015625, 426.8791809082031]}
+{"text": "certification exam (like a language proficiency test or a cloud certification). These integrations can be", "page_number": 5.0, "bbox": [108.0, 428.1211853027344, 533.8995361328125, 440.3791809082031]}
+{"text": "planned once the core system is proven.", "page_number": 5.0, "bbox": [108.0, 441.6211853027344, 280.2330017089844, 453.8791809082031]}
+{"text": "Technical Architecture & Stack Considerations", "page_number": 5.0, "bbox": [78.0, 470.4314270019531, 387.33905029296875, 488.81842041015625]}
+{"text": "Building this platform requires a mix of web development and AI/ML integration. Key technical decisions", "page_number": 5.0, "bbox": [78.0, 501.5762023925781, 533.9940185546875, 513.834228515625]}
+{"text": "and recommendations:", "page_number": 5.0, "bbox": [78.0, 515.0762329101562, 176.21697998046875, 527.334228515625]}
+{"text": "Overall  Architecture", "page_number": 5.0, "bbox": [108.0, 543.5762329101562, 201.98175048828125, 555.834228515625]}
+{"text": ":  Start  with  a", "page_number": 5.0, "bbox": [201.9612579345703, 543.5762329101562, 268.8050231933594, 555.834228515625]}
+{"text": "web  app  (SPA  or  SSR)", "page_number": 5.0, "bbox": [268.7564697265625, 543.5762329101562, 373.1984558105469, 555.834228515625]}
+{"text": "architecture,  backed  by  a  modular", "page_number": 5.0, "bbox": [373.2178955078125, 543.5762329101562, 533.9730224609375, 555.834228515625]}
+{"text": "backend. We can design it as a service-oriented architecture: a core backend that handles user data", "page_number": 5.0, "bbox": [108.0, 557.0762329101562, 533.873291015625, 569.334228515625]}
+{"text": "and  course  logic,  and  separate  services  for  AI  processing  if  needed.  This  separation  ensures", "page_number": 5.0, "bbox": [108.0, 570.5762329101562, 533.9392700195312, 582.834228515625]}
+{"text": "scalability – e.g., heavy AI tasks can run on separate servers or cloud functions without bogging", "page_number": 5.0, "bbox": [108.0, 584.0762329101562, 533.9317626953125, 596.334228515625]}
+{"text": "down the main app. An API-centric design (REST or GraphQL) is recommended so that the same", "page_number": 5.0, "bbox": [108.0, 597.5762329101562, 533.967529296875, 609.834228515625]}
+{"text": "backend can serve both the web front-end and future mobile apps.", "page_number": 5.0, "bbox": [108.0, 611.0762329101562, 392.8140563964844, 623.334228515625]}
+{"text": "Front-End", "page_number": 5.0, "bbox": [108.0, 639.5762329101562, 151.79400634765625, 651.834228515625]}
+{"text": ": Use a modern, lean front-end framework.", "page_number": 5.0, "bbox": [151.7841796875, 639.5762329101562, 345.8451232910156, 651.834228515625]}
+{"text": "React", "page_number": 5.0, "bbox": [345.81719970703125, 639.5762329101562, 371.0442199707031, 651.834228515625]}
+{"text": "(possibly with Next.js for server-side", "page_number": 5.0, "bbox": [371.04400634765625, 639.5762329101562, 533.9859619140625, 651.834228515625]}
+{"text": "rendering) is an option due to its popularity and a rich ecosystem, but we must manage boilerplate.", "page_number": 5.0, "bbox": [108.0, 653.0762329101562, 533.9669189453125, 665.334228515625]}
+{"text": "SvelteKit", "page_number": 5.0, "bbox": [108.0, 666.5762329101562, 147.99600219726562, 678.834228515625]}
+{"text": "or", "page_number": 5.0, "bbox": [147.99609375, 666.5762329101562, 162.44107055664062, 678.834228515625]}
+{"text": "Vue.js", "page_number": 5.0, "bbox": [162.43695068359375, 666.5762329101562, 189.21197509765625, 678.834228515625]}
+{"text": "could be alternatives for a simpler, more lightweight setup, as they often require", "page_number": 5.0, "bbox": [189.21136474609375, 666.5762329101562, 533.9833374023438, 678.834228515625]}
+{"text": "less code for the same functionality. The front-end will handle the user interface: the syllabus view,", "page_number": 5.0, "bbox": [108.0, 680.0762329101562, 533.9791259765625, 692.334228515625]}
+{"text": "dashboards, forms for inputs, and taking quizzes (which could be interactive). A component library", "page_number": 5.0, "bbox": [108.0, 693.5762329101562, 533.9154052734375, 705.834228515625]}
+{"text": "•", "page_number": 5.0, "bbox": [102.276123046875, 72.62118530273438, 108.0001220703125, 84.87918853759766]}
+{"text": "•", "page_number": 5.0, "bbox": [102.276123046875, 182.12118530273438, 108.0001220703125, 194.37918090820312]}
+{"text": "•", "page_number": 5.0, "bbox": [102.276123046875, 278.1211853027344, 108.0001220703125, 290.3791809082031]}
+{"text": "•", "page_number": 5.0, "bbox": [102.276123046875, 374.1211853027344, 108.0001220703125, 386.3791809082031]}
+{"text": "•", "page_number": 5.0, "bbox": [102.276123046875, 543.5762329101562, 108.0001220703125, 555.834228515625]}
+{"text": "•", "page_number": 5.0, "bbox": [102.276123046875, 639.5762329101562, 108.0001220703125, 651.834228515625]}
+{"text": "or design framework (like Material UI or Tailwind CSS) can speed up UI development while keeping it", "page_number": 6.0, "bbox": [108.0, 72.62118530273438, 533.8802490234375, 84.87918853759766]}
+{"text": "consistent.", "page_number": 6.0, "bbox": [108.0, 86.12118530273438, 156.15899658203125, 98.37918853759766]}
+{"text": "Backend", "page_number": 6.0, "bbox": [108.0, 114.62118530273438, 146.61900329589844, 126.87918853759766]}
+{"text": ": Two main paths –", "page_number": 6.0, "bbox": [146.619140625, 114.62118530273438, 227.62811279296875, 126.87918853759766]}
+{"text": "Node.js/Express", "page_number": 6.0, "bbox": [227.6279296875, 114.62118530273438, 299.1509704589844, 126.87918853759766]}
+{"text": "or", "page_number": 6.0, "bbox": [299.14013671875, 114.62118530273438, 312.9821472167969, 126.87918853759766]}
+{"text": "Python/FastAPI", "page_number": 6.0, "bbox": [312.982177734375, 114.62118530273438, 382.8941955566406, 126.87918853759766]}
+{"text": ", depending on team expertise:", "page_number": 6.0, "bbox": [382.89404296875, 114.62118530273438, 514.5551147460938, 126.87918853759766]}
+{"text": "A Node.js backend might integrate well with a React front-end if we prefer a single-language", "page_number": 6.0, "bbox": [108.0, 143.12118530273438, 497.74505615234375, 155.37918090820312]}
+{"text": "(JavaScript/TypeScript) across the stack. It’s efficient and can handle real-time features (if we add live", "page_number": 6.0, "bbox": [108.0, 156.62118530273438, 530.6129150390625, 168.87918090820312]}
+{"text": "collaboration or chat later). For AI tasks, the Node server can call external AI APIs (like OpenAI) since", "page_number": 6.0, "bbox": [108.0, 170.12118530273438, 529.73095703125, 182.37918090820312]}
+{"text": "heavy ML would not run on Node directly.", "page_number": 6.0, "bbox": [108.0, 183.62118530273438, 284.0489807128906, 195.87918090820312]}
+{"text": "A Python backend (Flask or FastAPI) might be preferable given the AI focus – Python has strong", "page_number": 6.0, "bbox": [108.0, 197.12118530273438, 509.1119689941406, 209.37918090820312]}
+{"text": "libraries for machine learning, PDF parsing (e.g.,", "page_number": 6.0, "bbox": [108.0, 210.62118530273438, 313.9559631347656, 222.87918090820312]}
+{"text": "PyMuPDF", "page_number": 6.0, "bbox": [313.95263671875, 210.62118530273438, 356.3786926269531, 222.87918090820312]}
+{"text": "or", "page_number": 6.0, "bbox": [356.37890625, 210.62118530273438, 370.2209167480469, 222.87918090820312]}
+{"text": "pdfminer", "page_number": 6.0, "bbox": [370.220947265625, 210.62118530273438, 411.9989013671875, 222.87918090820312]}
+{"text": "to extract text), and NLP. We", "page_number": 6.0, "bbox": [411.998291015625, 210.62118530273438, 532.7242431640625, 222.87918090820312]}
+{"text": "could build the core in Python and use it to handle content processing and calling AI models. FastAPI", "page_number": 6.0, "bbox": [108.0, 224.12118530273438, 532.5482177734375, 236.37918090820312]}
+{"text": "is lightweight and asynchronous, which would help handle multiple requests efficiently.", "page_number": 6.0, "bbox": [108.0, 237.62118530273438, 478.9171142578125, 249.87918090820312]}
+{"text": "It’s also feasible to have a hybrid: e.g., a Node front-end server and a Python microservice for AI. But", "page_number": 6.0, "bbox": [108.0, 260.1211853027344, 533.974609375, 272.3791809082031]}
+{"text": "for MVP, keeping it simple with one backend service is ideal. FastAPI could serve as both the web API", "page_number": 6.0, "bbox": [108.0, 273.6211853027344, 533.8934326171875, 285.8791809082031]}
+{"text": "and do AI processing in-process.", "page_number": 6.0, "bbox": [108.0, 287.1211853027344, 247.3109893798828, 299.3791809082031]}
+{"text": "AI and ML Integration", "page_number": 6.0, "bbox": [108.0, 315.6211853027344, 207.17095947265625, 327.8791809082031]}
+{"text": ": This is the heart of the platform’s intelligence:", "page_number": 6.0, "bbox": [207.161865234375, 315.6211853027344, 404.6038818359375, 327.8791809082031]}
+{"text": "Natural Language Processing", "page_number": 6.0, "bbox": [108.0, 344.1211853027344, 225.72897338867188, 356.3791809082031]}
+{"text": ": Use an advanced", "page_number": 6.0, "bbox": [225.71337890625, 344.1211853027344, 304.7603759765625, 356.3791809082031]}
+{"text": "Large Language Model (LLM)", "page_number": 6.0, "bbox": [304.7607421875, 344.1211853027344, 434.3966979980469, 356.3791809082031]}
+{"text": "to generate quiz", "page_number": 6.0, "bbox": [434.388427734375, 344.1211853027344, 505.91143798828125, 356.3791809082031]}
+{"text": "questions, explanations, and to assess open-ended answers. We could leverage external APIs like", "page_number": 6.0, "bbox": [108.0, 357.6211853027344, 517.590087890625, 369.8791809082031]}
+{"text": "OpenAI’s GPT-4/GPT-5 for high-quality outputs. These models can take as input the user’s study", "page_number": 6.0, "bbox": [108.0, 371.1211853027344, 509.4629211425781, 383.3791809082031]}
+{"text": "material (or relevant excerpts) and produce questions or summaries. For example, we can prompt", "page_number": 6.0, "bbox": [108.0, 384.6211853027344, 520.5060424804688, 396.8791809082031]}
+{"text": "the model: “Generate 5 quiz questions (with answers) about Chapter 2 of the attached text”. The", "page_number": 6.0, "bbox": [108.0, 398.1211853027344, 512.4779663085938, 410.3791809082031]}
+{"text": "LLM’s ability to understand context will be crucial. We must incorporate prompt engineering and", "page_number": 6.0, "bbox": [108.0, 411.6211853027344, 514.2960815429688, 423.8791809082031]}
+{"text": "perhaps fine-tuning to ensure the questions are accurate and relevant (and not too trivial or too", "page_number": 6.0, "bbox": [108.0, 425.1211853027344, 512.0369262695312, 437.3791809082031]}
+{"text": "advanced).", "page_number": 6.0, "bbox": [108.0, 438.6211853027344, 153.80999755859375, 450.8791809082031]}
+{"text": "Context handling", "page_number": 6.0, "bbox": [108.0, 452.1211853027344, 176.52597045898438, 464.3791809082031]}
+{"text": ": Since textbooks can be long, we’ll likely use an approach to feed the model smaller", "page_number": 6.0, "bbox": [176.527587890625, 452.1211853027344, 529.4536743164062, 464.3791809082031]}
+{"text": "chunks. One strategy is to create a", "page_number": 6.0, "bbox": [108.0, 465.6211853027344, 255.86099243164062, 477.8791809082031]}
+{"text": "vector embedding", "page_number": 6.0, "bbox": [255.860595703125, 465.6211853027344, 337.75164794921875, 477.8791809082031]}
+{"text": "of the textbook content (using an embedding", "page_number": 6.0, "bbox": [337.75048828125, 465.6211853027344, 531.6015014648438, 477.8791809082031]}
+{"text": "model) and store those in a vector database. When generating questions or answering user queries,", "page_number": 6.0, "bbox": [108.0, 479.1211853027344, 530.72998046875, 491.3791809082031]}
+{"text": "we can retrieve the most relevant sections of text and provide them as context to the LLM. This helps", "page_number": 6.0, "bbox": [108.0, 492.6211853027344, 532.2329711914062, 504.8791809082031]}
+{"text": "ground the AI’s responses in the actual course content, reducing hallucinations.", "page_number": 6.0, "bbox": [108.0, 506.1211853027344, 443.4930419921875, 518.3792114257812]}
+{"text": "OCR for Homework", "page_number": 6.0, "bbox": [108.0, 519.6212158203125, 184.11300659179688, 531.8792114257812]}
+{"text": "(future enhancement): To handle image/PDF submissions of homework, we’ll", "page_number": 6.0, "bbox": [184.105224609375, 519.6212158203125, 509.9322814941406, 531.8792114257812]}
+{"text": "integrate an OCR component. We can start with libraries like", "page_number": 6.0, "bbox": [108.0, 533.1212158203125, 364.697998046875, 545.3792114257812]}
+{"text": "Tesseract", "page_number": 6.0, "bbox": [364.695556640625, 533.1212158203125, 406.7525634765625, 545.3792114257812]}
+{"text": "or cloud OCR APIs to extract", "page_number": 6.0, "bbox": [406.734375, 533.1212158203125, 527.7484130859375, 545.3792114257812]}
+{"text": "text from images. For math or scientific content, we may need to interpret formulas (possibly using", "page_number": 6.0, "bbox": [108.0, 546.6212158203125, 525.6629638671875, 558.8792114257812]}
+{"text": "tools like Mathpix OCR). In early stages, we might avoid heavy reliance on OCR by asking users to", "page_number": 6.0, "bbox": [108.0, 560.1212158203125, 517.2479858398438, 572.3792114257812]}
+{"text": "input answers directly into the system for auto-graded questions. Later, when we allow scanned", "page_number": 6.0, "bbox": [108.0, 573.6212158203125, 511.2900085449219, 585.8792114257812]}
+{"text": "submissions, we can use OCR + LLM (to interpret the solution and compare with expected).", "page_number": 6.0, "bbox": [108.0, 587.1212158203125, 490.779052734375, 599.3792114257812]}
+{"text": "Adaptive Learning Algorithms", "page_number": 6.0, "bbox": [108.0, 600.6212158203125, 226.2419891357422, 612.8792114257812]}
+{"text": ": The logic for adaptation (e.g., how to adjust the schedule or insert", "page_number": 6.0, "bbox": [226.244384765625, 600.6212158203125, 508.8444519042969, 612.8792114257812]}
+{"text": "review) can be rule-based initially (if score < X, then do Y). Over time, we can employ machine", "page_number": 6.0, "bbox": [108.0, 614.1212158203125, 499.19415283203125, 626.3792114257812]}
+{"text": "learning to analyze performance data and optimize recommendations. For example, a reinforcement", "page_number": 6.0, "bbox": [108.0, 627.6212158203125, 533.4390869140625, 639.8792114257812]}
+{"text": "learning approach could tailor difficulty of next quiz based on past accuracy. But this is an advanced", "page_number": 6.0, "bbox": [108.0, 641.1212158203125, 528.47998046875, 653.3792114257812]}
+{"text": "step – initially, simple conditional rules and using the LLM for suggestions (“Given the student", "page_number": 6.0, "bbox": [108.0, 654.6212158203125, 502.48797607421875, 666.8792114257812]}
+{"text": "struggled with concept A, suggest a remedial activity”) will suffice.", "page_number": 6.0, "bbox": [108.0, 668.1212158203125, 385.9380187988281, 680.3792114257812]}
+{"text": "Data for AI", "page_number": 6.0, "bbox": [108.0, 690.6212158203125, 151.90797424316406, 702.8792114257812]}
+{"text": ": Each user’s progress and performance data can feed into the AI to personalize feedback.", "page_number": 6.0, "bbox": [151.92196655273438, 690.6212158203125, 533.9151000976562, 702.8792114257812]}
+{"text": "We must ensure we securely store this data. Also, to keep the AI responses accurate and unbiased,", "page_number": 6.0, "bbox": [108.0, 704.1212158203125, 533.9760131835938, 716.3792114257812]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 114.62118530273438, 108.0001220703125, 126.87918853759766]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 143.12118530273438, 108.0001220703125, 155.37918090820312]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 197.12118530273438, 108.0001220703125, 209.37918090820312]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 260.1211853027344, 108.0001220703125, 272.3791809082031]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 315.6211853027344, 108.0001220703125, 327.8791809082031]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 344.1211853027344, 108.0001220703125, 356.3791809082031]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 452.1211853027344, 108.0001220703125, 464.3791809082031]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 519.6212158203125, 108.0001220703125, 531.8792114257812]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 600.6212158203125, 108.0001220703125, 612.8792114257812]}
+{"text": "•", "page_number": 6.0, "bbox": [102.276123046875, 690.6212158203125, 108.0001220703125, 702.8792114257812]}
+{"text": "we’ll  likely  keep  a  human-in-the-loop  during  development  –  e.g.,  reviewing  some  AI-generated", "page_number": 7.0, "bbox": [108.0, 72.62118530273438, 533.9049682617188, 84.87918853759766]}
+{"text": "questions or grading outputs for quality control before fully automating.", "page_number": 7.0, "bbox": [108.0, 86.12118530273438, 416.19598388671875, 98.37918853759766]}
+{"text": "Database  and  Storage", "page_number": 7.0, "bbox": [108.0, 114.62118530273438, 212.1719970703125, 126.87918853759766]}
+{"text": ":  Use  a  reliable,  scalable  database  for  storing  user  information,  course", "page_number": 7.0, "bbox": [212.1676025390625, 114.62118530273438, 533.9745483398438, 126.87918853759766]}
+{"text": "structures, and results. A", "page_number": 7.0, "bbox": [108.0, 128.12118530273438, 217.4534454345703, 140.37918090820312]}
+{"text": "PostgreSQL", "page_number": 7.0, "bbox": [217.46066284179688, 128.12118530273438, 269.2016906738281, 140.37918090820312]}
+{"text": "database (or another SQL DB) is a good choice for structured", "page_number": 7.0, "bbox": [269.1923522949219, 128.12118530273438, 533.9259033203125, 140.37918090820312]}
+{"text": "data like user profiles, course outlines, schedules, and grades. It offers relational consistency (e.g.,", "page_number": 7.0, "bbox": [108.0, 141.62118530273438, 533.9503784179688, 153.87918090820312]}
+{"text": "linking  users  to  courses,  courses  to  assignments,  etc.).  We  may  also  need  to  store  large  text", "page_number": 7.0, "bbox": [108.0, 155.12118530273438, 533.9766845703125, 167.37918090820312]}
+{"text": "(extracted textbook content) – that can either go in the database or in specialized storage if using", "page_number": 7.0, "bbox": [108.0, 168.62118530273438, 533.8948364257812, 180.87918090820312]}
+{"text": "vector embeddings (for example, a service like Pinecone or an open-source vector DB for semantic", "page_number": 7.0, "bbox": [108.0, 182.12118530273438, 533.9896240234375, 194.37918090820312]}
+{"text": "search on content). For file storage (user-uploaded PDFs, images of homework), a cloud storage like", "page_number": 7.0, "bbox": [108.0, 195.62118530273438, 533.9432983398438, 207.87918090820312]}
+{"text": "AWS S3 or Google Cloud Storage is ideal to handle potentially large files. Ensure files are access-", "page_number": 7.0, "bbox": [108.0, 209.12118530273438, 533.8560180664062, 221.37918090820312]}
+{"text": "controlled so only the owner (and the AI processing service) can access them.", "page_number": 7.0, "bbox": [108.0, 222.62118530273438, 436.1039123535156, 234.87918090820312]}
+{"text": "Scalability & Performance", "page_number": 7.0, "bbox": [108.0, 251.12118530273438, 223.9199676513672, 263.3791809082031]}
+{"text": ": From the start, design for scaling:", "page_number": 7.0, "bbox": [223.92041015625, 251.12118530273438, 370.74639892578125, 263.3791809082031]}
+{"text": "Host on a cloud platform (AWS, GCP, Azure, or others) to easily scale servers. Containerize the", "page_number": 7.0, "bbox": [108.0, 279.6211853027344, 501.200927734375, 291.8791809082031]}
+{"text": "application with Docker so we can deploy updates or multiple instances easily. Using Kubernetes or", "page_number": 7.0, "bbox": [108.0, 293.1211853027344, 526.7429809570312, 305.3791809082031]}
+{"text": "a simpler PaaS (Platform as a Service) can manage load balancing as users grow.", "page_number": 7.0, "bbox": [108.0, 306.6211853027344, 447.2459716796875, 318.8791809082031]}
+{"text": "AI calls (especially if using external APIs) can be expensive and slow if overused. Implement caching", "page_number": 7.0, "bbox": [108.0, 320.1211853027344, 527.5350952148438, 332.3791809082031]}
+{"text": "where possible – e.g., if two users upload the", "page_number": 7.0, "bbox": [108.0, 333.6211853027344, 300.08697509765625, 345.8791809082031]}
+{"text": "same", "page_number": 7.0, "bbox": [300.08349609375, 333.6211853027344, 321.4494934082031, 345.8791809082031]}
+{"text": "popular textbook and ask for similar courses, we", "page_number": 7.0, "bbox": [321.44970703125, 333.6211853027344, 529.052734375, 345.8791809082031]}
+{"text": "could reuse the syllabus outline or quiz questions rather than regenerating from scratch. Also,", "page_number": 7.0, "bbox": [108.0, 347.1211853027344, 504.9990539550781, 359.3791809082031]}
+{"text": "perhaps generate content on demand and then store it, rather than generating everything upfront.", "page_number": 7.0, "bbox": [108.0, 360.6211853027344, 526.7969970703125, 372.8791809082031]}
+{"text": "For instance, we might generate each week’s materials just-in-time at the start of that week, which", "page_number": 7.0, "bbox": [108.0, 374.1211853027344, 522.23388671875, 386.3791809082031]}
+{"text": "distributes the computational load over time.", "page_number": 7.0, "bbox": [108.0, 387.6211853027344, 298.75506591796875, 399.8791809082031]}
+{"text": "Plan for a", "page_number": 7.0, "bbox": [108.0, 401.1211853027344, 150.70497131347656, 413.3791809082031]}
+{"text": "rate-limiting and batching", "page_number": 7.0, "bbox": [150.705322265625, 401.1211853027344, 269.1723327636719, 413.3791809082031]}
+{"text": "strategy for AI requests to control cost. In early MVP with few", "page_number": 7.0, "bbox": [269.162841796875, 401.1211853027344, 529.5147705078125, 413.3791809082031]}
+{"text": "users this isn’t an issue, but with scale, we’d want to batch some operations (like maybe process all", "page_number": 7.0, "bbox": [108.0, 414.6211853027344, 522.6480712890625, 426.8791809082031]}
+{"text": "quiz grading in a queue). A task queue system (Celery for Python or Bull for Node) could be used for", "page_number": 7.0, "bbox": [108.0, 428.1211853027344, 528.8580322265625, 440.3791809082031]}
+{"text": "background processing of heavy jobs (like grading a long essay or generating a large question set).", "page_number": 7.0, "bbox": [108.0, 441.6211853027344, 525.626953125, 453.8791809082031]}
+{"text": "The codebase should be kept", "page_number": 7.0, "bbox": [108.0, 464.1211853027344, 240.8452606201172, 476.3791809082031]}
+{"text": "modular", "page_number": 7.0, "bbox": [240.81817626953125, 464.1211853027344, 279.10418701171875, 476.3791809082031]}
+{"text": ": separate modules for syllabus planning, quiz generation,", "page_number": 7.0, "bbox": [279.10406494140625, 464.1211853027344, 533.9879760742188, 476.3791809082031]}
+{"text": "grading, user management, etc. This modularity not only helps in maintaining the code but also", "page_number": 7.0, "bbox": [108.0, 477.6211853027344, 533.881591796875, 489.8791809082031]}
+{"text": "allows scaling or swapping out components (for example, if we later switch from OpenAI’s API to a", "page_number": 7.0, "bbox": [108.0, 491.1211853027344, 533.9550170898438, 503.3791809082031]}
+{"text": "custom model, it should be an isolated change in the “AI module”).", "page_number": 7.0, "bbox": [108.0, 504.6211853027344, 390.3120422363281, 516.8792114257812]}
+{"text": "Security & Privacy", "page_number": 7.0, "bbox": [108.0, 533.1212158203125, 192.6300048828125, 545.3792114257812]}
+{"text": ": Implement secure user authentication (likely JWT-based tokens for the API).", "page_number": 7.0, "bbox": [192.64404296875, 533.1212158203125, 533.9390869140625, 545.3792114257812]}
+{"text": "Protect user data since learning progress can be sensitive. Also, consider the intellectual property of", "page_number": 7.0, "bbox": [108.0, 546.6212158203125, 533.9309692382812, 558.8792114257812]}
+{"text": "uploaded materials – we should clarify in terms that users should have the right to use whatever", "page_number": 7.0, "bbox": [108.0, 560.1212158203125, 533.9161987304688, 572.3792114257812]}
+{"text": "they upload for personal learning. All AI processing on the content should happen in a way that", "page_number": 7.0, "bbox": [108.0, 573.6212158203125, 533.9640502929688, 585.8792114257812]}
+{"text": "doesn’t leak the material to others. If using third-party AI APIs, we may need to consider encryption", "page_number": 7.0, "bbox": [108.0, 587.1212158203125, 533.97900390625, 599.3792114257812]}
+{"text": "or at least the privacy policies of those APIs regarding user data.", "page_number": 7.0, "bbox": [108.0, 600.6212158203125, 381.58197021484375, 612.8792114257812]}
+{"text": "Testing & QA", "page_number": 7.0, "bbox": [108.0, 629.1212158203125, 165.26699829101562, 641.3792114257812]}
+{"text": ": Given the critical role of AI, we will need a robust testing approach:", "page_number": 7.0, "bbox": [165.2578125, 629.1212158203125, 451.69189453125, 641.3792114257812]}
+{"text": "Test the syllabus generation against known syllabi (maybe compare what the AI comes up with to a", "page_number": 7.0, "bbox": [108.0, 657.6212158203125, 525.5370483398438, 669.8792114257812]}
+{"text": "real course syllabus for the same textbook).", "page_number": 7.0, "bbox": [108.0, 671.1212158203125, 291.950927734375, 683.3792114257812]}
+{"text": "Verify quiz questions for correctness (during development, have SMEs or the team review a sample", "page_number": 7.0, "bbox": [108.0, 684.6212158203125, 524.5829467773438, 696.8792114257812]}
+{"text": "of generated questions).", "page_number": 7.0, "bbox": [108.0, 698.1212158203125, 211.40101623535156, 710.3792114257812]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 114.62118530273438, 108.0001220703125, 126.87918853759766]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 251.12118530273438, 108.0001220703125, 263.3791809082031]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 279.6211853027344, 108.0001220703125, 291.8791809082031]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 320.1211853027344, 108.0001220703125, 332.3791809082031]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 401.1211853027344, 108.0001220703125, 413.3791809082031]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 464.1211853027344, 108.0001220703125, 476.3791809082031]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 533.1212158203125, 108.0001220703125, 545.3792114257812]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 629.1212158203125, 108.0001220703125, 641.3792114257812]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 657.6212158203125, 108.0001220703125, 669.8792114257812]}
+{"text": "•", "page_number": 7.0, "bbox": [102.276123046875, 684.6212158203125, 108.0001220703125, 696.8792114257812]}
+{"text": "Ensure that the adaptive logic truly helps (maybe simulate some learner profiles to see if", "page_number": 8.0, "bbox": [108.0, 72.62118530273438, 481.041015625, 84.87918853759766]}
+{"text": "adjustments make sense).", "page_number": 8.0, "bbox": [108.0, 86.12118530273438, 218.11497497558594, 98.37918853759766]}
+{"text": "Usability testing with target users to ensure the workflow (from uploading material to getting a plan", "page_number": 8.0, "bbox": [108.0, 99.62118530273438, 530.1539306640625, 111.87918853759766]}
+{"text": "to doing assignments) is smooth and not too confusing.", "page_number": 8.0, "bbox": [108.0, 113.12118530273438, 346.2840270996094, 125.37918853759766]}
+{"text": "Development Roadmap & Phasing", "page_number": 8.0, "bbox": [78.0, 138.13641357421875, 306.66302490234375, 156.52342224121094]}
+{"text": "To tackle this ambitious project, we’ll implement it in", "page_number": 8.0, "bbox": [78.0, 169.28118896484375, 307.35528564453125, 181.5391845703125]}
+{"text": "stages", "page_number": 8.0, "bbox": [307.384521484375, 169.28118896484375, 336.6885070800781, 181.5391845703125]}
+{"text": ", delivering core value early and then layering", "page_number": 8.0, "bbox": [336.68798828125, 169.28118896484375, 533.9507446289062, 181.5391845703125]}
+{"text": "on enhancements. Below is a proposed roadmap with features mapped to phases:", "page_number": 8.0, "bbox": [78.0, 182.78118896484375, 425.489990234375, 195.0391845703125]}
+{"text": "Phase 1: MVP Implementation (Months 0 – 3)", "page_number": 8.0, "bbox": [108.0, 211.28118896484375, 307.6830139160156, 223.5391845703125]}
+{"text": "Goal:", "page_number": 8.0, "bbox": [108.0, 224.78118896484375, 130.8330078125, 237.0391845703125]}
+{"text": "Deliver a working product that takes a user with a PDF through a personalized course with", "page_number": 8.0, "bbox": [130.833251953125, 224.78118896484375, 514.197265625, 237.0391845703125]}
+{"text": "basic assessments.", "page_number": 8.0, "bbox": [108.0, 238.28118896484375, 188.27099609375, 250.5391845703125]}
+{"text": "Scope:", "page_number": 8.0, "bbox": [108.0, 251.78118896484375, 136.7369842529297, 264.0391845703125]}
+{"text": "Set up the core web application (frontend + backend + database). Implement user accounts, PDF", "page_number": 8.0, "bbox": [108.0, 265.28118896484375, 513.9720458984375, 277.5391845703125]}
+{"text": "upload, and text extraction from PDF.", "page_number": 8.0, "bbox": [108.0, 278.78118896484375, 267.64202880859375, 291.0391845703125]}
+{"text": "Implement the chat/form for course setup (topic selection, goals, etc.) and generate a syllabus", "page_number": 8.0, "bbox": [108.0, 292.28118896484375, 505.4850158691406, 304.5391845703125]}
+{"text": "schedule. This involves the first use of the AI: take the textbook contents and user’s focus to create", "page_number": 8.0, "bbox": [108.0, 305.78118896484375, 523.2598266601562, 318.0391845703125]}
+{"text": "an outline. Possibly use a combination of contents parsing (like splitting by chapters) and an LLM to", "page_number": 8.0, "bbox": [108.0, 319.28118896484375, 526.994873046875, 331.5391845703125]}
+{"text": "summarize each part and distribute them across weeks.", "page_number": 8.0, "bbox": [108.0, 332.78118896484375, 346.4279479980469, 345.0391845703125]}
+{"text": "Create the interface for the weekly modules: list of readings and a simple quiz at the end of each", "page_number": 8.0, "bbox": [108.0, 346.28118896484375, 514.7190551757812, 358.5391845703125]}
+{"text": "module. Use AI to generate quiz questions for each module. For MVP, limit question types to things", "page_number": 8.0, "bbox": [108.0, 359.78118896484375, 525.6629638671875, 372.0391845703125]}
+{"text": "easily auto-graded (multiple-choice, true/false, etc.).", "page_number": 8.0, "bbox": [108.0, 373.28118896484375, 329.08502197265625, 385.5391845703125]}
+{"text": "Basic grading engine: auto-mark the quizzes, record scores. If wrong, show the correct answer and", "page_number": 8.0, "bbox": [108.0, 386.78118896484375, 524.259033203125, 399.0391845703125]}
+{"text": "maybe a brief AI-generated explanation/rationale.", "page_number": 8.0, "bbox": [108.0, 400.28118896484375, 321.6780090332031, 412.5391845703125]}
+{"text": "Basic progress tracking page (show completed modules, scores, what’s next).", "page_number": 8.0, "bbox": [108.0, 413.78118896484375, 434.7989501953125, 426.0391845703125]}
+{"text": "No advanced adaptation", "page_number": 8.0, "bbox": [108.0, 427.28118896484375, 218.55596923828125, 439.5391845703125]}
+{"text": "yet in this phase – the course follows the initially generated plan strictly.", "page_number": 8.0, "bbox": [218.5546875, 427.28118896484375, 523.6456298828125, 439.5391845703125]}
+{"text": "(But we will design the system such that changing the schedule is possible, to enable adaptation", "page_number": 8.0, "bbox": [108.0, 440.78118896484375, 514.052978515625, 453.0391845703125]}
+{"text": "later.)", "page_number": 8.0, "bbox": [108.0, 454.28118896484375, 133.43399047851562, 466.5391845703125]}
+{"text": "No group features", "page_number": 8.0, "bbox": [108.0, 467.78118896484375, 190.12498474121094, 480.0391845703125]}
+{"text": "yet – single-user courses only.", "page_number": 8.0, "bbox": [190.105224609375, 467.78118896484375, 320.9652404785156, 480.0391845703125]}
+{"text": "Testing internally with a couple of example textbooks to refine AI prompts and ensure syllabus and", "page_number": 8.0, "bbox": [108.0, 481.28118896484375, 524.7269897460938, 493.5391845703125]}
+{"text": "quiz quality are acceptable.", "page_number": 8.0, "bbox": [108.0, 494.78118896484375, 225.24295043945312, 507.0391845703125]}
+{"text": "By end of Phase 1, we have an end-to-end usable product for a single learner to input material and", "page_number": 8.0, "bbox": [108.0, 517.28125, 533.8441772460938, 529.5392456054688]}
+{"text": "get a structured learning experience with quizzes. This can be released as an alpha/beta to gather", "page_number": 8.0, "bbox": [108.0, 530.78125, 533.9205932617188, 543.0392456054688]}
+{"text": "user feedback.", "page_number": 8.0, "bbox": [108.0, 544.28125, 172.25100708007812, 556.5392456054688]}
+{"text": "Phase 2: Enhanced Learning Experience (Months 4 – 6)", "page_number": 8.0, "bbox": [108.0, 572.78125, 349.70404052734375, 585.0392456054688]}
+{"text": "Goal:", "page_number": 8.0, "bbox": [108.0, 586.28125, 130.8330078125, 598.5392456054688]}
+{"text": "Add depth to the learning experience with homework, feedback, and adaptation, based on", "page_number": 8.0, "bbox": [130.833251953125, 586.28125, 533.8983154296875, 598.5392456054688]}
+{"text": "feedback from MVP.", "page_number": 8.0, "bbox": [108.0, 599.78125, 191.9250030517578, 612.0392456054688]}
+{"text": "Scope:", "page_number": 8.0, "bbox": [108.0, 613.28125, 136.7369842529297, 625.5392456054688]}
+{"text": "Homework assignments submission", "page_number": 8.0, "bbox": [108.0, 641.78125, 270.0809631347656, 654.0392456054688]}
+{"text": ": Enable the system to handle open-ended responses.", "page_number": 8.0, "bbox": [270.079833984375, 641.78125, 495.93487548828125, 654.0392456054688]}
+{"text": "Introduce a mechanism for the user to submit answers or files for homework problems. For", "page_number": 8.0, "bbox": [108.0, 655.28125, 494.5050354003906, 667.5392456054688]}
+{"text": "example, allow text submission for essay answers or file upload for scanned work.", "page_number": 8.0, "bbox": [108.0, 668.78125, 456.4169616699219, 681.0392456054688]}
+{"text": "AI grading for open-ended tasks", "page_number": 8.0, "bbox": [108.0, 682.28125, 252.52198791503906, 694.5392456054688]}
+{"text": ": Integrate the LLM to evaluate written answers. Start with short", "page_number": 8.0, "bbox": [252.51123046875, 682.28125, 522.115234375, 694.5392456054688]}
+{"text": "answers or essays where the AI can compare to expected points. We might keep very complex", "page_number": 8.0, "bbox": [108.0, 695.78125, 504.8010559082031, 708.0392456054688]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 72.62118530273438, 108.0001220703125, 84.87918853759766]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 99.62118530273438, 108.0001220703125, 111.87918853759766]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 211.28118896484375, 108.0001220703125, 223.5391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 265.28118896484375, 108.0001220703125, 277.5391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 292.28118896484375, 108.0001220703125, 304.5391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 346.28118896484375, 108.0001220703125, 358.5391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 386.78118896484375, 108.0001220703125, 399.0391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 413.78118896484375, 108.0001220703125, 426.0391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 427.28118896484375, 108.0001220703125, 439.5391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 467.78118896484375, 108.0001220703125, 480.0391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 481.28118896484375, 108.0001220703125, 493.5391845703125]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 517.28125, 108.0001220703125, 529.5392456054688]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 572.78125, 108.0001220703125, 585.0392456054688]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 641.78125, 108.0001220703125, 654.0392456054688]}
+{"text": "•", "page_number": 8.0, "bbox": [102.276123046875, 682.28125, 108.0001220703125, 694.5392456054688]}
+{"text": "grading (like complete proof verification or long essays) semi-automated at first (AI provides a draft", "page_number": 9.0, "bbox": [108.0, 72.62118530273438, 526.796875, 84.87918853759766]}
+{"text": "grade and feedback that a developer can review in testing, until we trust it more). Over time this", "page_number": 9.0, "bbox": [108.0, 86.12118530273438, 512.6219482421875, 98.37918853759766]}
+{"text": "becomes fully automated as we fine-tune.", "page_number": 9.0, "bbox": [108.0, 99.62118530273438, 287.06396484375, 111.87918853759766]}
+{"text": "Personalized feedback", "page_number": 9.0, "bbox": [108.0, 113.12118530273438, 208.844970703125, 125.37918853759766]}
+{"text": ": Use AI to provide explanations on homework. For instance, if a math proof", "page_number": 9.0, "bbox": [208.84423828125, 113.12118530273438, 527.3182983398438, 125.37918853759766]}
+{"text": "is wrong, the feedback might say which step is flawed. This is where the", "page_number": 9.0, "bbox": [108.0, 126.62118530273438, 412.6230163574219, 138.87918090820312]}
+{"text": "AI Instructor Review", "page_number": 9.0, "bbox": [412.61865234375, 126.62118530273438, 491.6115417480469, 138.87918090820312]}
+{"text": "capability comes in – generating feedback from the AI’s analysis", "page_number": 9.0, "bbox": [108.0, 140.12118530273438, 376.61395263671875, 152.37918090820312]}
+{"text": ". We will refine prompt templates", "page_number": 9.0, "bbox": [393.111328125, 140.12118530273438, 533.1962890625, 152.37918090820312]}
+{"text": "for different subjects (e.g., how to give feedback for math vs. for a history essay).", "page_number": 9.0, "bbox": [108.0, 153.62118530273438, 450.5129089355469, 165.87918090820312]}
+{"text": "Adaptive scheduling", "page_number": 9.0, "bbox": [108.0, 167.12118530273438, 199.51199340820312, 179.37918090820312]}
+{"text": ": Implement logic to modify the course plan based on performance.", "page_number": 9.0, "bbox": [199.510986328125, 167.12118530273438, 484.78411865234375, 179.37918090820312]}
+{"text": "Concretely, if a user’s quiz score is below a threshold, automatically insert a remedial lesson (e.g.,", "page_number": 9.0, "bbox": [108.0, 180.62118530273438, 516.5640258789062, 192.87918090820312]}
+{"text": "“Review Appendix A”) or extend the schedule by a week to cover missed material. Likewise, if a user", "page_number": 9.0, "bbox": [108.0, 194.12118530273438, 524.718017578125, 206.37918090820312]}
+{"text": "indicates they are struggling or conversely finds it too easy (perhaps via a quick feedback survey", "page_number": 9.0, "bbox": [108.0, 207.62118530273438, 513.3330688476562, 219.87918090820312]}
+{"text": "after each week), adjust difficulty or pace. Technically, this means the syllabus generated in Phase 1", "page_number": 9.0, "bbox": [108.0, 221.12118530273438, 526.2300415039062, 233.37918090820312]}
+{"text": "isn’t static; we create functions to update the schedule and perhaps regenerate certain module", "page_number": 9.0, "bbox": [108.0, 234.62118530273438, 507.85205078125, 246.87918090820312]}
+{"text": "content via AI if needed.", "page_number": 9.0, "bbox": [108.0, 248.12118530273438, 212.59796142578125, 260.3791809082031]}
+{"text": "User control for pace changes", "page_number": 9.0, "bbox": [108.0, 261.6211853027344, 241.8839874267578, 273.8791809082031]}
+{"text": ": Also allow the user to manually request a schedule change (“I’m", "page_number": 9.0, "bbox": [241.87353515625, 261.6211853027344, 514.9696044921875, 273.8791809082031]}
+{"text": "busy this week, shift everything by a week” or “Pause the course”). The system will accommodate", "page_number": 9.0, "bbox": [108.0, 275.1211853027344, 515.2230224609375, 287.3791809082031]}
+{"text": "these changes, recalculating due dates.", "page_number": 9.0, "bbox": [108.0, 288.6211853027344, 276.83099365234375, 300.8791809082031]}
+{"text": "Refine quizzes and content", "page_number": 9.0, "bbox": [108.0, 302.1211853027344, 228.87002563476562, 314.3791809082031]}
+{"text": ": Based on Phase 1 testing, improve the quality of AI-generated quizzes", "page_number": 9.0, "bbox": [228.86865234375, 302.1211853027344, 528.5957641601562, 314.3791809082031]}
+{"text": "(maybe introduce new question types like fill-in-the-blank or matching if feasible). Also consider", "page_number": 9.0, "bbox": [108.0, 315.6211853027344, 510.3450622558594, 327.8791809082031]}
+{"text": "adding a small number of flashcard-style prompts or memory refreshers for key terms, since", "page_number": 9.0, "bbox": [108.0, 329.1211853027344, 498.5279235839844, 341.3791809082031]}
+{"text": "platforms have found this useful for retention", "page_number": 9.0, "bbox": [108.0, 342.6211853027344, 301.34698486328125, 354.8791809082031]}
+{"text": ".", "page_number": 9.0, "bbox": [317.8447265625, 342.6211853027344, 322.5967102050781, 354.8791809082031]}
+{"text": "UI/UX improvements", "page_number": 9.0, "bbox": [108.0, 356.1211853027344, 202.64398193359375, 368.3791809082031]}
+{"text": ": Polish the interface, add features like tooltips or a help section (especially if", "page_number": 9.0, "bbox": [202.634765625, 356.1211853027344, 524.1508178710938, 368.3791809082031]}
+{"text": "users need guidance on how to upload content or interpret AI feedback). Also, implement the", "page_number": 9.0, "bbox": [108.0, 369.6211853027344, 502.4520263671875, 381.8791809082031]}
+{"text": "notification system for reminders in this phase (could be as simple as an email server that sends", "page_number": 9.0, "bbox": [108.0, 383.1211853027344, 513.368896484375, 395.3791809082031]}
+{"text": "scheduled emails for upcoming tasks).", "page_number": 9.0, "bbox": [108.0, 396.6211853027344, 272.28594970703125, 408.8791809082031]}
+{"text": "This phase will make the platform much more interactive and supportive, moving beyond quizzes", "page_number": 9.0, "bbox": [108.0, 419.1211853027344, 533.9401245117188, 431.3791809082031]}
+{"text": "into assignments and truly personalized pacing. By the end of Phase 2, the product should feel like a", "page_number": 9.0, "bbox": [108.0, 432.6211853027344, 533.8787231445312, 444.8791809082031]}
+{"text": "robust personal tutor that not only tests you but also adjusts to you. We can then consider this a", "page_number": 9.0, "bbox": [108.0, 446.1211853027344, 533.9563598632812, 458.3791809082031]}
+{"text": "public beta ready for more users.", "page_number": 9.0, "bbox": [108.0, 459.6211853027344, 250.4519805908203, 471.8791809082031]}
+{"text": "Phase 3: Social & Scalability Features (Months 7 – 9)", "page_number": 9.0, "bbox": [108.0, 488.1211853027344, 336.9420166015625, 500.3791809082031]}
+{"text": "Goal:", "page_number": 9.0, "bbox": [108.0, 501.6211853027344, 130.8330078125, 513.8792114257812]}
+{"text": "Introduce group learning and scale the platform for more users and content types.", "page_number": 9.0, "bbox": [130.833251953125, 501.6211853027344, 482.77813720703125, 513.8792114257812]}
+{"text": "Scope:", "page_number": 9.0, "bbox": [108.0, 515.1212158203125, 136.7369842529297, 527.3792114257812]}
+{"text": "Cohort/Group courses", "page_number": 9.0, "bbox": [108.0, 543.6212158203125, 206.90997314453125, 555.8792114257812]}
+{"text": ": Implement the ability for a user to invite others to their course or join an", "page_number": 9.0, "bbox": [206.899658203125, 543.6212158203125, 517.9937133789062, 555.8792114257812]}
+{"text": "existing course. This involves creating a course code or invitation system, and a shared scoreboard", "page_number": 9.0, "bbox": [108.0, 557.1212158203125, 523.6829833984375, 569.3792114257812]}
+{"text": "or progress page. When in cohort mode, all members follow the same schedule (the schedule might", "page_number": 9.0, "bbox": [108.0, 570.6212158203125, 529.9291381835938, 582.8792114257812]}
+{"text": "be created by one “host” and shared). We’ll add features for comparing quiz scores within the group", "page_number": 9.0, "bbox": [108.0, 584.1212158203125, 528.3270263671875, 596.3792114257812]}
+{"text": "(perhaps showing a leaderboard or at least average vs your score) to spur motivation. We’ll also add", "page_number": 9.0, "bbox": [108.0, 597.6212158203125, 528.929931640625, 609.8792114257812]}
+{"text": "a discussion feature – could start basic like a comment section per lesson or integration with a chat", "page_number": 9.0, "bbox": [108.0, 611.1212158203125, 525.4739990234375, 623.3792114257812]}
+{"text": "app (even a Discord/Slack channel link) for the cohort. The competitive aspect should be tuned to", "page_number": 9.0, "bbox": [108.0, 624.6212158203125, 517.1489868164062, 636.8792114257812]}
+{"text": "encourage improvement, not discourage; perhaps emphasize personal progress plus gentle", "page_number": 9.0, "bbox": [108.0, 638.1212158203125, 496.23297119140625, 650.3792114257812]}
+{"text": "competition.", "page_number": 9.0, "bbox": [108.0, 651.6212158203125, 163.69198608398438, 663.8792114257812]}
+{"text": "Gamification", "page_number": 9.0, "bbox": [108.0, 665.1212158203125, 165.9600067138672, 677.3792114257812]}
+{"text": ": Alongside cohorts, introduce points and badges as discussed. For example, points for", "page_number": 9.0, "bbox": [165.960205078125, 665.1212158203125, 531.0271606445312, 677.3792114257812]}
+{"text": "completing assignments on time, extra points for high scores, etc. Badges for milestones (finished", "page_number": 9.0, "bbox": [108.0, 678.6212158203125, 522.1979370117188, 690.8792114257812]}
+{"text": "first course, completed 5 quizzes, etc.). If multiple courses, maybe an XP system that carries over, to", "page_number": 9.0, "bbox": [108.0, 692.1212158203125, 526.9228515625, 704.3792114257812]}
+{"text": "encourage continued use of the platform for learning different subjects.", "page_number": 9.0, "bbox": [108.0, 705.6212158203125, 414.4499206542969, 717.8792114257812]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 113.12118530273438, 108.0001220703125, 125.37918853759766]}
+{"text": "3", "page_number": 9.0, "bbox": [383.895263671875, 141.3691864013672, 387.3272705078125, 149.5411834716797]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 167.12118530273438, 108.0001220703125, 179.37918090820312]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 261.6211853027344, 108.0001220703125, 273.8791809082031]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 302.1211853027344, 108.0001220703125, 314.3791809082031]}
+{"text": "2", "page_number": 9.0, "bbox": [308.628662109375, 343.86920166015625, 312.0606689453125, 352.04119873046875]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 356.1211853027344, 108.0001220703125, 368.3791809082031]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 419.1211853027344, 108.0001220703125, 431.3791809082031]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 488.1211853027344, 108.0001220703125, 500.3791809082031]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 543.6212158203125, 108.0001220703125, 555.8792114257812]}
+{"text": "•", "page_number": 9.0, "bbox": [102.276123046875, 665.1212158203125, 108.0001220703125, 677.3792114257812]}
+{"text": "Content expansion", "page_number": 10.0, "bbox": [108.0, 72.62118530273438, 192.68997192382812, 84.87918853759766]}
+{"text": ": Add support for", "page_number": 10.0, "bbox": [192.687744140625, 72.62118530273438, 266.8927307128906, 84.87918853759766]}
+{"text": "video content ingestion", "page_number": 10.0, "bbox": [266.892333984375, 72.62118530273438, 373.4613952636719, 84.87918853759766]}
+{"text": ". This likely means integrating with", "page_number": 10.0, "bbox": [373.459716796875, 72.62118530273438, 519.8267211914062, 84.87918853759766]}
+{"text": "YouTube API to fetch video transcripts or requiring the user to provide transcripts if not available.", "page_number": 10.0, "bbox": [108.0, 86.12118530273438, 517.81494140625, 98.37918853759766]}
+{"text": "Then using the transcript text similarly to how we use PDFs. We’ll need to adjust the syllabus", "page_number": 10.0, "bbox": [108.0, 99.62118530273438, 496.5570068359375, 111.87918853759766]}
+{"text": "generator to handle time-based content (e.g., instead of “read pages 10-20” it might say “watch video", "page_number": 10.0, "bbox": [108.0, 113.12118530273438, 533.6910400390625, 125.37918853759766]}
+{"text": "1 (30 min)”). Ensure quizzes can draw from video content by reading transcripts. We should also", "page_number": 10.0, "bbox": [108.0, 126.62118530273438, 510.20098876953125, 138.87918090820312]}
+{"text": "handle segmentation (if a video series is uploaded, perhaps treat each video as a “chapter”).", "page_number": 10.0, "bbox": [108.0, 140.12118530273438, 497.3039855957031, 152.37918090820312]}
+{"text": "Mobile app development", "page_number": 10.0, "bbox": [108.0, 153.62118530273438, 219.33897399902344, 165.87918090820312]}
+{"text": ": If usage is growing, start the development of mobile apps. We could", "page_number": 10.0, "bbox": [219.337646484375, 153.62118530273438, 511.4776916503906, 165.87918090820312]}
+{"text": "approach this by either building native apps or wrapping the web app in a WebView temporarily. A", "page_number": 10.0, "bbox": [108.0, 167.12118530273438, 522.3060302734375, 179.37918090820312]}
+{"text": "likely strategy is to develop a", "page_number": 10.0, "bbox": [108.0, 180.62118530273438, 231.8309783935547, 192.87918090820312]}
+{"text": "React Native", "page_number": 10.0, "bbox": [231.8291015625, 180.62118530273438, 289.2401123046875, 192.87918090820312]}
+{"text": "or", "page_number": 10.0, "bbox": [289.239990234375, 180.62118530273438, 303.0820007324219, 192.87918090820312]}
+{"text": "Flutter", "page_number": 10.0, "bbox": [303.08203125, 180.62118530273438, 333.8980712890625, 192.87918090820312]}
+{"text": "app that communicates with the same", "page_number": 10.0, "bbox": [333.89794921875, 180.62118530273438, 498.1569519042969, 192.87918090820312]}
+{"text": "backend. Since by now our API is stable, a mobile app mostly replicates the functionality: viewing the", "page_number": 10.0, "bbox": [108.0, 194.12118530273438, 531.8909912109375, 206.37918090820312]}
+{"text": "syllabus, taking quizzes (maybe with a mobile-friendly UI), receiving push notifications, and", "page_number": 10.0, "bbox": [108.0, 207.62118530273438, 491.6430969238281, 219.87918090820312]}
+{"text": "uploading photos of homework. For homework photo upload, we’ll incorporate the OCR back-end", "page_number": 10.0, "bbox": [108.0, 221.12118530273438, 519.6150512695312, 233.37918090820312]}
+{"text": "from Phase 2. This might extend beyond month 9, but starting the work here ensures we address", "page_number": 10.0, "bbox": [108.0, 234.62118530273438, 518.1119995117188, 246.87918090820312]}
+{"text": "any API adjustments needed for mobile.", "page_number": 10.0, "bbox": [108.0, 248.12118530273438, 279.7740173339844, 260.3791809082031]}
+{"text": "Scalability focus", "page_number": 10.0, "bbox": [108.0, 261.6211853027344, 180.56700134277344, 273.8791809082031]}
+{"text": ": By Phase 3, if we have more users, we should containerize and possibly move to", "page_number": 10.0, "bbox": [180.56689453125, 261.6211853027344, 522.5669555664062, 273.8791809082031]}
+{"text": "managed services. For example, deploy the AI processing as a serverless function if appropriate, or", "page_number": 10.0, "bbox": [108.0, 275.1211853027344, 525.4199829101562, 287.3791809082031]}
+{"text": "use a message queue for handling grading tasks asynchronously to keep the app responsive. Also", "page_number": 10.0, "bbox": [108.0, 288.6211853027344, 521.1990966796875, 300.8791809082031]}
+{"text": "implement more monitoring (analytics on which features are used, where users drop off in the", "page_number": 10.0, "bbox": [108.0, 302.1211853027344, 506.3760070800781, 314.3791809082031]}
+{"text": "course, etc., to inform future improvements).", "page_number": 10.0, "bbox": [108.0, 315.6211853027344, 300.13201904296875, 327.8791809082031]}
+{"text": "Improved AI models", "page_number": 10.0, "bbox": [108.0, 338.1211853027344, 199.5449676513672, 350.3791809082031]}
+{"text": ": Keep an eye on the latest in AI. By this time, we might consider fine-tuning a", "page_number": 10.0, "bbox": [199.53604125976562, 338.1211853027344, 533.9970092773438, 350.3791809082031]}
+{"text": "smaller open-source model on our domain (education data) to reduce reliance on external APIs and", "page_number": 10.0, "bbox": [108.0, 351.6211853027344, 533.9310302734375, 363.8791809082031]}
+{"text": "cut costs. If there’s an open-source LLM that can run on our servers for at least some tasks (like a", "page_number": 10.0, "bbox": [108.0, 365.1211853027344, 533.9285278320312, 377.3791809082031]}
+{"text": "simpler model for generating straightforward questions), integrate it to optimize costs.", "page_number": 10.0, "bbox": [108.0, 378.6211853027344, 477.3058776855469, 390.8791809082031]}
+{"text": "Phase 4: Future Expansion (Month 10 onward)", "page_number": 10.0, "bbox": [108.0, 407.1211853027344, 312.86700439453125, 419.3791809082031]}
+{"text": "Goal:", "page_number": 10.0, "bbox": [108.0, 420.6211853027344, 130.8330078125, 432.8791809082031]}
+{"text": "Evolve the product based on user feedback and explore new opportunities.", "page_number": 10.0, "bbox": [130.833251953125, 420.6211853027344, 451.63824462890625, 432.8791809082031]}
+{"text": "By this stage, we will have a solid product. Future directions could include partnering with content", "page_number": 10.0, "bbox": [108.0, 449.1211853027344, 520.857177734375, 461.3791809082031]}
+{"text": "providers (publishers or online course creators) to officially support their materials, adding more", "page_number": 10.0, "bbox": [108.0, 462.6211853027344, 514.97998046875, 474.8791809082031]}
+{"text": "sophisticated pedagogical strategies (like spaced repetition scheduling for reviews, or adaptive", "page_number": 10.0, "bbox": [108.0, 476.1211853027344, 507.48309326171875, 488.3791809082031]}
+{"text": "difficulty that resembles an intelligent tutoring system more closely).", "page_number": 10.0, "bbox": [108.0, 489.6211853027344, 400.0140075683594, 501.8791809082031]}
+{"text": "Another future idea: incorporate", "page_number": 10.0, "bbox": [108.0, 503.1211853027344, 247.45501708984375, 515.3792114257812]}
+{"text": "certification and rewards", "page_number": 10.0, "bbox": [247.453125, 503.1211853027344, 360.56512451171875, 515.3792114257812]}
+{"text": "– maybe the platform can issue", "page_number": 10.0, "bbox": [360.54638671875, 503.1211853027344, 494.9793395996094, 515.3792114257812]}
+{"text": "certificates of completion or even integrate with accredited programs for those who finish courses.", "page_number": 10.0, "bbox": [108.0, 516.6212158203125, 524.5831298828125, 528.8792114257812]}
+{"text": "This can increase the value of sticking with the program for users.", "page_number": 10.0, "bbox": [108.0, 530.1212158203125, 387.6929016113281, 542.3792114257812]}
+{"text": "If targeting educational institutions, we might add admin dashboards for teachers to create courses", "page_number": 10.0, "bbox": [108.0, 543.6212158203125, 529.6049194335938, 555.8792114257812]}
+{"text": "for their students using our AI. However, that’s a pivot towards B2B/educator use. For now, our focus", "page_number": 10.0, "bbox": [108.0, 557.1212158203125, 531.8101196289062, 569.3792114257812]}
+{"text": "remains B2C for individual learners, but the underlying tech could be repurposed for teachers", "page_number": 10.0, "bbox": [108.0, 570.6212158203125, 503.9460754394531, 582.8792114257812]}
+{"text": "eventually (similar to how some tools help educators generate curriculum", "page_number": 10.0, "bbox": [108.0, 584.1212158203125, 418.7700500488281, 596.3792114257812]}
+{"text": ").", "page_number": 10.0, "bbox": [435.264404296875, 584.1212158203125, 442.7164001464844, 596.3792114257812]}
+{"text": "(The timeline above is an estimate; adjustments will be made based on team size, complexity encountered, and", "page_number": 10.0, "bbox": [78.0, 606.6212158203125, 533.916015625, 618.8792114257812]}
+{"text": "user feedback. Early user testing might reprioritize certain features – for example, if we find users really want the", "page_number": 10.0, "bbox": [78.0, 620.1212158203125, 533.8861083984375, 632.3792114257812]}
+{"text": "mobile app sooner or that they are clamoring for group study, we can adapt accordingly.)", "page_number": 10.0, "bbox": [78.0, 633.6212158203125, 435.22796630859375, 645.8792114257812]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 72.62118530273438, 108.0001220703125, 84.87918853759766]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 153.62118530273438, 108.0001220703125, 165.87918090820312]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 261.6211853027344, 108.0001220703125, 273.8791809082031]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 338.1211853027344, 108.0001220703125, 350.3791809082031]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 407.1211853027344, 108.0001220703125, 419.3791809082031]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 449.1211853027344, 108.0001220703125, 461.3791809082031]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 503.1211853027344, 108.0001220703125, 515.3792114257812]}
+{"text": "•", "page_number": 10.0, "bbox": [102.276123046875, 543.6212158203125, 108.0001220703125, 555.8792114257812]}
+{"text": "7", "page_number": 10.0, "bbox": [426.04833984375, 585.3692016601562, 429.4803466796875, 593.5411987304688]}
+{"text": "Potential Challenges and Considerations", "page_number": 11.0, "bbox": [78.0, 72.93141174316406, 350.9295349121094, 91.31841278076172]}
+{"text": "While implementing this project, we need to be mindful of several challenges and how to address them:", "page_number": 11.0, "bbox": [78.0, 104.07618713378906, 515.589111328125, 116.33419036865234]}
+{"text": "Content Quality and AI Accuracy", "page_number": 11.0, "bbox": [108.0, 132.57618713378906, 253.8809814453125, 144.8341827392578]}
+{"text": ": Relying on AI to generate course content (syllabi, questions,", "page_number": 11.0, "bbox": [253.871337890625, 132.57618713378906, 511.25335693359375, 144.8341827392578]}
+{"text": "answers) introduces the risk of errors or “hallucinations” (the AI might fabricate facts or misinterpret", "page_number": 11.0, "bbox": [108.0, 146.07618713378906, 530.8919677734375, 158.3341827392578]}
+{"text": "the material). To mitigate this, we will:", "page_number": 11.0, "bbox": [108.0, 159.57618713378906, 267.740966796875, 171.8341827392578]}
+{"text": "Use the actual textbook content as much as possible when generating questions (e.g., having the AI", "page_number": 11.0, "bbox": [108.0, 173.07618713378906, 528.777099609375, 185.3341827392578]}
+{"text": "quote definitions or use examples from the text, by providing it with context paragraphs).", "page_number": 11.0, "bbox": [108.0, 186.57618713378906, 487.0530090332031, 198.8341827392578]}
+{"text": "Start with simpler factual or conceptual questions before attempting very complex problem", "page_number": 11.0, "bbox": [108.0, 200.07618713378906, 493.9921569824219, 212.3341827392578]}
+{"text": "generation. For complex subjects, we might initially lean on existing problem sets (if available from", "page_number": 11.0, "bbox": [108.0, 213.57618713378906, 524.1959838867188, 225.8341827392578]}
+{"text": "the material) rather than AI-generated ones.", "page_number": 11.0, "bbox": [108.0, 227.07618713378906, 297.6390075683594, 239.3341827392578]}
+{"text": "Include a feedback mechanism for users: if a question or answer seems wrong, the user should be", "page_number": 11.0, "bbox": [108.0, 249.57620239257812, 533.9160766601562, 261.8341979980469]}
+{"text": "able to flag it. In early stages, we’ll manually review these to improve the system. Over time, we can", "page_number": 11.0, "bbox": [108.0, 263.0762023925781, 533.866455078125, 275.3341979980469]}
+{"text": "use such feedback to fine-tune the AI or fix our prompt strategies.", "page_number": 11.0, "bbox": [108.0, 276.5762023925781, 388.9709777832031, 288.8341979980469]}
+{"text": "Grading Fairness", "page_number": 11.0, "bbox": [108.0, 305.0762023925781, 184.6439971923828, 317.3341979980469]}
+{"text": ": Especially for open-ended answers, AI grading might be inconsistent or biased.", "page_number": 11.0, "bbox": [184.63836669921875, 305.0762023925781, 533.9644775390625, 317.3341979980469]}
+{"text": "We need to ensure that the AI’s feedback is appropriate and not discouraging. We’ll likely:", "page_number": 11.0, "bbox": [108.0, 318.5762023925781, 484.77606201171875, 330.8341979980469]}
+{"text": "Program the AI prompts to follow rubrics (which we design per assignment type) so that it looks for", "page_number": 11.0, "bbox": [108.0, 347.0762023925781, 527.0848999023438, 359.3341979980469]}
+{"text": "key points in an answer rather than surface details.", "page_number": 11.0, "bbox": [108.0, 360.5762023925781, 326.0789489746094, 372.8341979980469]}
+{"text": "Possibly have the AI provide a", "page_number": 11.0, "bbox": [108.0, 374.0762023925781, 236.16000366210938, 386.3341979980469]}
+{"text": "suggested", "page_number": 11.0, "bbox": [236.158447265625, 374.0762023925781, 276.7484436035156, 386.3341979980469]}
+{"text": "grade and justification, which we can calibrate. If users find", "page_number": 11.0, "bbox": [276.749267578125, 374.0762023925781, 529.0013427734375, 386.3341979980469]}
+{"text": "the grading questionable, allow them to contest it or get a second attempt.", "page_number": 11.0, "bbox": [108.0, 387.5762023925781, 427.2030029296875, 399.8341979980469]}
+{"text": "For math and science, consider integrating symbolic checkers or test-case based grading (for coding", "page_number": 11.0, "bbox": [108.0, 410.0762023925781, 533.9445190429688, 422.3341979980469]}
+{"text": "assignments) alongside the AI to improve reliability (e.g., use a math engine to verify the final", "page_number": 11.0, "bbox": [108.0, 423.5762023925781, 533.8780517578125, 435.8341979980469]}
+{"text": "answer of a problem whenever possible).", "page_number": 11.0, "bbox": [108.0, 437.0762023925781, 283.7880554199219, 449.3341979980469]}
+{"text": "User Motivation & Drop-off", "page_number": 11.0, "bbox": [108.0, 465.5762023925781, 229.31326293945312, 477.8341979980469]}
+{"text": ": Even with our platform’s guidance, some learners may lose motivation.", "page_number": 11.0, "bbox": [229.32321166992188, 465.5762023925781, 533.9417724609375, 477.8341979980469]}
+{"text": "To tackle this, we plan to use:", "page_number": 11.0, "bbox": [108.0, 479.0762023925781, 231.2189483642578, 491.3341979980469]}
+{"text": "The", "page_number": 11.0, "bbox": [108.0, 507.5762023925781, 125.98199462890625, 519.834228515625]}
+{"text": "accountability group feature", "page_number": 11.0, "bbox": [125.981689453125, 507.5762023925781, 255.13174438476562, 519.834228515625]}
+{"text": "and gamification to harness positive peer pressure and rewards.", "page_number": 11.0, "bbox": [255.112060546875, 507.5762023925781, 528.964111328125, 519.834228515625]}
+{"text": "Learning in a cohort, as noted, can significantly boost completion rates", "page_number": 11.0, "bbox": [108.0, 521.0762329101562, 407.0519714355469, 533.334228515625]}
+{"text": ".", "page_number": 11.0, "bbox": [423.54931640625, 521.0762329101562, 428.3013000488281, 533.334228515625]}
+{"text": "Personalized encouragement: the system can notice if a user is slipping (not logging in or poor", "page_number": 11.0, "bbox": [108.0, 534.5762329101562, 507.4200744628906, 546.834228515625]}
+{"text": "scores) and proactively send encouraging messages or tips (“It seems the last quiz was tough.", "page_number": 11.0, "bbox": [108.0, 548.0762329101562, 503.3609619140625, 560.334228515625]}
+{"text": "Remember, practice makes perfect – you’ve got this! Need to revisit any material?”). The tone should", "page_number": 11.0, "bbox": [108.0, 561.5762329101562, 528.3269653320312, 573.834228515625]}
+{"text": "be supportive, not scolding.", "page_number": 11.0, "bbox": [108.0, 575.0762329101562, 227.72703552246094, 587.334228515625]}
+{"text": "Regular milestones and celebration: e.g., after finishing each week or module, congratulate the user,", "page_number": 11.0, "bbox": [108.0, 597.5762329101562, 533.9512329101562, 609.834228515625]}
+{"text": "maybe show a fun animation or allow them to share their progress. A sense of accomplishment can", "page_number": 11.0, "bbox": [108.0, 611.0762329101562, 533.9251098632812, 623.334228515625]}
+{"text": "drive them forward.", "page_number": 11.0, "bbox": [108.0, 624.5762329101562, 194.4089813232422, 636.834228515625]}
+{"text": "Privacy and Copyright", "page_number": 11.0, "bbox": [108.0, 653.0762329101562, 211.7519989013672, 665.334228515625]}
+{"text": ": Our platform will be ingesting possibly copyrighted textbooks or paid", "page_number": 11.0, "bbox": [211.7603759765625, 653.0762329101562, 533.9603271484375, 665.334228515625]}
+{"text": "course materials that users upload. We need to ensure we are not violating any laws:", "page_number": 11.0, "bbox": [108.0, 666.5762329101562, 465.79498291015625, 678.834228515625]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 132.57618713378906, 108.0001220703125, 144.8341827392578]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 173.07618713378906, 108.0001220703125, 185.3341827392578]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 200.07618713378906, 108.0001220703125, 212.3341827392578]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 249.57620239257812, 108.0001220703125, 261.8341979980469]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 305.0762023925781, 108.0001220703125, 317.3341979980469]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 347.0762023925781, 108.0001220703125, 359.3341979980469]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 374.0762023925781, 108.0001220703125, 386.3341979980469]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 410.0762023925781, 108.0001220703125, 422.3341979980469]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 465.5762023925781, 108.0001220703125, 477.8341979980469]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 507.5762023925781, 108.0001220703125, 519.834228515625]}
+{"text": "5", "page_number": 11.0, "bbox": [414.333251953125, 522.3241577148438, 417.7652587890625, 530.4961547851562]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 534.5762329101562, 108.0001220703125, 546.834228515625]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 597.5762329101562, 108.0001220703125, 609.834228515625]}
+{"text": "•", "page_number": 11.0, "bbox": [102.276123046875, 653.0762329101562, 108.0001220703125, 665.334228515625]}
+{"text": "We will clearly state that users should only upload materials they have rights to use for personal", "page_number": 12.0, "bbox": [108.0, 72.62118530273438, 512.9459228515625, 84.87918853759766]}
+{"text": "study. The content will not be exposed to anyone else or used for any purpose beyond their own", "page_number": 12.0, "bbox": [108.0, 86.12118530273438, 514.089111328125, 98.37918853759766]}
+{"text": "learning on the platform.", "page_number": 12.0, "bbox": [108.0, 99.62118530273438, 216.63897705078125, 111.87918853759766]}
+{"text": "Any AI processing on the content will be transient and for the user’s benefit (e.g., summarizing their", "page_number": 12.0, "bbox": [108.0, 113.12118530273438, 528.7859497070312, 125.37918853759766]}
+{"text": "textbook section or generating questions on it). We should avoid storing large chunks of the original", "page_number": 12.0, "bbox": [108.0, 126.62118530273438, 531.0001220703125, 138.87918090820312]}
+{"text": "content in a way that could be accessed publicly. If we generate a syllabus (which might implicitly", "page_number": 12.0, "bbox": [108.0, 140.12118530273438, 516.8611450195312, 152.37918090820312]}
+{"text": "contain some content from the book like chapter titles or summaries), that’s usually acceptable as it’s", "page_number": 12.0, "bbox": [108.0, 153.62118530273438, 533.8258056640625, 165.87918090820312]}
+{"text": "analogous to notes. But we must be cautious not to expose full textbook text.", "page_number": 12.0, "bbox": [108.0, 167.12118530273438, 436.7969665527344, 179.37918090820312]}
+{"text": "If using third-party AI APIs (like OpenAI), we should review their data usage policies – ideally use", "page_number": 12.0, "bbox": [108.0, 189.62118530273438, 533.955078125, 201.87918090820312]}
+{"text": "ones that don’t learn from our data or that allow opting out of data retention, to protect user", "page_number": 12.0, "bbox": [108.0, 203.12118530273438, 533.8784790039062, 215.37918090820312]}
+{"text": "content. Alternatively, self-hosted models mitigate this risk.", "page_number": 12.0, "bbox": [108.0, 216.62118530273438, 360.37799072265625, 228.87918090820312]}
+{"text": "Technical Scaling Challenges", "page_number": 12.0, "bbox": [108.0, 245.12118530273438, 236.0070343017578, 257.3791809082031]}
+{"text": ": As user count grows, heavy use of AI could become costly or slow:", "page_number": 12.0, "bbox": [235.997314453125, 245.12118530273438, 518.8043212890625, 257.3791809082031]}
+{"text": "We will monitor usage patterns. If quizzes or grading are taking too long to generate or process, we", "page_number": 12.0, "bbox": [108.0, 273.6211853027344, 528.8849487304688, 285.8791809082031]}
+{"text": "might need to optimize (e.g., limit quiz length or use smaller models for some tasks).", "page_number": 12.0, "bbox": [108.0, 287.1211853027344, 467.6220397949219, 299.3791809082031]}
+{"text": "Caching and reuse: As mentioned, if many users use the same textbook, we can reuse the AI outputs", "page_number": 12.0, "bbox": [108.0, 300.6211853027344, 532.3949584960938, 312.8791809082031]}
+{"text": "(syllabus, quizzes) for that source. This not only saves computation but also allows us to refine those", "page_number": 12.0, "bbox": [108.0, 314.1211853027344, 530.0909423828125, 326.3791809082031]}
+{"text": "outputs over time for quality.", "page_number": 12.0, "bbox": [108.0, 327.6211853027344, 233.24395751953125, 339.8791809082031]}
+{"text": "Possibly introduce a premium model: heavy AI usage could be reserved for paid tier users or limited", "page_number": 12.0, "bbox": [108.0, 350.1211853027344, 533.9429931640625, 362.3791809082031]}
+{"text": "per free user per month, to control costs. This is a business consideration, but from development", "page_number": 12.0, "bbox": [108.0, 363.6211853027344, 533.9453125, 375.8791809082031]}
+{"text": "side we should build in some usage metering.", "page_number": 12.0, "bbox": [108.0, 377.1211853027344, 304.1549987792969, 389.3791809082031]}
+{"text": "Competitive Landscape", "page_number": 12.0, "bbox": [108.0, 405.6211853027344, 214.1624755859375, 417.8791809082031]}
+{"text": ": We should keep an eye on other AI learning tools emerging. Some, like", "page_number": 12.0, "bbox": [214.1661376953125, 405.6211853027344, 533.9436645507812, 417.8791809082031]}
+{"text": "Teachfloor or Kyron, focus on course creators and educators; others like MindGrasp target students", "page_number": 12.0, "bbox": [108.0, 419.1211853027344, 533.9488525390625, 431.3791809082031]}
+{"text": "for  note-taking  and  Q&A", "page_number": 12.0, "bbox": [108.0, 432.6211853027344, 221.7869873046875, 444.8791809082031]}
+{"text": ".  Our  niche  is  structured  self-study  with  accountability,  which  is", "page_number": 12.0, "bbox": [238.297119140625, 432.6211853027344, 533.9739990234375, 444.8791809082031]}
+{"text": "somewhat unique. However, if bigger platforms (e.g. an official Khan Academy AI or Coursera) start", "page_number": 12.0, "bbox": [108.0, 446.1211853027344, 533.9611206054688, 458.3791809082031]}
+{"text": "offering personalized course paths, we’ll need to emphasize what makes our approach special (the", "page_number": 12.0, "bbox": [108.0, 459.6211853027344, 533.990234375, 471.8791809082031]}
+{"text": "high degree of personalization and use of", "page_number": 12.0, "bbox": [108.0, 473.1211853027344, 287.4870300292969, 485.3791809082031]}
+{"text": "any", "page_number": 12.0, "bbox": [287.49176025390625, 473.1211853027344, 302.01776123046875, 485.3791809082031]}
+{"text": "content the user chooses). We should aim to integrate", "page_number": 12.0, "bbox": [302.01788330078125, 473.1211853027344, 533.98388671875, 485.3791809082031]}
+{"text": "new proven techniques (for example, if research shows certain AI feedback methods work best, we", "page_number": 12.0, "bbox": [108.0, 486.6211853027344, 533.8859252929688, 498.8791809082031]}
+{"text": "adopt them) to stay cutting-edge.", "page_number": 12.0, "bbox": [108.0, 500.1211853027344, 251.73902893066406, 512.3792114257812]}
+{"text": "Conclusion and Next Steps", "page_number": 12.0, "bbox": [78.0, 528.931396484375, 256.7805480957031, 547.3184204101562]}
+{"text": "This plan outlines a comprehensive approach to building an AI-driven personal learning platform, from core", "page_number": 12.0, "bbox": [78.0, 560.0762329101562, 533.9729614257812, 572.334228515625]}
+{"text": "features through future enhancements. The focus is on creating a", "page_number": 12.0, "bbox": [78.0, 573.5762329101562, 363.0419616699219, 585.834228515625]}
+{"text": "scalable, modular system", "page_number": 12.0, "bbox": [363.0548095703125, 573.5762329101562, 478.230712890625, 585.834228515625]}
+{"text": "that delivers", "page_number": 12.0, "bbox": [478.23663330078125, 573.5762329101562, 533.9886474609375, 585.834228515625]}
+{"text": "real value early (a functioning MVP with personalized courses from any textbook) and then iteratively", "page_number": 12.0, "bbox": [78.0, 587.0762329101562, 533.9850463867188, 599.334228515625]}
+{"text": "enhances the learning experience (adaptivity, social learning, multi-format support).", "page_number": 12.0, "bbox": [78.0, 600.5762329101562, 434.7060241699219, 612.834228515625]}
+{"text": "Moving forward, the next step is to refine the technical design for Phase 1 and start implementation. We will", "page_number": 12.0, "bbox": [78.0, 629.0762329101562, 533.904052734375, 641.334228515625]}
+{"text": "begin by selecting the tech stack (depending on team strengths, decide on Node.js vs Python for backend,", "page_number": 12.0, "bbox": [78.0, 642.5762329101562, 534.0, 654.834228515625]}
+{"text": "etc.), and setting up the basic project infrastructure. Concurrently, we should work on prompt design for the", "page_number": 12.0, "bbox": [78.0, 656.0762329101562, 533.865234375, 668.334228515625]}
+{"text": "AI (even before coding, testing some manual prompts with GPT on a sample textbook to gauge results for", "page_number": 12.0, "bbox": [78.0, 669.5762329101562, 533.9842529296875, 681.834228515625]}
+{"text": "syllabus and quiz generation). This will inform development and ensure our approach is feasible.", "page_number": 12.0, "bbox": [78.0, 683.0762329101562, 487.4190979003906, 695.334228515625]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 72.62118530273438, 108.0001220703125, 84.87918853759766]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 113.12118530273438, 108.0001220703125, 125.37918853759766]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 189.62118530273438, 108.0001220703125, 201.87918090820312]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 245.12118530273438, 108.0001220703125, 257.3791809082031]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 273.6211853027344, 108.0001220703125, 285.8791809082031]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 300.6211853027344, 108.0001220703125, 312.8791809082031]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 350.1211853027344, 108.0001220703125, 362.3791809082031]}
+{"text": "•", "page_number": 12.0, "bbox": [102.276123046875, 405.6211853027344, 108.0001220703125, 417.8791809082031]}
+{"text": "2", "page_number": 12.0, "bbox": [229.0810546875, 433.86920166015625, 232.5130615234375, 442.04119873046875]}
+{"text": "By following this plan and continually incorporating user feedback, we aim to develop a platform that truly", "page_number": 13.0, "bbox": [78.0, 72.62118530273438, 533.9341430664062, 84.87918853759766]}
+{"text": "helps self-learners stay accountable and achieve their learning goals. The end result will be a product that", "page_number": 13.0, "bbox": [78.0, 86.12118530273438, 533.8709716796875, 98.37918853759766]}
+{"text": "turns a solitary learning endeavor into a guided, interactive journey – powered by AI, but driven by the", "page_number": 13.0, "bbox": [78.0, 99.62118530273438, 533.9619140625, 111.87918853759766]}
+{"text": "learner’s own curiosity and commitment.", "page_number": 13.0, "bbox": [78.0, 113.12118530273438, 252.95999145507812, 125.37918853759766]}
+{"text": "9 Best AI Course Curriculum Generators for Educators [2025] - Teachfloor Blog", "page_number": 13.0, "bbox": [138.3603515625, 157.37118530273438, 468.5253601074219, 169.62918090820312]}
+{"text": "https://www.teachfloor.com/blog/ai-curriculum-generator", "page_number": 13.0, "bbox": [78.0, 171.8535919189453, 280.9125061035156, 182.06858825683594]}
+{"text": "Mindgrasp - #1 AI Learning Platform For Students and Professionals", "page_number": 13.0, "bbox": [108.18017578125, 190.62899780273438, 395.4241943359375, 202.88699340820312]}
+{"text": "https://www.mindgrasp.ai/", "page_number": 13.0, "bbox": [78.0, 205.1114044189453, 172.3499755859375, 215.32640075683594]}
+{"text": "Improve Student Success With Cohort-based Courses - Teachable Blog", "page_number": 13.0, "bbox": [93.090087890625, 223.88681030273438, 388.8211364746094, 236.14480590820312]}
+{"text": "https://teachable.com/blog/improve-student-success", "page_number": 13.0, "bbox": [78.0, 238.3692169189453, 264.37493896484375, 248.58421325683594]}
+{"text": "1", "page_number": 13.0, "bbox": [82.283935546875, 158.6191864013672, 85.71593475341797, 166.7911834716797]}
+{"text": "3", "page_number": 13.0, "bbox": [97.3740234375, 158.6191864013672, 100.80602264404297, 166.7911834716797]}
+{"text": "4", "page_number": 13.0, "bbox": [112.464111328125, 158.6191864013672, 115.89611053466797, 166.7911834716797]}
+{"text": "7", "page_number": 13.0, "bbox": [127.55419921875, 158.6191864013672, 130.9862060546875, 166.7911834716797]}
+{"text": "2", "page_number": 13.0, "bbox": [82.283935546875, 191.8769989013672, 85.71593475341797, 200.0489959716797]}
+{"text": "6", "page_number": 13.0, "bbox": [97.3740234375, 191.8769989013672, 100.80602264404297, 200.0489959716797]}
+{"text": "5", "page_number": 13.0, "bbox": [82.283935546875, 225.1348114013672, 85.71593475341797, 233.3068084716797]}
+{"text": "13", "page_number": 13.0, "bbox": [300.851806640625, 749.8712158203125, 311.1478271484375, 762.1292114257812]}

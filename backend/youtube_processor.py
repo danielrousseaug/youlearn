@@ -9,31 +9,75 @@ from urllib.parse import urlparse, parse_qs
 
 def extract_video_id(youtube_url: str) -> Optional[str]:
     """
-    Extract YouTube video ID from various YouTube URL formats.
+    Extract a YouTube video ID from a wide variety of URL formats or a bare ID.
 
-    Supports:
+    Supported examples (not exhaustive):
     - https://www.youtube.com/watch?v=VIDEO_ID
     - https://youtu.be/VIDEO_ID
-    - https://youtube.com/watch?v=VIDEO_ID
+    - https://youtube.com/embed/VIDEO_ID
     - https://m.youtube.com/watch?v=VIDEO_ID
+    - https://www.youtube.com/shorts/VIDEO_ID
+    - https://www.youtube.com/live/VIDEO_ID
+    - https://www.youtube.com/v/VIDEO_ID
+    - VIDEO_ID (bare 11-character ID)
     """
-    # Handle youtu.be short URLs
-    if 'youtu.be/' in youtube_url:
-        return youtube_url.split('youtu.be/')[-1].split('?')[0].split('&')[0]
+    if not youtube_url:
+        return None
 
-    # Handle standard YouTube URLs
-    parsed_url = urlparse(youtube_url)
+    candidate = youtube_url.strip()
 
-    if parsed_url.hostname in ['www.youtube.com', 'youtube.com', 'm.youtube.com']:
-        if parsed_url.path == '/watch':
+    # Accept a bare 11-character ID directly
+    if re.fullmatch(r"[a-zA-Z0-9_-]{11}", candidate):
+        return candidate
+
+    # Handle youtu.be short URLs quickly
+    if 'youtu.be/' in candidate:
+        return candidate.split('youtu.be/')[-1].split('?')[0].split('&')[0].split('/')[0]
+
+    # Ensure urlparse can parse even if scheme is missing
+    url_to_parse = candidate if re.match(r'^https?://', candidate) else f'https://{candidate}'
+    parsed_url = urlparse(url_to_parse)
+
+    host = (parsed_url.hostname or '').lower()
+    path = parsed_url.path or ''
+
+    # Common YouTube hosts
+    yt_hosts = {
+        'youtube.com', 'www.youtube.com', 'm.youtube.com',
+        'youtu.be', 'www.youtu.be'
+    }
+
+    if host in yt_hosts:
+        # Patterns by path
+        if path == '/watch':
             query_params = parse_qs(parsed_url.query)
-            return query_params.get('v', [None])[0]
-        elif parsed_url.path.startswith('/embed/'):
-            return parsed_url.path.split('/embed/')[-1].split('?')[0]
+            vid = query_params.get('v', [None])[0]
+            if vid and re.fullmatch(r"[a-zA-Z0-9_-]{11}", vid):
+                return vid
+        # /embed/VIDEO_ID
+        if '/embed/' in path:
+            vid = path.split('/embed/')[-1].split('?')[0].split('/')[0]
+            if re.fullmatch(r"[a-zA-Z0-9_-]{11}", vid):
+                return vid
+        # /shorts/VIDEO_ID
+        if '/shorts/' in path:
+            vid = path.split('/shorts/')[-1].split('?')[0].split('/')[0]
+            if re.fullmatch(r"[a-zA-Z0-9_-]{11}", vid):
+                return vid
+        # /live/VIDEO_ID
+        if '/live/' in path:
+            vid = path.split('/live/')[-1].split('?')[0].split('/')[0]
+            if re.fullmatch(r"[a-zA-Z0-9_-]{11}", vid):
+                return vid
+        # /v/VIDEO_ID (legacy)
+        if path.startswith('/v/'):
+            vid = path.split('/v/')[-1].split('?')[0].split('/')[0]
+            if re.fullmatch(r"[a-zA-Z0-9_-]{11}", vid):
+                return vid
 
-    # Try to extract from any URL containing a video ID pattern
-    video_id_pattern = r'(?:v=|embed\/|youtu\.be\/)([a-zA-Z0-9_-]{11})'
-    match = re.search(video_id_pattern, youtube_url)
+    # Fallback: search the whole string for accepted tokens followed by an ID
+    fallback_pattern = r'(?:v=|vi=|embed/|shorts/|live/|youtu\.be/|/v/)([a-zA-Z0-9_-]{11})'
+    match = re.search(fallback_pattern, candidate)
     if match:
         return match.group(1)
 
