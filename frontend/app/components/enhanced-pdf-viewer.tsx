@@ -112,7 +112,7 @@ const EnhancedPdfViewer = forwardRef<PdfViewerHandle, EnhancedPdfViewerProps>(
                             return Promise.resolve(true);
                         } catch (scrollError) {
                             container.scrollTo({
-                                top: pageElement.offsetTop,
+                                top: (pageElement as HTMLElement).offsetTop,
                                 behavior: useInstantScroll ? 'instant' : 'smooth'
                             });
                             return Promise.resolve(true);
