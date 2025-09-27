@@ -16,7 +16,7 @@ interface YouTubePlayerProps {
 declare global {
   interface Window {
     YT: {
-      Player: new (element: string, config: {
+      Player: new (element: string | HTMLElement, config: {
         height: string;
         width: string;
         videoId: string;
