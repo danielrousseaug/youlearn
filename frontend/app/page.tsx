@@ -159,7 +159,7 @@ export default function Home() {
             <div className="flex rounded-xl bg-neutral-100 dark:bg-neutral-800 p-1">
               <button
                 onClick={() => setSelectedOption('preset')}
-                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 cursor-pointer ${
                   selectedOption === 'preset'
                     ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-md'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
@@ -169,7 +169,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setSelectedOption('upload')}
-                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 cursor-pointer ${
                   selectedOption === 'upload'
                     ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-md'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
@@ -179,7 +179,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setSelectedOption('youtube')}
-                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all duration-200 cursor-pointer ${
                   selectedOption === 'youtube'
                     ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-md'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'

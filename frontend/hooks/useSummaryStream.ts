@@ -64,6 +64,10 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
   useEffect(() => {
     if (pendingSummary && isStreaming) {
       throttledSetSummary(pendingSummary);
+    } else if (!isStreaming && pendingSummary) {
+      // If streaming stopped but we have pending content, flush it immediately
+      setSummary(pendingSummary);
+      setPendingSummary('');
     }
   }, [pendingSummary, isStreaming, throttledSetSummary]);
 
@@ -159,7 +163,12 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
                 if (updateTimeoutRef.current) {
                   clearTimeout(updateTimeoutRef.current);
                 }
-                // Don't override with pendingSummary, just stop streaming
+                // Flush any pending summary updates before stopping
+                if (pendingSummary) {
+                  setSummary(pendingSummary);
+                  setPendingSummary('');
+                }
+                // Stop streaming - this will hide the cursor
                 setIsStreaming(false);
               } else if (data.type === 'error') {
                 setError(data.message || 'Unknown error occurred');
@@ -179,7 +188,12 @@ export function useSummaryStream(docId: string): UseSummaryStreamReturn {
       setError(err instanceof Error ? err.message : 'An error occurred');
       setIsStreaming(false);
     } finally {
+      // Clean up streaming state
       setReader(null);
+      setIsStreaming(false);
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
+      }
     }
   }, [docId, isStreaming]);
 
