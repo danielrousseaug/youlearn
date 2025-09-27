@@ -25,7 +25,7 @@ declare global {
           onStateChange: (event: { target: unknown; data: number }) => void;
         };
       }) => {
-        seekTo: (seconds: number) => void;
+        seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
         getCurrentTime: () => number;
         destroy: () => void;
       };
